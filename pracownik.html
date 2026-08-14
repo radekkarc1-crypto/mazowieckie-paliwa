@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mazowieckie Paliwa S.A.</title>
+    <title>👷 Strefa pracownika | Mazowieckie Paliwa S.A.</title>
 
     <style>
         * {
@@ -42,7 +42,6 @@
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 25px;
             font-weight: bold;
         }
 
@@ -50,10 +49,10 @@
             color: #f5c400;
         }
 
-        .hero {
+        .container {
             width: 90%;
-            max-width: 1100px;
-            margin: 80px auto;
+            max-width: 900px;
+            margin: 70px auto;
         }
 
         .badge {
@@ -63,13 +62,12 @@
             padding: 10px 16px;
             border-radius: 20px;
             font-weight: bold;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         h1 {
-            font-size: 58px;
-            line-height: 1.05;
-            margin-bottom: 20px;
+            font-size: 48px;
+            margin-bottom: 15px;
         }
 
         h1 span {
@@ -77,118 +75,89 @@
         }
 
         .description {
-            max-width: 650px;
             color: #aebdcb;
-            font-size: 19px;
-            line-height: 1.6;
+            font-size: 18px;
             margin-bottom: 35px;
         }
 
-        .buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 22px;
-            border-radius: 9px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.2s;
-            cursor: pointer;
-        }
-
-        .primary {
-            background: #f5c400;
-            color: #071525;
-            border: 1px solid #f5c400;
-        }
-
-        .primary:hover {
-            background: #ffd92e;
-            border-color: #ffd92e;
-        }
-
-        .secondary {
-            background: #0b1f35;
-            color: white;
-            border: 1px solid #38516a;
-        }
-
-        .secondary:hover {
-            border-color: #f5c400;
-            color: #f5c400;
-        }
-
-        /* STREFA PRACOWNIKA */
-        .worker-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 16px 22px;
-
-            background: #0b1f35;
-            color: white;
-
-            border: 1px solid #38516a;
-            border-radius: 9px;
-
-            text-decoration: none;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .worker-button:hover {
-            background: #0b1f35;
-            color: #f5c400;
-            border-color: #f5c400;
-            transform: translateY(-1px);
-        }
-
-        .cards {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto 80px;
-
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
+        .panel {
             background: #0b1f35;
             border: 1px solid #203b55;
             border-radius: 15px;
             padding: 30px;
         }
 
-        .icon {
-            font-size: 40px;
-            margin-bottom: 15px;
+        .panel h2 {
+            margin-bottom: 25px;
         }
 
-        .card h2 {
-            margin-bottom: 10px;
+        .form {
+            display: grid;
+            gap: 16px;
         }
 
-        .card p {
-            color: #9fb0c0;
-            line-height: 1.5;
+        label {
+            font-weight: bold;
+            margin-bottom: -8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #38516a;
+            background: #071525;
+            color: white;
+            font-size: 16px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #f5c400;
+        }
+
+        .submit {
+            margin-top: 10px;
+            padding: 16px;
+            border: none;
+            border-radius: 9px;
+            background: #f5c400;
+            color: #071525;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background: #ffd92e;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            color: #aebdcb;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: #f5c400;
         }
 
         footer {
+            margin-top: 80px;
+            padding: 30px;
+            text-align: center;
             background: #06111e;
             border-top: 1px solid #203b55;
-            text-align: center;
-            padding: 30px;
             color: #8495a6;
         }
 
@@ -196,34 +165,13 @@
             color: #f5c400;
         }
 
-        @media (max-width: 750px) {
-
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav a {
-                margin: 0 8px;
-                font-size: 14px;
-            }
-
+        @media (max-width: 600px) {
             h1 {
-                font-size: 42px;
+                font-size: 36px;
             }
 
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .buttons {
-                flex-direction: column;
-            }
-
-            .button,
-            .worker-button {
-                width: 100%;
-                text-align: center;
+            .container {
+                margin-top: 45px;
             }
         }
     </style>
@@ -238,120 +186,145 @@
     </div>
 
     <nav>
-        <a href="/">Start</a>
-        <a href="/ceny.html">Ceny paliw</a>
-        <a href="/paragon.html">Paragon</a>
-        <a href="/pracownik.html">Pracownik</a>
+        <a href="/">← Strona główna</a>
     </nav>
 
 </header>
 
 
-<section class="hero">
+<main class="container">
 
     <div class="badge">
-        🟢 STACJA OTWARTA
+        👷 PANEL PRACOWNIKA
     </div>
 
     <h1>
-        Mazowieckie<br>
-        <span>Paliwa S.A.</span>
+        Strefa <span>pracownika</span>
     </h1>
 
     <p class="description">
-        Oficjalny system stacji benzynowej działającej
-        na naszym prywatnym serwerze Roblox.
-        Obsługa transakcji, paragony i płatności
-        połączone z Discordem.
+        Panel do wystawiania dokumentów sprzedaży
+        na stacji Mazowieckie Paliwa S.A.
     </p>
 
 
-    <div class="buttons">
-
-        <a
-            class="button primary"
-            href="/ceny.html"
-        >
-            ⛽ Ceny paliw
-        </a>
-
-
-        <a
-            class="button secondary"
-            href="/paragon.html"
-        >
-            🧾 Sprawdź paragon
-        </a>
-
-
-        <a
-            class="worker-button"
-            href="/pracownik.html"
-        >
-            👷 Strefa pracownika
-        </a>
-
-    </div>
-
-</section>
-
-
-<section class="cards">
-
-    <div class="card">
-
-        <div class="icon">
-            ⛽
-        </div>
+    <section class="panel">
 
         <h2>
-            Paliwa
+            🧾 Nowa transakcja
         </h2>
 
-        <p>
-            Sprawdź aktualne ceny paliw
-            dostępne na stacji.
-        </p>
+        <form class="form" id="transactionForm">
 
-    </div>
+            <label for="identyfikator_pracownika">
+                Identyfikator pracownika
+            </label>
 
-
-    <div class="card">
-
-        <div class="icon">
-            🧾
-        </div>
-
-        <h2>
-            Paragony
-        </h2>
-
-        <p>
-            Sprawdzaj wystawione paragony
-            za pomocą ich numeru.
-        </p>
-
-    </div>
+            <input
+                id="identyfikator_pracownika"
+                name="identyfikator_pracownika"
+                type="text"
+                required
+            >
 
 
-    <div class="card">
+            <label for="identyfikator_klienta">
+                Identyfikator klienta
+            </label>
 
-        <div class="icon">
-            👷
-        </div>
+            <input
+                id="identyfikator_klienta"
+                name="identyfikator_klienta"
+                type="text"
+                required
+            >
 
-        <h2>
-            Pracownicy
-        </h2>
 
-        <p>
-            Kasjerzy mogą wystawiać paragony
-            i faktury dla klientów.
-        </p>
+            <label for="typ_dokumentu">
+                Typ dokumentu
+            </label>
 
-    </div>
+            <select
+                id="typ_dokumentu"
+                name="typ_dokumentu"
+                required
+            >
+                <option value="">Wybierz dokument</option>
+                <option value="paragon">Paragon</option>
+                <option value="faktura">Faktura</option>
+            </select>
 
-</section>
+
+            <label for="typ_paliwa">
+                Typ paliwa
+            </label>
+
+            <select
+                id="typ_paliwa"
+                name="typ_paliwa"
+                required
+            >
+                <option value="">Wybierz paliwo</option>
+                <option value="benzyna95">Benzyna 95</option>
+                <option value="benzyna98">Benzyna 98</option>
+                <option value="diesel">Diesel</option>
+            </select>
+
+
+            <label for="litry">
+                Litry
+            </label>
+
+            <input
+                id="litry"
+                name="litry"
+                type="number"
+                step="0.01"
+                min="0"
+                required
+            >
+
+
+            <label for="kwota">
+                Kwota
+            </label>
+
+            <input
+                id="kwota"
+                name="kwota"
+                type="number"
+                step="0.01"
+                min="0"
+                required
+            >
+
+
+            <button
+                class="submit"
+                type="submit"
+            >
+                🧾 Wystaw dokument
+            </button>
+
+        </form>
+
+
+        <div
+            class="message"
+            id="message"
+        ></div>
+
+    </section>
+
+
+    <a
+        class="back"
+        href="/"
+    >
+        ← Wróć na stronę główną
+    </a>
+
+</main>
 
 
 <footer>
@@ -362,13 +335,92 @@
 
     <br><br>
 
-    „Napędzamy Twoją drogę.”
-
-    <br><br>
-
     © 2026 Mazowieckie Paliwa S.A.
 
 </footer>
+
+
+<script>
+
+document
+    .getElementById("transactionForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const message =
+            document.getElementById("message");
+
+        const formData =
+            new FormData(this);
+
+        const data =
+            Object.fromEntries(formData.entries());
+
+        message.style.display = "block";
+        message.textContent = "⏳ Zapisywanie transakcji...";
+
+        try {
+
+            const response =
+                await fetch("/api/transactions", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(data)
+
+                });
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.error
+                        ? JSON.stringify(result.error)
+                        : "Nie udało się zapisać transakcji"
+                );
+
+            }
+
+
+            message.textContent =
+                "✅ Transakcja została zapisana.";
+
+            message.style.background =
+                "#123c2a";
+
+            message.style.color =
+                "#58d68d";
+
+
+            this.reset();
+
+
+        } catch (error) {
+
+            message.textContent =
+                "❌ Nie udało się zapisać transakcji: "
+                + error.message;
+
+            message.style.background =
+                "#3a1515";
+
+            message.style.color =
+                "#ff7676";
+
+        }
+
+    });
+
+</script>
 
 </body>
 </html>
