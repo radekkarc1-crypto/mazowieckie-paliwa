@@ -1,9 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Mazowieckie Paliwa S.A.</title>
 
     <style>
@@ -24,7 +24,6 @@
             background: #0b1f35;
             border-bottom: 3px solid #f5c400;
             padding: 20px 7%;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -90,31 +89,38 @@
             gap: 15px;
         }
 
-        .button {
-            display: inline-block;
+        .button,
+        .worker-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 16px 22px;
             border-radius: 9px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.2s;
+            cursor: pointer;
         }
 
         .primary {
             background: #f5c400;
             color: #071525;
+            border: 1px solid #f5c400;
         }
 
         .primary:hover {
             background: #ffd92e;
         }
 
-        .secondary {
+        .secondary,
+        .worker-button {
             background: #0b1f35;
             color: white;
             border: 1px solid #38516a;
         }
 
-        .secondary:hover {
+        .secondary:hover,
+        .worker-button:hover {
             border-color: #f5c400;
             color: #f5c400;
         }
@@ -123,7 +129,6 @@
             width: 90%;
             max-width: 1100px;
             margin: 0 auto 80px;
-
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
@@ -163,7 +168,6 @@
         }
 
         @media (max-width: 750px) {
-
             header {
                 flex-direction: column;
                 gap: 15px;
@@ -186,7 +190,9 @@
                 flex-direction: column;
             }
 
-            .button {
+            .button,
+            .worker-button {
+                width: 100%;
                 text-align: center;
             }
         }
@@ -195,9 +201,7 @@
 
 <body>
 
-
 <header>
-
     <div class="logo">
         MAZOWIECKIE <span>PALIWA</span> S.A.
     </div>
@@ -208,9 +212,7 @@
         <a href="/paragon.html">Paragon</a>
         <a href="/pracownik.html">Pracownik</a>
     </nav>
-
 </header>
-
 
 <section class="hero">
 
@@ -230,24 +232,17 @@
         połączone z Discordem.
     </p>
 
-
     <div class="buttons">
 
-        <a
-            class="button primary"
-            href="/ceny.html"
-        >
+        <a class="button primary" href="/ceny.html">
             ⛽ Ceny paliw
         </a>
 
-        <a
-            class="button secondary"
-            href="/paragon.html"
-        >
+        <a class="button secondary" href="/paragon.html">
             🧾 Sprawdź paragon
         </a>
 
-        <a href="/pracownik.html">
+        <a class="worker-button" href="/pracownik.html">
             👷 Strefa pracownika
         </a>
 
@@ -255,81 +250,45 @@
 
 </section>
 
-
 <section class="cards">
 
-
     <div class="card">
-
-        <div class="icon">
-            ⛽
-        </div>
-
-        <h2>
-            Paliwa
-        </h2>
-
+        <div class="icon">⛽</div>
+        <h2>Paliwa</h2>
         <p>
             Sprawdź aktualne ceny paliw
             dostępne na stacji.
         </p>
-
     </div>
 
-
     <div class="card">
-
-        <div class="icon">
-            🧾
-        </div>
-
-        <h2>
-            Paragony
-        </h2>
-
+        <div class="icon">🧾</div>
+        <h2>Paragony</h2>
         <p>
             Sprawdzaj wystawione paragony
             za pomocą ich numeru.
         </p>
-
     </div>
 
-
     <div class="card">
-
-        <div class="icon">
-            👷
-        </div>
-
-        <h2>
-            Pracownicy
-        </h2>
-
+        <div class="icon">👷</div>
+        <h2>Pracownicy</h2>
         <p>
             Kasjerzy mogą wystawiać paragony
             i faktury dla klientów.
         </p>
-
     </div>
-
 
 </section>
 
-
 <footer>
-
     <strong>MAZOWIECKIE PALIWA S.A.</strong>
-
     <br><br>
-
     „Napędzamy Twoją drogę.”
-
     <br><br>
-
     © 2026 Mazowieckie Paliwa S.A.
-
 </footer>
-
 
 </body>
 </html>
+```
