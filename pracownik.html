@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Strefa pracownika | Mazowieckie Paliwa S.A.</title>
+    <title>Mazowieckie Paliwa S.A.</title>
 
     <style>
         * {
@@ -24,13 +24,14 @@
             background: #0b1f35;
             border-bottom: 3px solid #f5c400;
             padding: 20px 7%;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 23px;
             font-weight: bold;
         }
 
@@ -38,226 +39,208 @@
             color: #f5c400;
         }
 
-        .home {
+        .nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav a {
             color: white;
             text-decoration: none;
             font-weight: bold;
         }
 
-        .home:hover {
+        .nav a:hover {
             color: #f5c400;
         }
 
-        .container {
+        .hero {
             width: 90%;
-            max-width: 900px;
-            margin: 55px auto;
-        }
+            max-width: 1100px;
+            margin: 90px auto 60px;
 
-        .title {
-            margin-bottom: 30px;
-        }
-
-        .title h1 {
-            font-size: 44px;
-            margin-bottom: 10px;
-        }
-
-        .title h1 span {
-            color: #f5c400;
-        }
-
-        .title p {
-            color: #9fb0c0;
-            font-size: 17px;
-        }
-
-        .status {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 16px;
-            border-radius: 20px;
-            background: #123c2a;
-            color: #58d68d;
-            font-weight: bold;
-        }
-
-        .panel {
-            background: #0b1f35;
-            border: 1px solid #203b55;
-            border-radius: 16px;
-            padding: 30px;
-        }
-
-        .panel-title {
-            font-size: 23px;
-            font-weight: bold;
-            margin-bottom: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 22px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #38516a;
-            background: #071525;
-            color: white;
-            font-size: 16px;
-            outline: none;
-        }
-
-        input:focus,
-        select:focus {
-            border-color: #f5c400;
-        }
-
-        .total {
-            background: #071525;
-            border: 1px solid #203b55;
-            border-radius: 12px;
-            padding: 25px;
             text-align: center;
-            margin: 30px 0;
         }
 
-        .total-label {
-            color: #9fb0c0;
-            font-size: 14px;
-        }
-
-        .total-value {
-            color: #f5c400;
-            font-size: 38px;
-            font-weight: bold;
-            margin-top: 8px;
-        }
-
-        .button {
-            width: 100%;
-            padding: 17px;
-            border: none;
-            border-radius: 9px;
-            background: #f5c400;
-            color: #071525;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .button:hover {
-            background: #ffd92e;
-        }
-
-        .payment-button {
-            background: #2ecc71;
-            color: white;
-        }
-
-        .payment-button:hover {
-            background: #27ae60;
-        }
-
-        .payment-button:disabled {
-            background: #555;
-            cursor: not-allowed;
-        }
-
-        .message {
-            display: none;
-            margin-top: 20px;
-            padding: 18px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        .success {
-            background: #123c2a;
-            color: #58d68d;
-        }
-
-        .error {
-            background: #401d22;
-            color: #ff7676;
-        }
-
-        .receipt {
-            display: none;
-            margin-top: 25px;
-            padding: 25px;
-            background: #071525;
-            border: 1px solid #203b55;
-            border-radius: 12px;
-        }
-
-        .receipt h2 {
-            color: #f5c400;
+        .hero h1 {
+            font-size: 58px;
+            line-height: 1.05;
             margin-bottom: 20px;
         }
 
-        .receipt-row {
+        .hero h1 span {
+            color: #f5c400;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+
+            color: #a9b8c7;
+            font-size: 19px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin-top: 35px;
+
             display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 11px 0;
-            border-bottom: 1px solid #203b55;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .receipt-row:last-child {
-            border-bottom: none;
-        }
+        .button {
+            display: inline-block;
 
-        .payment-status {
-            color: #f5c400;
-        }
+            padding: 16px 28px;
 
-        .paid {
-            color: #58d68d !important;
-        }
+            border-radius: 9px;
 
-        .back {
-            display: block;
-            text-align: center;
-            color: #f5c400;
+            font-size: 17px;
+            font-weight: bold;
+
             text-decoration: none;
-            margin-top: 30px;
-            padding-bottom: 40px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
         }
 
-        @media (max-width: 650px) {
+        .button-primary {
+            background: #f5c400;
+            color: #071525;
+        }
+
+        .button-primary:hover {
+            background: #ffd92e;
+            transform: translateY(-2px);
+        }
+
+        .button-worker {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            min-width: 230px;
+
+            padding: 16px 28px;
+
+            border-radius: 9px;
+
+            background: #2ecc71;
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            border: 2px solid #2ecc71;
+
+            transition: 0.2s;
+        }
+
+        .button-worker:hover {
+            background: #27ae60;
+            border-color: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .cards {
+            width: 90%;
+            max-width: 1100px;
+
+            margin: 60px auto;
+
+            display: grid;
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .card {
+            background: #0b1f35;
+
+            border: 1px solid #203b55;
+
+            border-radius: 15px;
+
+            padding: 30px;
+
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #9fb0c0;
+            line-height: 1.5;
+        }
+
+        footer {
+            margin-top: 80px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            background: #0b1f35;
+
+            border-top: 1px solid #203b55;
+
+            color: #8193a5;
+        }
+
+        footer strong {
+            color: #f5c400;
+        }
+
+        @media (max-width: 800px) {
+
+            .hero h1 {
+                font-size: 44px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
 
             header {
                 flex-direction: column;
                 gap: 15px;
             }
+        }
 
-            .container {
-                width: 94%;
-                margin-top: 30px;
+        @media (max-width: 500px) {
+
+            .hero {
+                margin-top: 55px;
             }
 
-            .title h1 {
-                font-size: 35px;
+            .hero h1 {
+                font-size: 36px;
             }
 
-            .panel {
-                padding: 20px;
+            .hero p {
+                font-size: 16px;
             }
 
-            .receipt-row {
-                flex-direction: column;
-                gap: 5px;
+            .button,
+            .button-worker {
+                width: 100%;
             }
         }
     </style>
@@ -271,590 +254,129 @@
         MAZOWIECKIE <span>PALIWA</span> S.A.
     </div>
 
-    <a class="home" href="/">
-        ← Strona główna
-    </a>
+    <nav class="nav">
+        <a href="/">
+            Strona główna
+        </a>
+    </nav>
 
 </header>
 
 
-<main class="container">
+<main>
 
-    <div class="title">
+    <section class="hero">
 
         <h1>
-            Strefa <span>pracownika</span>
+            MAZOWIECKIE
+            <span>PALIWA</span>
         </h1>
 
         <p>
-            Panel kasjera Mazowieckie Paliwa S.A.
+            Witamy na oficjalnej stronie Mazowieckie Paliwa S.A.
+            Tankuj szybko, wygodnie i bezpiecznie.
         </p>
 
-        <div class="status">
-            🟢 STACJA OTWARTA
-        </div>
 
-    </div>
+        <div class="buttons">
 
-
-    <section class="panel">
-
-        <div class="panel-title">
-            🧾 Wystaw dokument sprzedaży
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="documentType">
-                Rodzaj dokumentu
-            </label>
-
-            <select id="documentType">
-
-                <option value="receipt">
-                    🧾 Paragon
-                </option>
-
-                <option value="invoice">
-                    📄 Faktura
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="customerId">
-                ID klienta Discord
-            </label>
-
-            <input
-                id="customerId"
-                type="text"
-                inputmode="numeric"
-                placeholder="Wpisz Discord ID klienta"
+            <a
+                href="#oferta"
+                class="button button-primary"
             >
+                ⛽ NASZA OFERTA
+            </a>
 
-        </div>
 
+            <!-- PANEL PRACOWNIKA -->
 
-        <div class="form-group">
-
-            <label for="fuelType">
-                Rodzaj paliwa
-            </label>
-
-            <select
-                id="fuelType"
-                onchange="calculateTotal()"
+            <a
+                href="/pracownik.html"
+                class="button-worker"
             >
-
-                <option value="5.99">
-                    Benzyna 95 • 5,99 zł/L
-                </option>
-
-                <option value="6.49">
-                    Benzyna 98 • 6,49 zł/L
-                </option>
-
-                <option value="6.19">
-                    Diesel • 6,19 zł/L
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="liters">
-                Ilość paliwa
-            </label>
-
-            <input
-                id="liters"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="np. 45"
-                oninput="calculateTotal()"
-            >
-
-        </div>
-
-
-        <div class="total">
-
-            <div class="total-label">
-                KWOTA DO ZAPŁATY
-            </div>
-
-            <div
-                class="total-value"
-                id="total"
-            >
-                0,00 zł
-            </div>
-
-        </div>
-
-
-        <button
-            class="button"
-            onclick="createReceipt()"
-        >
-            🧾 WYSTAW DOKUMENT
-        </button>
-
-
-        <div
-            id="message"
-            class="message"
-        ></div>
-
-
-        <div
-            id="receipt"
-            class="receipt"
-        >
-
-            <h2>
-                ⛽ Mazowieckie Paliwa S.A.
-            </h2>
-
-
-            <div class="receipt-row">
-                <span>Numer dokumentu</span>
-                <strong id="receiptNumber"></strong>
-            </div>
-
-
-            <div class="receipt-row">
-                <span>Klient Discord</span>
-                <strong id="receiptCustomer"></strong>
-            </div>
-
-
-            <div class="receipt-row">
-                <span>Dokument</span>
-                <strong id="receiptDocument"></strong>
-            </div>
-
-
-            <div class="receipt-row">
-                <span>Paliwo</span>
-                <strong id="receiptFuel"></strong>
-            </div>
-
-
-            <div class="receipt-row">
-                <span>Ilość</span>
-                <strong id="receiptLiters"></strong>
-            </div>
-
-
-            <div class="receipt-row">
-                <span>Kwota</span>
-                <strong id="receiptAmount"></strong>
-            </div>
-
-
-            <div class="receipt-row">
-                <span>Status płatności</span>
-
-                <strong
-                    id="paymentStatus"
-                    class="payment-status"
-                >
-                    OCZEKUJE
-                </strong>
-
-            </div>
-
-
-            <div
-                class="receipt-row"
-                id="paymentTimeRow"
-                style="display:none;"
-            >
-
-                <span>Potwierdzono</span>
-
-                <strong id="paymentTime"></strong>
-
-            </div>
-
-
-            <button
-                id="paymentButton"
-                class="button payment-button"
-                onclick="confirmPayment()"
-            >
-                💰 POTWIERDŹ PŁATNOŚĆ
-            </button>
+                👷 PANEL PRACOWNIKA
+            </a>
 
         </div>
 
     </section>
 
 
-    <a class="back" href="/">
-        ← Wróć na stronę główną
-    </a>
+    <section
+        class="cards"
+        id="oferta"
+    >
+
+        <div class="card">
+
+            <div class="icon">
+                ⛽
+            </div>
+
+            <h2>
+                Paliwa
+            </h2>
+
+            <p>
+                Benzyna 95, Benzyna 98 oraz Diesel.
+                Wysoka jakość paliwa w atrakcyjnych cenach.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                💳
+            </div>
+
+            <h2>
+                Wygodne płatności
+            </h2>
+
+            <p>
+                Zapłać szybko i wygodnie wybraną
+                przez siebie metodą.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                🕐
+            </div>
+
+            <h2>
+                Stacja otwarta
+            </h2>
+
+            <p>
+                Jesteśmy gotowi obsłużyć Cię
+                wtedy, kiedy tego potrzebujesz.
+            </p>
+
+        </div>
+
+    </section>
 
 </main>
 
 
-<script>
+<footer>
 
-let currentReceipt = null;
+    © 2026
+    <strong>
+        Mazowieckie Paliwa S.A.
+    </strong>
 
+    <br>
 
-function calculateTotal() {
+    Wszystkie prawa zastrzeżone.
 
-    const price =
-        Number(
-            document.getElementById("fuelType").value
-        );
-
-    const liters =
-        Number(
-            document.getElementById("liters").value
-        );
-
-    const totalElement =
-        document.getElementById("total");
-
-
-    if (
-        !Number.isFinite(price) ||
-        !Number.isFinite(liters) ||
-        liters <= 0
-    ) {
-
-        totalElement.textContent =
-            "0,00 zł";
-
-        return 0;
-    }
-
-
-    const total =
-        Math.round(
-            price * liters * 100
-        ) / 100;
-
-
-    totalElement.textContent =
-        total
-            .toFixed(2)
-            .replace(".", ",") +
-        " zł";
-
-
-    return total;
-}
-
-
-function createReceipt() {
-
-    const customer =
-        document
-            .getElementById("customerId")
-            .value
-            .trim();
-
-
-    const documentType =
-        document
-            .getElementById("documentType")
-            .value;
-
-
-    const fuelSelect =
-        document.getElementById("fuelType");
-
-
-    const fuel =
-        fuelSelect
-            .options[
-                fuelSelect.selectedIndex
-            ]
-            .text
-            .split(" • ")[0];
-
-
-    const liters =
-        Number(
-            document
-                .getElementById("liters")
-                .value
-        );
-
-
-    const amount =
-        calculateTotal();
-
-
-    if (customer === "") {
-
-        showMessage(
-            "❌ Wpisz Discord ID klienta.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (
-        !Number.isFinite(liters) ||
-        liters <= 0
-    ) {
-
-        showMessage(
-            "❌ Wpisz poprawną ilość litrów.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (amount <= 0) {
-
-        showMessage(
-            "❌ Kwota musi być większa od 0 zł.",
-            false
-        );
-
-        return;
-    }
-
-
-    const number =
-        "MP-" +
-        Math.floor(
-            100000 +
-            Math.random() * 900000
-        );
-
-
-    currentReceipt = {
-        number: number,
-        customer: customer,
-        documentType:
-            documentType === "receipt"
-                ? "Paragon"
-                : "Faktura",
-        fuel: fuel,
-        liters: liters,
-        amount: amount,
-        paid: false
-    };
-
-
-    document.getElementById(
-        "receiptNumber"
-    ).textContent =
-        number;
-
-
-    document.getElementById(
-        "receiptCustomer"
-    ).textContent =
-        customer;
-
-
-    document.getElementById(
-        "receiptDocument"
-    ).textContent =
-        currentReceipt.documentType;
-
-
-    document.getElementById(
-        "receiptFuel"
-    ).textContent =
-        fuel;
-
-
-    document.getElementById(
-        "receiptLiters"
-    ).textContent =
-        liters.toFixed(2) +
-        " L";
-
-
-    document.getElementById(
-        "receiptAmount"
-    ).textContent =
-        amount
-            .toFixed(2)
-            .replace(".", ",") +
-        " zł";
-
-
-    const status =
-        document.getElementById(
-            "paymentStatus"
-        );
-
-
-    status.textContent =
-        "OCZEKUJE";
-
-
-    status.className =
-        "payment-status";
-
-
-    document.getElementById(
-        "paymentTimeRow"
-    ).style.display =
-        "none";
-
-
-    const paymentButton =
-        document.getElementById(
-            "paymentButton"
-        );
-
-
-    paymentButton.disabled =
-        false;
-
-
-    paymentButton.textContent =
-        "💰 POTWIERDŹ PŁATNOŚĆ";
-
-
-    document.getElementById(
-        "receipt"
-    ).style.display =
-        "block";
-
-
-    showMessage(
-        "✅ Dokument przygotowany. Sprawdź przelew klienta.",
-        true
-    );
-
-}
-
-
-function confirmPayment() {
-
-    if (!currentReceipt) {
-
-        showMessage(
-            "❌ Najpierw wystaw dokument.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (currentReceipt.paid) {
-
-        return;
-    }
-
-
-    currentReceipt.paid =
-        true;
-
-
-    const status =
-        document.getElementById(
-            "paymentStatus"
-        );
-
-
-    status.textContent =
-        "OPŁACONO";
-
-
-    status.className =
-        "payment-status paid";
-
-
-    const now =
-        new Date();
-
-
-    document.getElementById(
-        "paymentTime"
-    ).textContent =
-        now.toLocaleString(
-            "pl-PL"
-        );
-
-
-    document.getElementById(
-        "paymentTimeRow"
-    ).style.display =
-        "flex";
-
-
-    const button =
-        document.getElementById(
-            "paymentButton"
-        );
-
-
-    button.textContent =
-        "✅ PŁATNOŚĆ POTWIERDZONA";
-
-
-    button.disabled =
-        true;
-
-
-    showMessage(
-        "✅ Płatność została potwierdzona przez kasjera.",
-        true
-    );
-
-}
-
-
-function showMessage(
-    text,
-    success
-) {
-
-    const message =
-        document.getElementById(
-            "message"
-        );
-
-
-    message.textContent =
-        text;
-
-
-    message.className =
-        "message " +
-        (
-            success
-                ? "success"
-                : "error"
-        );
-
-
-    message.style.display =
-        "block";
-}
-
-
-calculateTotal();
-
-</script>
+</footer>
 
 </body>
 </html>
