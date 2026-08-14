@@ -488,7 +488,180 @@ function calculateTotal() {
 }
 
 
-function createReceipt() {
+async function createReceipt() {
+
+    const customer =
+        document.getElementById("customerId").value.trim();
+
+    const documentType =
+        document.getElementById("documentType").value;
+
+    const fuelSelect =
+        document.getElementById("fuelType");
+
+    const fuel =
+        fuelSelect.options[
+            fuelSelect.selectedIndex
+        ].text.split(" • ")[0];
+
+    const price =
+        parseFloat(fuelSelect.value);
+
+    const liters =
+        parseFloat(
+            document.getElementById("liters").value
+        );
+
+    /*
+       NA RAZIE TESTOWY IDENTYFIKATOR PRACOWNIKA.
+       Później pobierzemy go automatycznie z Discorda.
+    */
+    const employeeId = "TEST";
+
+    if (customer === "") {
+
+        showMessage(
+            "❌ Wpisz Discord ID klienta.",
+            false
+        );
+
+        return;
+    }
+
+    if (isNaN(liters) || liters <= 0) {
+
+        showMessage(
+            "❌ Wpisz poprawną ilość litrów.",
+            false
+        );
+
+        return;
+    }
+
+    const amount = price * liters;
+
+    showMessage(
+        "⏳ Zapisywanie transakcji...",
+        true
+    );
+
+    try {
+
+        const response = await fetch(
+            "/api/transactions",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    identyfikator_pracownika:
+                        employeeId,
+
+                    identyfikator_klienta:
+                        customer,
+
+                    typ_dokumentu:
+                        documentType === "receipt"
+                            ? "Paragon"
+                            : "Faktura",
+
+                    typ_paliwa:
+                        fuel,
+
+                    litry:
+                        liters,
+
+                    kwota:
+                        amount
+
+                })
+            }
+        );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            console.error(data);
+
+            showMessage(
+                "❌ Nie udało się zapisać transakcji.",
+                false
+            );
+
+            return;
+        }
+
+        const transaction =
+            data.transaction;
+
+        const number =
+            transaction.id || "MP-TEST";
+
+
+        document.getElementById(
+            "receiptNumber"
+        ).textContent = number;
+
+
+        document.getElementById(
+            "receiptCustomer"
+        ).textContent = customer;
+
+
+        document.getElementById(
+            "receiptDocument"
+        ).textContent =
+            documentType === "receipt"
+                ? "Paragon"
+                : "Faktura";
+
+
+        document.getElementById(
+            "receiptFuel"
+        ).textContent = fuel;
+
+
+        document.getElementById(
+            "receiptLiters"
+        ).textContent =
+            liters.toFixed(2) + " L";
+
+
+        document.getElementById(
+            "receiptAmount"
+        ).textContent =
+            amount
+                .toFixed(2)
+                .replace(".", ",") +
+            " zł";
+
+
+        document.getElementById(
+            "receipt"
+        ).style.display = "block";
+
+
+        showMessage(
+            "✅ Transakcja została zapisana!",
+            true
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            "❌ Błąd połączenia z API.",
+            false
+        );
+    }
+}
 
     const customer =
         document.getElementById("customerId").value.trim();
