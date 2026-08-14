@@ -2,179 +2,274 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>👷 Strefa pracownika | Mazowieckie Paliwa S.A.</title>
+<title>👷 Strefa pracownika | Mazowieckie Paliwa S.A.</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #071525;
-            color: white;
-            min-height: 100vh;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #071525;
+    color: white;
+    min-height: 100vh;
+}
 
-        header {
-            background: #0b1f35;
-            border-bottom: 3px solid #f5c400;
-            padding: 20px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+header {
+    background: #0b1f35;
+    border-bottom: 3px solid #f5c400;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-        }
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
 
-        .logo span {
-            color: #f5c400;
-        }
+.logo span {
+    color: #f5c400;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        nav a:hover {
-            color: #f5c400;
-        }
+nav a:hover {
+    color: #f5c400;
+}
 
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 70px auto;
-        }
+.container {
+    width: 92%;
+    max-width: 1000px;
+    margin: 55px auto;
+}
 
-        .badge {
-            display: inline-block;
-            background: #123c2a;
-            color: #58d68d;
-            padding: 10px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+.badge {
+    display: inline-block;
+    background: #123c2a;
+    color: #58d68d;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 
-        h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
+h1 {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
 
-        h1 span {
-            color: #f5c400;
-        }
+h1 span {
+    color: #f5c400;
+}
 
-        .description {
-            color: #aebdcb;
-            font-size: 18px;
-            margin-bottom: 35px;
-        }
+.description {
+    color: #aebdcb;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
 
-        .panel {
-            background: #0b1f35;
-            border: 1px solid #203b55;
-            border-radius: 15px;
-            padding: 30px;
-        }
+.panel {
+    background: #0b1f35;
+    border: 1px solid #203b55;
+    border-radius: 15px;
+    padding: 30px;
+}
 
-        .panel h2 {
-            margin-bottom: 25px;
-        }
+.document-switch {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+}
 
-        .form {
-            display: grid;
-            gap: 16px;
-        }
+.document-switch button {
+    flex: 1;
+    padding: 15px;
+    border-radius: 9px;
+    border: 1px solid #38516a;
+    background: #071525;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        label {
-            font-weight: bold;
-            margin-bottom: -8px;
-        }
+.document-switch button.active {
+    background: #f5c400;
+    color: #071525;
+    border-color: #f5c400;
+}
 
-        input,
-        select {
-            width: 100%;
-            padding: 14px;
-            border-radius: 8px;
-            border: 1px solid #38516a;
-            background: #071525;
-            color: white;
-            font-size: 16px;
-        }
+.section {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #203b55;
+}
 
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #f5c400;
-        }
+.section h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
 
-        .submit {
-            margin-top: 10px;
-            padding: 16px;
-            border: none;
-            border-radius: 9px;
-            background: #f5c400;
-            color: #071525;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
 
-        .submit:hover {
-            background: #ffd92e;
-        }
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
 
-        .message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-        }
+.field.full {
+    grid-column: 1 / -1;
+}
 
-        .back {
-            display: inline-block;
-            margin-top: 25px;
-            color: #aebdcb;
-            text-decoration: none;
-        }
+label {
+    font-weight: bold;
+    color: #dce5ed;
+}
 
-        .back:hover {
-            color: #f5c400;
-        }
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    border-radius: 8px;
+    border: 1px solid #38516a;
+    background: #071525;
+    color: white;
+    font-size: 16px;
+}
 
-        footer {
-            margin-top: 80px;
-            padding: 30px;
-            text-align: center;
-            background: #06111e;
-            border-top: 1px solid #203b55;
-            color: #8495a6;
-        }
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #f5c400;
+}
 
-        footer strong {
-            color: #f5c400;
-        }
+input[readonly] {
+    background: #101f30;
+    color: #f5c400;
+    font-weight: bold;
+}
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 36px;
-            }
+.summary {
+    margin-top: 25px;
+    background: #071525;
+    border: 1px solid #38516a;
+    border-radius: 10px;
+    padding: 20px;
+}
 
-            .container {
-                margin-top: 45px;
-            }
-        }
-    </style>
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    color: #b8c5d1;
+}
+
+.summary-row.total {
+    border-top: 1px solid #38516a;
+    margin-top: 8px;
+    padding-top: 15px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.summary-row.total span:last-child {
+    color: #f5c400;
+}
+
+.submit {
+    width: 100%;
+    margin-top: 25px;
+    padding: 17px;
+    border: none;
+    border-radius: 9px;
+    background: #f5c400;
+    color: #071525;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background: #ffd92e;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    display: none;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 25px;
+    color: #aebdcb;
+    text-decoration: none;
+}
+
+.back:hover {
+    color: #f5c400;
+}
+
+footer {
+    margin-top: 70px;
+    padding: 30px;
+    text-align: center;
+    background: #06111e;
+    border-top: 1px solid #203b55;
+    color: #8495a6;
+}
+
+footer strong {
+    color: #f5c400;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 700px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+
+    .document-switch {
+        flex-direction: column;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -203,123 +298,406 @@
     </h1>
 
     <p class="description">
-        Panel do wystawiania dokumentów sprzedaży
-        na stacji Mazowieckie Paliwa S.A.
+        Wystaw paragon lub fakturę VAT.
+        Ceny paliw i kwoty są obliczane automatycznie.
     </p>
 
 
     <section class="panel">
 
-        <h2>
-            🧾 Nowa transakcja
-        </h2>
+        <!-- WYBÓR DOKUMENTU -->
 
-        <form class="form" id="transactionForm">
+        <div class="document-switch">
 
-            <label for="identyfikator_pracownika">
-                Identyfikator pracownika
-            </label>
+            <button
+                type="button"
+                id="paragonBtn"
+                class="active"
+                onclick="setDocumentType('paragon')"
+            >
+                🧾 PARAGON
+            </button>
 
-            <input
-                id="identyfikator_pracownika"
-                name="identyfikator_pracownika"
-                type="text"
-                required
+            <button
+                type="button"
+                id="fakturaBtn"
+                onclick="setDocumentType('faktura')"
+            >
+                🏢 FAKTURA VAT
+            </button>
+
+        </div>
+
+
+        <form id="transactionForm">
+
+
+            <!-- DANE PRACOWNIKA -->
+
+            <div class="section">
+
+                <h2>👷 Dane pracownika</h2>
+
+                <div class="form-grid">
+
+                    <div class="field">
+
+                        <label for="identyfikator_pracownika">
+                            Identyfikator pracownika
+                        </label>
+
+                        <input
+                            id="identyfikator_pracownika"
+                            name="identyfikator_pracownika"
+                            type="text"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div
+                        class="field"
+                        id="kasaField"
+                    >
+
+                        <label for="numer_kasy">
+                            Numer kasy
+                        </label>
+
+                        <input
+                            id="numer_kasy"
+                            name="numer_kasy"
+                            type="text"
+                            value="K1"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAKTURA: DANE NABYWCY -->
+
+            <div
+                class="section hidden"
+                id="companySection"
             >
 
+                <h2>🏢 Dane nabywcy</h2>
 
-            <label for="identyfikator_klienta">
-                Identyfikator klienta
-            </label>
+                <div class="form-grid">
 
-            <input
-                id="identyfikator_klienta"
-                name="identyfikator_klienta"
-                type="text"
-                required
-            >
+                    <div class="field full">
 
+                        <label for="nazwa_firmy">
+                            Nazwa / Imię i Nazwisko
+                        </label>
 
-            <label for="typ_dokumentu">
-                Typ dokumentu
-            </label>
+                        <input
+                            id="nazwa_firmy"
+                            name="nazwa_firmy"
+                            type="text"
+                        >
 
-            <select
-                id="typ_dokumentu"
-                name="typ_dokumentu"
-                required
-            >
-                <option value="">Wybierz dokument</option>
-                <option value="paragon">Paragon</option>
-                <option value="faktura">Faktura</option>
-            </select>
+                    </div>
 
 
-            <label for="typ_paliwa">
-                Typ paliwa
-            </label>
+                    <div class="field full">
 
-            <select
-                id="typ_paliwa"
-                name="typ_paliwa"
-                required
-            >
-                <option value="">Wybierz paliwo</option>
-                <option value="benzyna95">Benzyna 95</option>
-                <option value="benzyna98">Benzyna 98</option>
-                <option value="diesel">Diesel</option>
-            </select>
+                        <label for="adres_firmy">
+                            Adres
+                        </label>
 
+                        <input
+                            id="adres_firmy"
+                            name="adres_firmy"
+                            type="text"
+                        >
 
-            <label for="litry">
-                Litry
-            </label>
-
-            <input
-                id="litry"
-                name="litry"
-                type="number"
-                step="0.01"
-                min="0"
-                required
-            >
+                    </div>
 
 
-            <label for="kwota">
-                Kwota
-            </label>
+                    <div class="field">
 
-            <input
-                id="kwota"
-                name="kwota"
-                type="number"
-                step="0.01"
-                min="0"
-                required
-            >
+                        <label for="nip">
+                            NIP
+                        </label>
+
+                        <input
+                            id="nip"
+                            name="nip"
+                            type="text"
+                            placeholder="000-000-00-00"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="telefon">
+                            Nr konta / Tel.
+                        </label>
+
+                        <input
+                            id="telefon"
+                            name="telefon"
+                            type="text"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PALIWO -->
+
+            <div class="section">
+
+                <h2>⛽ Paliwo</h2>
+
+                <div class="form-grid">
+
+                    <div class="field">
+
+                        <label for="typ_paliwa">
+                            Typ paliwa
+                        </label>
+
+                        <select
+                            id="typ_paliwa"
+                            name="typ_paliwa"
+                            required
+                            onchange="calculate()"
+                        >
+
+                            <option value="">
+                                Wybierz paliwo
+                            </option>
+
+                            <option value="Benzyna PB95">
+                                🟢 Benzyna 95
+                            </option>
+
+                            <option value="Benzyna PB98">
+                                🔵 Benzyna 98
+                            </option>
+
+                            <option value="Olej Napędowy ON">
+                                ⚫ Diesel
+                            </option>
+
+                            <option value="Gaz LPG">
+                                🟡 LPG
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="litry">
+                            Ilość litrów
+                        </label>
+
+                        <input
+                            id="litry"
+                            name="litry"
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            placeholder="np. 40"
+                            required
+                            oninput="calculate()"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="cena">
+                            Cena za litr
+                        </label>
+
+                        <input
+                            id="cena"
+                            type="text"
+                            readonly
+                            value="0,00 zł/l"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="kwota">
+                            Kwota brutto
+                        </label>
+
+                        <input
+                            id="kwota"
+                            name="kwota"
+                            type="text"
+                            readonly
+                            value="0,00 zł"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary">
+
+                    <div class="summary-row">
+
+                        <span>Cena za litr</span>
+
+                        <span id="summaryPrice">
+                            0,00 zł
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>Ilość</span>
+
+                        <span id="summaryLiters">
+                            0,00 l
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row total">
+
+                        <span>DO ZAPŁATY</span>
+
+                        <span id="summaryTotal">
+                            0,00 zł
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PŁATNOŚĆ -->
+
+            <div class="section">
+
+                <h2>💳 Płatność</h2>
+
+                <div class="form-grid">
+
+                    <div class="field">
+
+                        <label for="forma_platnosci">
+                            Forma płatności
+                        </label>
+
+                        <select
+                            id="forma_platnosci"
+                            name="forma_platnosci"
+                            onchange="paymentChanged()"
+                            required
+                        >
+
+                            <option value="">
+                                Wybierz
+                            </option>
+
+                            <option value="Gotówka">
+                                💵 Gotówka
+                            </option>
+
+                            <option value="Karta">
+                                💳 Karta
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div
+                        class="field hidden"
+                        id="cashField"
+                    >
+
+                        <label for="wplacono">
+                            Wpłacono
+                        </label>
+
+                        <input
+                            id="wplacono"
+                            name="wplacono"
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            oninput="calculateChange()"
+                        >
+
+                    </div>
+
+
+                    <div
+                        class="field hidden"
+                        id="changeField"
+                    >
+
+                        <label for="reszta">
+                            Reszta
+                        </label>
+
+                        <input
+                            id="reszta"
+                            type="text"
+                            readonly
+                            value="0,00 zł"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
 
 
             <button
-                class="submit"
                 type="submit"
+                class="submit"
             >
                 🧾 Wystaw dokument
             </button>
 
+
+            <div
+                class="message"
+                id="message"
+            ></div>
+
         </form>
-
-
-        <div
-            class="message"
-            id="message"
-        ></div>
 
     </section>
 
 
     <a
-        class="back"
         href="/"
+        class="back"
     >
         ← Wróć na stronę główną
     </a>
@@ -335,6 +713,10 @@
 
     <br><br>
 
+    Dokument wygenerowany wyłącznie na potrzeby roleplay'u Volista RP.
+
+    <br><br>
+
     © 2026 Mazowieckie Paliwa S.A.
 
 </footer>
@@ -342,38 +724,272 @@
 
 <script>
 
+const prices = {
+    "Benzyna PB95": 6.20,
+    "Benzyna PB98": 6.70,
+    "Olej Napędowy ON": 6.35,
+    "Gaz LPG": 3.20
+};
+
+let documentType = "paragon";
+
+
+function setDocumentType(type) {
+
+    documentType = type;
+
+    const paragonBtn =
+        document.getElementById("paragonBtn");
+
+    const fakturaBtn =
+        document.getElementById("fakturaBtn");
+
+    const companySection =
+        document.getElementById("companySection");
+
+    const companyInputs =
+        companySection.querySelectorAll("input");
+
+
+    if (type === "faktura") {
+
+        paragonBtn.classList.remove("active");
+        fakturaBtn.classList.add("active");
+
+        companySection.classList.remove("hidden");
+
+        companyInputs.forEach(input => {
+            input.required = true;
+        });
+
+    } else {
+
+        fakturaBtn.classList.remove("active");
+        paragonBtn.classList.add("active");
+
+        companySection.classList.add("hidden");
+
+        companyInputs.forEach(input => {
+            input.required = false;
+        });
+
+    }
+
+}
+
+
+function calculate() {
+
+    const fuel =
+        document.getElementById("typ_paliwa").value;
+
+    const liters =
+        parseFloat(
+            document.getElementById("litry").value
+        ) || 0;
+
+    const price =
+        prices[fuel] || 0;
+
+    const total =
+        liters * price;
+
+
+    document.getElementById("cena").value =
+        price.toFixed(2).replace(".", ",") + " zł/l";
+
+
+    document.getElementById("kwota").value =
+        total.toFixed(2).replace(".", ",") + " zł";
+
+
+    document.getElementById("summaryPrice").textContent =
+        price.toFixed(2).replace(".", ",") + " zł/l";
+
+
+    document.getElementById("summaryLiters").textContent =
+        liters.toFixed(2).replace(".", ",") + " l";
+
+
+    document.getElementById("summaryTotal").textContent =
+        total.toFixed(2).replace(".", ",") + " zł";
+
+
+    calculateChange();
+
+}
+
+
+function paymentChanged() {
+
+    const payment =
+        document.getElementById("forma_platnosci").value;
+
+    const cashField =
+        document.getElementById("cashField");
+
+    const changeField =
+        document.getElementById("changeField");
+
+
+    if (payment === "Gotówka") {
+
+        cashField.classList.remove("hidden");
+        changeField.classList.remove("hidden");
+
+    } else {
+
+        cashField.classList.add("hidden");
+        changeField.classList.add("hidden");
+
+        document.getElementById("wplacono").value = "";
+        document.getElementById("reszta").value = "0,00 zł";
+
+    }
+
+}
+
+
+function calculateChange() {
+
+    const totalText =
+        document.getElementById("kwota").value;
+
+    const total =
+        parseFloat(
+            totalText
+                .replace(" zł", "")
+                .replace(",", ".")
+        ) || 0;
+
+
+    const paid =
+        parseFloat(
+            document.getElementById("wplacono").value
+        ) || 0;
+
+
+    let change =
+        paid - total;
+
+
+    if (change < 0) {
+        change = 0;
+    }
+
+
+    document.getElementById("reszta").value =
+        change.toFixed(2).replace(".", ",") + " zł";
+
+}
+
+
 document
     .getElementById("transactionForm")
     .addEventListener("submit", async function(event) {
 
         event.preventDefault();
 
+
         const message =
             document.getElementById("message");
+
+
+        const fuel =
+            document.getElementById("typ_paliwa").value;
+
+
+        const liters =
+            parseFloat(
+                document.getElementById("litry").value
+            ) || 0;
+
+
+        const price =
+            prices[fuel] || 0;
+
+
+        const total =
+            liters * price;
+
+
+        if (!fuel || liters <= 0) {
+
+            message.style.display = "block";
+            message.style.background = "#3a1515";
+            message.style.color = "#ff7676";
+            message.textContent =
+                "❌ Wybierz paliwo i podaj ilość litrów.";
+
+            return;
+
+        }
+
+
+        if (
+            documentType === "faktura" &&
+            (
+                !document.getElementById("nazwa_firmy").value ||
+                !document.getElementById("adres_firmy").value ||
+                !document.getElementById("nip").value
+            )
+        ) {
+
+            message.style.display = "block";
+            message.style.background = "#3a1515";
+            message.style.color = "#ff7676";
+            message.textContent =
+                "❌ Uzupełnij dane nabywcy dla faktury.";
+
+            return;
+
+        }
+
 
         const formData =
             new FormData(this);
 
+
         const data =
             Object.fromEntries(formData.entries());
 
+
+        data.typ_dokumentu =
+            documentType === "faktura"
+                ? "faktura"
+                : "paragon";
+
+
+        data.kwota =
+            total.toFixed(2);
+
+
+        data.cena_za_litr =
+            price.toFixed(2);
+
+
         message.style.display = "block";
-        message.textContent = "⏳ Zapisywanie transakcji...";
+        message.style.background = "#102c20";
+        message.style.color = "#58d68d";
+        message.textContent =
+            "⏳ Zapisywanie transakcji...";
+
 
         try {
 
             const response =
-                await fetch("/api/transactions", {
+                await fetch(
+                    "/api/transactions",
+                    {
+                        method: "POST",
 
-                    method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify(data)
-
-                });
+                        body: JSON.stringify(data)
+                    }
+                );
 
 
             const result =
@@ -391,30 +1007,43 @@ document
             }
 
 
+            message.style.display = "block";
+            message.style.background = "#123c2a";
+            message.style.color = "#58d68d";
+
             message.textContent =
-                "✅ Transakcja została zapisana.";
-
-            message.style.background =
-                "#123c2a";
-
-            message.style.color =
-                "#58d68d";
-
+                "✅ Dokument został wystawiony poprawnie.";
 
             this.reset();
 
+            documentType = "paragon";
+
+            setDocumentType("paragon");
+
+            document.getElementById("cena").value =
+                "0,00 zł/l";
+
+            document.getElementById("kwota").value =
+                "0,00 zł";
+
+            document.getElementById("summaryPrice").textContent =
+                "0,00 zł/l";
+
+            document.getElementById("summaryLiters").textContent =
+                "0,00 l";
+
+            document.getElementById("summaryTotal").textContent =
+                "0,00 zł";
 
         } catch (error) {
+
+            message.style.display = "block";
+            message.style.background = "#3a1515";
+            message.style.color = "#ff7676";
 
             message.textContent =
                 "❌ Nie udało się zapisać transakcji: "
                 + error.message;
-
-            message.style.background =
-                "#3a1515";
-
-            message.style.color =
-                "#ff7676";
 
         }
 
