@@ -1,79 +1,89 @@
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY
-);
-
 export default async function handler(req, res) {
     if (req.method !== "POST") {
         return res.status(405).json({
+            success: false,
             error: "Method not allowed"
         });
     }
 
     try {
         const {
-            customer_id,
-            employee_id,
-            document_type,
-            fuel_type,
-            liters,
-            amount
+            identyfikator_pracownika,
+            identyfikator_klienta,
+            typ_dokumentu,
+            typ_paliwa,
+            litry,
+            kwota
         } = req.body;
 
         if (
-            !customer_id ||
-            !employee_id ||
-            !document_type ||
-            !fuel_type ||
-            !liters ||
-            !amount
+            !identyfikator_pracownika ||
+            !identyfikator_klienta ||
+            !typ_dokumentu ||
+            !typ_paliwa ||
+            !litry ||
+            !kwota
         ) {
             return res.status(400).json({
+                success: false,
                 error: "Brak wymaganych danych"
             });
         }
 
-        const receiptNumber =
-            "MP-" +
-            Date.now().toString().slice(-8);
+        const supabaseUrl = process.env.SUPABASE_URL;
+        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-        const { data, error } = await supabase
-            .from("transactions")
-            .insert([
-                {
-                    receipt_number: receiptNumber,
-                    customer_id: customer_id,
-                    employee_id: employee_id,
-                    document_type: document_type,
-                    fuel_type: fuel_type,
-                    liters: liters,
-                    amount: amount,
-                    payment_status: "pending"
-                }
-            ])
-            .select()
-            .single();
-
-        if (error) {
-            console.error(error);
-
+        if (!supabaseUrl || !supabaseKey) {
             return res.status(500).json({
-                error: "Nie udało się zapisać transakcji"
+                success: false,
+                error: "Brak konfiguracji Supabase"
+            });
+        }
+
+        const response = await fetch(
+            `${supabaseUrl}/rest/v1/transactions`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": supabaseKey,
+                    "Authorization": `Bearer ${supabaseKey}`,
+                    "Prefer": "return=representation"
+                },
+
+                body: JSON.stringify({
+                    identyfikator_pracownika,
+                    identyfikator_klienta,
+                    typ_dokumentu,
+                    typ_paliwa,
+                    litry,
+                    kwota,
+                    stan_płatności: "oczekuje"
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({
+                success: false,
+                error: data
             });
         }
 
         return res.status(201).json({
             success: true,
-            transaction: data
+            transaction: data[0]
         });
 
     } catch (error) {
-        console.error(error);
 
         return res.status(500).json({
-            error: "Błąd serwera"
+            success: false,
+            error: error.message
         });
+
     }
 }
