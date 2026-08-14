@@ -17,12 +17,16 @@
             font-family: Arial, sans-serif;
             background: #071525;
             color: white;
+            min-height: 100vh;
         }
 
         header {
             background: #0b1f35;
             border-bottom: 3px solid #f5c400;
             padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
@@ -34,36 +38,57 @@
             color: #f5c400;
         }
 
-        .content {
-            max-width: 600px;
-            margin: 70px auto;
-            padding: 0 25px;
+        nav {
+            display: flex;
+            gap: 25px;
         }
 
-        .box {
-            background: #0b1f35;
-            border: 1px solid #203b55;
-            border-radius: 15px;
-            padding: 35px;
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        h1 {
-            margin-bottom: 10px;
-        }
-
-        h1 span {
+        nav a:hover {
             color: #f5c400;
         }
 
-        .description {
-            color: #aebdcb;
+        .content {
+            max-width: 650px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .title {
+            text-align: center;
             margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .title h1 span {
+            color: #f5c400;
+        }
+
+        .title p {
+            color: #aebdcb;
+            line-height: 1.5;
+        }
+
+        .search-box {
+            background: #0b1f35;
+            border: 1px solid #203b55;
+            border-radius: 15px;
+            padding: 30px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
         input {
@@ -73,18 +98,23 @@
             border: 1px solid #38516a;
             background: #071525;
             color: white;
-            font-size: 16px;
-            margin-bottom: 15px;
+            font-size: 17px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #f5c400;
         }
 
         button {
             width: 100%;
-            padding: 15px;
+            margin-top: 15px;
+            padding: 16px;
             border: none;
-            border-radius: 8px;
+            border-radius: 9px;
             background: #f5c400;
             color: #071525;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
         }
@@ -93,38 +123,116 @@
             background: #ffd92e;
         }
 
-        .result {
+        .error {
             display: none;
-            margin-top: 25px;
-            padding: 25px;
-            background: #071525;
-            border: 1px solid #203b55;
-            border-radius: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 9px;
+            background: #421b1b;
+            color: #ff8c8c;
         }
 
-        .result h2 {
-            color: #f5c400;
+        .receipt {
+            display: none;
+            margin-top: 25px;
+            background: #f5f5f5;
+            color: #111;
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        .receipt-header {
+            text-align: center;
+            border-bottom: 1px dashed #777;
+            padding-bottom: 20px;
             margin-bottom: 20px;
         }
 
-        .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 9px 0;
-            border-bottom: 1px solid #203b55;
+        .receipt-header h2 {
+            font-size: 22px;
         }
 
-        .paid {
-            color: #58d68d;
+        .receipt-header p {
+            margin-top: 5px;
+            color: #555;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 11px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .receipt-row span:first-child {
+            color: #555;
+        }
+
+        .receipt-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .receipt-status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 7px;
+            text-align: center;
+            background: #fff3bf;
+            color: #765900;
             font-weight: bold;
         }
 
         .back {
             display: block;
+            text-align: center;
             margin-top: 25px;
             color: #f5c400;
             text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 70px;
+            background: #06111e;
+            border-top: 1px solid #203b55;
             text-align: center;
+            padding: 30px;
+            color: #8495a6;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .title h1 {
+                font-size: 34px;
+            }
+
+            .search-box {
+                padding: 22px;
+            }
         }
     </style>
 </head>
@@ -132,96 +240,291 @@
 <body>
 
 <header>
+
     <div class="logo">
         MAZOWIECKIE <span>PALIWA</span> S.A.
     </div>
+
+    <nav>
+
+        <a href="/">
+            Strona główna
+        </a>
+
+        <a href="/ceny.html">
+            Ceny paliw
+        </a>
+
+        <a href="/pracownik.html">
+            Strefa pracownika
+        </a>
+
+    </nav>
+
 </header>
+
 
 <main class="content">
 
-    <div class="box">
+    <div class="title">
 
-        <h1>Sprawdź <span>paragon</span></h1>
+        <h1>
+            Sprawdź <span>paragon</span>
+        </h1>
 
-        <p class="description">
-            Wpisz numer paragonu, aby sprawdzić transakcję.
+        <p>
+            Wpisz numer paragonu otrzymany podczas
+            tankowania na naszej stacji.
         </p>
 
-        <label for="receipt">
+    </div>
+
+
+    <div class="search-box">
+
+        <label for="receiptNumber">
             Numer paragonu
         </label>
 
         <input
-            id="receipt"
+            id="receiptNumber"
             type="text"
             placeholder="np. MP-000001"
+            autocomplete="off"
         >
 
         <button onclick="checkReceipt()">
             🧾 SPRAWDŹ PARAGON
         </button>
 
-        <div id="result" class="result">
 
-            <h2>⛽ Mazowieckie Paliwa S.A.</h2>
+        <div id="error" class="error">
+            ❌ Nie znaleziono paragonu.
+        </div>
 
-            <div class="row">
-                <span>Numer</span>
-                <strong id="number"></strong>
+
+        <div id="receipt" class="receipt">
+
+            <div class="receipt-header">
+
+                <h2>
+                    MAZOWIECKIE PALIWA S.A.
+                </h2>
+
+                <p>
+                    Elektroniczny paragon
+                </p>
+
             </div>
 
-            <div class="row">
-                <span>Klient</span>
-                <strong>TEST</strong>
+
+            <div class="receipt-row">
+
+                <span>
+                    Numer paragonu
+                </span>
+
+                <strong id="receiptNumberResult">
+                    -
+                </strong>
+
             </div>
 
-            <div class="row">
-                <span>Paliwo</span>
-                <strong>Benzyna 95</strong>
+
+            <div class="receipt-row">
+
+                <span>
+                    ID klienta
+                </span>
+
+                <strong id="customerResult">
+                    -
+                </strong>
+
             </div>
 
-            <div class="row">
-                <span>Ilość</span>
-                <strong>10 L</strong>
+
+            <div class="receipt-row">
+
+                <span>
+                    Dokument
+                </span>
+
+                <strong id="documentResult">
+                    -
+                </strong>
+
             </div>
 
-            <div class="row">
-                <span>Kwota</span>
-                <strong>59,90 zł</strong>
+
+            <div class="receipt-row">
+
+                <span>
+                    Paliwo
+                </span>
+
+                <strong id="fuelResult">
+                    -
+                </strong>
+
             </div>
 
-            <div class="row">
-                <span>Płatność</span>
-                <strong class="paid">OCZEKUJE</strong>
+
+            <div class="receipt-row">
+
+                <span>
+                    Ilość
+                </span>
+
+                <strong id="litersResult">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-total">
+
+                <span>
+                    RAZEM
+                </span>
+
+                <span id="amountResult">
+                    0,00 zł
+                </span>
+
+            </div>
+
+
+            <div id="paymentStatus" class="receipt-status">
+                💳 OCZEKUJE NA PŁATNOŚĆ
             </div>
 
         </div>
 
-        <a class="back" href="/">
-            ← Wróć na stronę główną
-        </a>
-
     </div>
 
+
+    <a
+        class="back"
+        href="/"
+    >
+        ← Wróć na stronę główną
+    </a>
+
 </main>
+
+
+<footer>
+
+    <strong>
+        MAZOWIECKIE PALIWA S.A.
+    </strong>
+
+    <br><br>
+
+    „Napędzamy Twoją drogę.”
+
+    <br><br>
+
+    © 2026 Mazowieckie Paliwa S.A.
+
+</footer>
+
 
 <script>
 
 function checkReceipt() {
 
-    const receipt = document
-        .getElementById("receipt")
-        .value
-        .trim();
+    const input =
+        document
+            .getElementById("receiptNumber")
+            .value
+            .trim();
 
-    if (receipt === "") {
-        alert("Wpisz numer paragonu.");
+    const error =
+        document.getElementById("error");
+
+    const receipt =
+        document.getElementById("receipt");
+
+
+    error.style.display = "none";
+    receipt.style.display = "none";
+
+
+    if (!input) {
+
+        error.textContent =
+            "❌ Wpisz numer paragonu.";
+
+        error.style.display = "block";
+
         return;
     }
 
-    document.getElementById("number").textContent = receipt;
 
-    document.getElementById("result").style.display = "block";
+    /*
+        WERSJA TESTOWA
+
+        Na tym etapie pokazujemy przykładowy
+        paragon, aby sprawdzić działanie strony.
+
+        Później zastąpimy ten fragment
+        zapytaniem do naszego API.
+    */
+
+
+    if (input.toUpperCase() !== "MP-000001") {
+
+        error.textContent =
+            "❌ Nie znaleziono paragonu o numerze " +
+            input + ".";
+
+        error.style.display = "block";
+
+        return;
+    }
+
+
+    document
+        .getElementById("receiptNumberResult")
+        .textContent = "MP-000001";
+
+
+    document
+        .getElementById("customerResult")
+        .textContent = "TEST";
+
+
+    document
+        .getElementById("documentResult")
+        .textContent = "Paragon";
+
+
+    document
+        .getElementById("fuelResult")
+        .textContent = "Benzyna 95";
+
+
+    document
+        .getElementById("litersResult")
+        .textContent = "10 L";
+
+
+    document
+        .getElementById("amountResult")
+        .textContent = "59,90 zł";
+
+
+    document
+        .getElementById("paymentStatus")
+        .textContent =
+            "💳 OCZEKUJE NA PŁATNOŚĆ";
+
+
+    receipt.style.display = "block";
+
 }
 
 </script>
