@@ -24,7 +24,6 @@
             background: #0b1f35;
             border-bottom: 3px solid #f5c400;
             padding: 20px 7%;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -160,6 +159,11 @@
             background: #ffd92e;
         }
 
+        .button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
         .message {
             display: none;
             margin-top: 20px;
@@ -214,7 +218,6 @@
         }
 
         @media (max-width: 650px) {
-
             header {
                 flex-direction: column;
                 gap: 15px;
@@ -243,7 +246,6 @@
 
 <body>
 
-
 <header>
 
     <div class="logo">
@@ -258,7 +260,6 @@
 
 
 <main class="container">
-
 
     <div class="title">
 
@@ -278,7 +279,6 @@
 
 
     <section class="panel">
-
 
         <div class="panel-title">
             🧾 Wystaw dokument sprzedaży
@@ -309,12 +309,13 @@
         <div class="form-group">
 
             <label for="customerId">
-    ID klienta Discord
-</label>
+                ID klienta Discord
+            </label>
 
             <input
                 id="customerId"
                 type="text"
+                inputmode="numeric"
                 placeholder="Wpisz Discord ID klienta"
             >
 
@@ -385,6 +386,7 @@
 
         <button
             class="button"
+            id="submitButton"
             onclick="createReceipt()"
         >
             🧾 WYSTAW DOKUMENT
@@ -412,7 +414,7 @@
             </div>
 
             <div class="receipt-row">
-                <span>Klient Roblox</span>
+                <span>Klient Discord</span>
                 <strong id="receiptCustomer"></strong>
             </div>
 
@@ -438,9 +440,11 @@
 
             <div class="receipt-row">
                 <span>Status płatności</span>
+
                 <strong style="color:#f5c400;">
                     OCZEKUJE
                 </strong>
+
             </div>
 
         </div>
@@ -459,64 +463,91 @@
 
 function calculateTotal() {
 
+    const fuelElement =
+        document.getElementById("fuelType");
+
+    const litersElement =
+        document.getElementById("liters");
+
+    const totalElement =
+        document.getElementById("total");
+
+
     const price =
-        parseFloat(
-            document.getElementById("fuelType").value
-        );
+        Number(fuelElement.value);
 
     const liters =
-        parseFloat(
-            document.getElementById("liters").value
-        );
+        Number(litersElement.value);
+
 
     if (
-        isNaN(price) ||
-        isNaN(liters) ||
+        !Number.isFinite(price) ||
+        !Number.isFinite(liters) ||
         liters <= 0
     ) {
 
-        document.getElementById("total").textContent =
+        totalElement.textContent =
             "0,00 zł";
 
-        return;
+        return 0;
     }
 
-    const total = price * liters;
 
-    document.getElementById("total").textContent =
-        total.toFixed(2).replace(".", ",") + " zł";
+    const total =
+        Math.round(price * liters * 100) / 100;
+
+
+    totalElement.textContent =
+        total.toFixed(2).replace(".", ",") +
+        " zł";
+
+
+    return total;
 }
 
 
 async function createReceipt() {
 
+    const button =
+        document.getElementById("submitButton");
+
+
     const customer =
-        document.getElementById("customerId").value.trim();
+        document.getElementById("customerId")
+        .value
+        .trim();
+
 
     const documentType =
-        document.getElementById("documentType").value;
+        document.getElementById("documentType")
+        .value;
+
 
     const fuelSelect =
         document.getElementById("fuelType");
 
+
     const fuel =
-        fuelSelect.options[
-            fuelSelect.selectedIndex
-        ].text.split(" • ")[0];
+        fuelSelect
+        .options[fuelSelect.selectedIndex]
+        .text
+        .split(" • ")[0];
+
 
     const price =
-        parseFloat(fuelSelect.value);
+        Number(fuelSelect.value);
+
 
     const liters =
-        parseFloat(
-            document.getElementById("liters").value
+        Number(
+            document.getElementById("liters")
+            .value
         );
 
-    /*
-       NA RAZIE TESTOWY IDENTYFIKATOR PRACOWNIKA.
-       Później pobierzemy go automatycznie z Discorda.
-    */
-    const employeeId = "TEST";
+
+    const amount =
+        calculateTotal();
+
 
     if (customer === "") {
 
@@ -528,7 +559,11 @@ async function createReceipt() {
         return;
     }
 
-    if (isNaN(liters) || liters <= 0) {
+
+    if (
+        !Number.isFinite(liters) ||
+        liters <= 0
+    ) {
 
         showMessage(
             "❌ Wpisz poprawną ilość litrów.",
@@ -538,80 +573,124 @@ async function createReceipt() {
         return;
     }
 
-    const amount = price * liters;
+
+    if (
+        !Number.isFinite(price) ||
+        amount <= 0
+    ) {
+
+        showMessage(
+            "❌ Nie udało się obliczyć kwoty.",
+            false
+        );
+
+        return;
+    }
+
+
+    /*
+        NA RAZIE TEST.
+        Później pobierzemy prawdziwe
+        Discord ID pracownika.
+    */
+
+    const employeeId =
+        "TEST";
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "⏳ ZAPISYWANIE...";
+
 
     showMessage(
         "⏳ Zapisywanie transakcji...",
         true
     );
 
+
     try {
 
-        const response = await fetch(
-            "/api/transactions",
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                "/api/transactions",
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify({
+                    body: JSON.stringify({
 
-                    identyfikator_pracownika:
-                        employeeId,
+                        identyfikator_pracownika:
+                            employeeId,
 
-                    identyfikator_klienta:
-                        customer,
+                        identyfikator_klienta:
+                            customer,
 
-                    typ_dokumentu:
-                        documentType === "receipt"
-                            ? "Paragon"
-                            : "Faktura",
+                        typ_dokumentu:
+                            documentType === "receipt"
+                                ? "Paragon"
+                                : "Faktura",
 
-                    typ_paliwa:
-                        fuel,
+                        typ_paliwa:
+                            fuel,
 
-                    litry:
-                        liters,
+                        litry:
+                            liters,
 
-                    kwota:
-                        amount
+                        kwota:
+                            amount
 
-                })
-            }
-        );
+                    })
+                }
+            );
+
 
         const data =
             await response.json();
 
+
         if (!response.ok) {
 
-            console.error(data);
+            console.error(
+                "API ERROR:",
+                data
+            );
 
             showMessage(
-                "❌ Nie udało się zapisać transakcji.",
+                "❌ Nie udało się zapisać transakcji. Sprawdź API.",
                 false
             );
 
             return;
         }
 
+
         const transaction =
             data.transaction;
 
+
         const number =
-            transaction.id || "MP-TEST";
+            transaction &&
+            transaction.id
+                ? transaction.id
+                : "MP-TEST";
 
 
         document.getElementById(
             "receiptNumber"
-        ).textContent = number;
+        ).textContent =
+            number;
 
 
         document.getElementById(
             "receiptCustomer"
-        ).textContent = customer;
+        ).textContent =
+            customer;
 
 
         document.getElementById(
@@ -624,27 +703,30 @@ async function createReceipt() {
 
         document.getElementById(
             "receiptFuel"
-        ).textContent = fuel;
+        ).textContent =
+            fuel;
 
 
         document.getElementById(
             "receiptLiters"
         ).textContent =
-            liters.toFixed(2) + " L";
+            liters.toFixed(2) +
+            " L";
 
 
         document.getElementById(
             "receiptAmount"
         ).textContent =
             amount
-                .toFixed(2)
-                .replace(".", ",") +
+            .toFixed(2)
+            .replace(".", ",") +
             " zł";
 
 
         document.getElementById(
             "receipt"
-        ).style.display = "block";
+        ).style.display =
+            "block";
 
 
         showMessage(
@@ -652,138 +734,59 @@ async function createReceipt() {
             true
         );
 
+
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "CONNECTION ERROR:",
+            error
+        );
 
         showMessage(
             "❌ Błąd połączenia z API.",
             false
         );
+
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "🧾 WYSTAW DOKUMENT";
     }
-}
-
-    const customer =
-        document.getElementById("customerId").value.trim();
-
-    const documentType =
-        document.getElementById("documentType").value;
-
-    const fuelSelect =
-        document.getElementById("fuelType");
-
-    const fuel =
-        fuelSelect.options[
-            fuelSelect.selectedIndex
-        ].text.split(" • ")[0];
-
-    const price =
-        parseFloat(fuelSelect.value);
-
-    const liters =
-        parseFloat(
-            document.getElementById("liters").value
-        );
-
-
-    if (customer === "") {
-
-        showMessage(
-            "❌ Wpisz ID klienta Roblox.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (
-        isNaN(liters) ||
-        liters <= 0
-    ) {
-
-        showMessage(
-            "❌ Wpisz poprawną ilość litrów.",
-            false
-        );
-
-        return;
-    }
-
-
-    const amount = price * liters;
-
-
-    const number =
-        "MP-" +
-        Math.floor(
-            100000 +
-            Math.random() * 900000
-        );
-
-
-    document.getElementById(
-        "receiptNumber"
-    ).textContent = number;
-
-
-    document.getElementById(
-        "receiptCustomer"
-    ).textContent = customer;
-
-
-    document.getElementById(
-        "receiptDocument"
-    ).textContent =
-        documentType === "receipt"
-            ? "Paragon"
-            : "Faktura";
-
-
-    document.getElementById(
-        "receiptFuel"
-    ).textContent = fuel;
-
-
-    document.getElementById(
-        "receiptLiters"
-    ).textContent =
-        liters.toFixed(2) + " L";
-
-
-    document.getElementById(
-        "receiptAmount"
-    ).textContent =
-        amount.toFixed(2).replace(".", ",") +
-        " zł";
-
-
-    document.getElementById(
-        "receipt"
-    ).style.display = "block";
-
-
-    showMessage(
-        "✅ Dokument przygotowany: " + number,
-        true
-    );
 
 }
 
 
-function showMessage(text, success) {
+function showMessage(
+    text,
+    success
+) {
 
     const message =
         document.getElementById("message");
 
-    message.textContent = text;
+
+    message.textContent =
+        text;
+
 
     message.className =
         "message " +
-        (success ? "success" : "error");
+        (
+            success
+                ? "success"
+                : "error"
+        );
 
-    message.style.display = "block";
+
+    message.style.display =
+        "block";
 }
+
+
+calculateTotal();
 
 </script>
 
