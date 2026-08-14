@@ -1,794 +1,127 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Strefa pracownika | Mazowieckie Paliwa S.A.</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #071525;
-            color: white;
-            min-height: 100vh;
-        }
-
-        header {
-            background: #0b1f35;
-            border-bottom: 3px solid #f5c400;
-            padding: 20px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .logo span {
-            color: #f5c400;
-        }
-
-        .home {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .home:hover {
-            color: #f5c400;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 55px auto;
-        }
-
-        .title {
-            margin-bottom: 30px;
-        }
-
-        .title h1 {
-            font-size: 44px;
-            margin-bottom: 10px;
-        }
-
-        .title h1 span {
-            color: #f5c400;
-        }
-
-        .title p {
-            color: #9fb0c0;
-            font-size: 17px;
-        }
-
-        .status {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 16px;
-            border-radius: 20px;
-            background: #123c2a;
-            color: #58d68d;
-            font-weight: bold;
-        }
-
-        .panel {
-            background: #0b1f35;
-            border: 1px solid #203b55;
-            border-radius: 16px;
-            padding: 30px;
-        }
-
-        .panel-title {
-            font-size: 23px;
-            font-weight: bold;
-            margin-bottom: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 22px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #38516a;
-            background: #071525;
-            color: white;
-            font-size: 16px;
-            outline: none;
-        }
-
-        input:focus,
-        select:focus {
-            border-color: #f5c400;
-        }
-
-        .total {
-            background: #071525;
-            border: 1px solid #203b55;
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            margin: 30px 0;
-        }
-
-        .total-label {
-            color: #9fb0c0;
-            font-size: 14px;
-        }
-
-        .total-value {
-            color: #f5c400;
-            font-size: 38px;
-            font-weight: bold;
-            margin-top: 8px;
-        }
-
-        .button {
-            width: 100%;
-            padding: 17px;
-            border: none;
-            border-radius: 9px;
-            background: #f5c400;
-            color: #071525;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background: #ffd92e;
-        }
-
-        .button:disabled {
-            opacity: 0.6;
-            cursor: wait;
-        }
-
-        .message {
-            display: none;
-            margin-top: 20px;
-            padding: 18px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        .success {
-            background: #123c2a;
-            color: #58d68d;
-        }
-
-        .error {
-            background: #401d22;
-            color: #ff7676;
-        }
-
-        .receipt {
-            display: none;
-            margin-top: 25px;
-            padding: 25px;
-            background: #071525;
-            border: 1px solid #203b55;
-            border-radius: 12px;
-        }
-
-        .receipt h2 {
-            color: #f5c400;
-            margin-bottom: 20px;
-        }
-
-        .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 11px 0;
-            border-bottom: 1px solid #203b55;
-        }
-
-        .receipt-row:last-child {
-            border-bottom: none;
-        }
-
-        .back {
-            display: block;
-            text-align: center;
-            color: #f5c400;
-            text-decoration: none;
-            margin-top: 30px;
-            padding-bottom: 40px;
-        }
-
-        @media (max-width: 650px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .container {
-                width: 94%;
-                margin-top: 30px;
-            }
-
-            .title h1 {
-                font-size: 35px;
-            }
-
-            .panel {
-                padding: 20px;
-            }
-
-            .receipt-row {
-                flex-direction: column;
-                gap: 5px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<header>
-
-    <div class="logo">
-        MAZOWIECKIE <span>PALIWA</span> S.A.
-    </div>
-
-    <a class="home" href="/">
-        ← Strona główna
-    </a>
-
-</header>
-
-
-<main class="container">
-
-    <div class="title">
-
-        <h1>
-            Strefa <span>pracownika</span>
-        </h1>
-
-        <p>
-            Panel kasjera Mazowieckie Paliwa S.A.
-        </p>
-
-        <div class="status">
-            🟢 STACJA OTWARTA
-        </div>
-
-    </div>
-
-
-    <section class="panel">
-
-        <div class="panel-title">
-            🧾 Wystaw dokument sprzedaży
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="documentType">
-                Rodzaj dokumentu
-            </label>
-
-            <select id="documentType">
-
-                <option value="receipt">
-                    🧾 Paragon
-                </option>
-
-                <option value="invoice">
-                    📄 Faktura
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="customerId">
-                ID klienta Discord
-            </label>
-
-            <input
-                id="customerId"
-                type="text"
-                inputmode="numeric"
-                placeholder="Wpisz Discord ID klienta"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="fuelType">
-                Rodzaj paliwa
-            </label>
-
-            <select
-                id="fuelType"
-                onchange="calculateTotal()"
-            >
-
-                <option value="5.99">
-                    Benzyna 95 • 5,99 zł/L
-                </option>
-
-                <option value="6.49">
-                    Benzyna 98 • 6,49 zł/L
-                </option>
-
-                <option value="6.19">
-                    Diesel • 6,19 zł/L
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="liters">
-                Ilość paliwa
-            </label>
-
-            <input
-                id="liters"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="np. 45"
-                oninput="calculateTotal()"
-            >
-
-        </div>
-
-
-        <div class="total">
-
-            <div class="total-label">
-                KWOTA DO ZAPŁATY
-            </div>
-
-            <div
-                class="total-value"
-                id="total"
-            >
-                0,00 zł
-            </div>
-
-        </div>
-
-
-        <button
-            class="button"
-            id="submitButton"
-            onclick="createReceipt()"
-        >
-            🧾 WYSTAW DOKUMENT
-        </button>
-
-
-        <div
-            id="message"
-            class="message"
-        ></div>
-
-
-        <div
-            id="receipt"
-            class="receipt"
-        >
-
-            <h2>
-                ⛽ Mazowieckie Paliwa S.A.
-            </h2>
-
-            <div class="receipt-row">
-                <span>Numer dokumentu</span>
-                <strong id="receiptNumber"></strong>
-            </div>
-
-            <div class="receipt-row">
-                <span>Klient Discord</span>
-                <strong id="receiptCustomer"></strong>
-            </div>
-
-            <div class="receipt-row">
-                <span>Dokument</span>
-                <strong id="receiptDocument"></strong>
-            </div>
-
-            <div class="receipt-row">
-                <span>Paliwo</span>
-                <strong id="receiptFuel"></strong>
-            </div>
-
-            <div class="receipt-row">
-                <span>Ilość</span>
-                <strong id="receiptLiters"></strong>
-            </div>
-
-            <div class="receipt-row">
-                <span>Kwota</span>
-                <strong id="receiptAmount"></strong>
-            </div>
-
-            <div class="receipt-row">
-                <span>Status płatności</span>
-
-                <strong style="color:#f5c400;">
-                    OCZEKUJE
-                </strong>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <a class="back" href="/">
-        ← Wróć na stronę główną
-    </a>
-
-</main>
-
-
-<script>
-
-function calculateTotal() {
-
-    const fuelElement =
-        document.getElementById("fuelType");
-
-    const litersElement =
-        document.getElementById("liters");
-
-    const totalElement =
-        document.getElementById("total");
-
-
-    const price =
-        Number(fuelElement.value);
-
-    const liters =
-        Number(litersElement.value);
-
-
-    if (
-        !Number.isFinite(price) ||
-        !Number.isFinite(liters) ||
-        liters <= 0
-    ) {
-
-        totalElement.textContent =
-            "0,00 zł";
-
-        return 0;
+export default async function handler(req, res) {
+
+    if (req.method !== "POST") {
+        return res.status(405).json({
+            error: "Method not allowed"
+        });
     }
-
-
-    const total =
-        Math.round(price * liters * 100) / 100;
-
-
-    totalElement.textContent =
-        total.toFixed(2).replace(".", ",") +
-        " zł";
-
-
-    return total;
-}
-
-
-async function createReceipt() {
-
-    const button =
-        document.getElementById("submitButton");
-
-
-    const customer =
-        document.getElementById("customerId")
-        .value
-        .trim();
-
-
-    const documentType =
-        document.getElementById("documentType")
-        .value;
-
-
-    const fuelSelect =
-        document.getElementById("fuelType");
-
-
-    const fuel =
-        fuelSelect
-        .options[fuelSelect.selectedIndex]
-        .text
-        .split(" • ")[0];
-
-
-    const price =
-        Number(fuelSelect.value);
-
-
-    const liters =
-        Number(
-            document.getElementById("liters")
-            .value
-        );
-
-
-    const amount =
-        calculateTotal();
-
-
-    if (customer === "") {
-
-        showMessage(
-            "❌ Wpisz Discord ID klienta.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (
-        !Number.isFinite(liters) ||
-        liters <= 0
-    ) {
-
-        showMessage(
-            "❌ Wpisz poprawną ilość litrów.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (
-        !Number.isFinite(price) ||
-        amount <= 0
-    ) {
-
-        showMessage(
-            "❌ Nie udało się obliczyć kwoty.",
-            false
-        );
-
-        return;
-    }
-
-
-    /*
-        NA RAZIE TEST.
-        Później pobierzemy prawdziwe
-        Discord ID pracownika.
-    */
-
-    const employeeId =
-        "TEST";
-
-
-    button.disabled = true;
-
-    button.textContent =
-        "⏳ ZAPISYWANIE...";
-
-
-    showMessage(
-        "⏳ Zapisywanie transakcji...",
-        true
-    );
-
 
     try {
 
-        const response =
-            await fetch(
-                "/api/transactions",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        identyfikator_pracownika:
-                            employeeId,
-
-                        identyfikator_klienta:
-                            customer,
-
-                        typ_dokumentu:
-                            documentType === "receipt"
-                                ? "Paragon"
-                                : "Faktura",
-
-                        typ_paliwa:
-                            fuel,
-
-                        litry:
-                            liters,
-
-                        kwota:
-                            amount
-
-                    })
-                }
-            );
+        const {
+            identyfikator_pracownika,
+            identyfikator_klienta,
+            typ_dokumentu,
+            typ_paliwa,
+            litry,
+            kwota
+        } = req.body;
 
 
-        const data =
-            await response.json();
+        const supabaseUrl =
+            process.env.SUPABASE_URL;
+
+        const supabaseKey =
+            process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+
+        if (!supabaseUrl || !supabaseKey) {
+
+            return res.status(500).json({
+                error: "Brakuje zmiennych Supabase w Vercel"
+            });
+
+        }
+
+
+        const response = await fetch(
+            `${supabaseUrl}/rest/v1/transactions`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": supabaseKey,
+                    "Authorization": `Bearer ${supabaseKey}`,
+                    "Prefer": "return=representation"
+                },
+
+                body: JSON.stringify({
+
+                    identyfikator_pracownika:
+                        identyfikator_pracownika,
+
+                    identyfikator_klienta:
+                        identyfikator_klienta,
+
+                    typ_dokumentu:
+                        typ_dokumentu,
+
+                    typ_paliwa:
+                        typ_paliwa,
+
+                    litry:
+                        litry,
+
+                    kwota:
+                        kwota,
+
+                    "stan_płatności":
+                        "oczekuje"
+
+                })
+            }
+        );
+
+
+        const text =
+            await response.text();
 
 
         if (!response.ok) {
 
-            console.error(
-                "API ERROR:",
-                data
-            );
+            return res.status(response.status).json({
 
-            showMessage(
-                "❌ Nie udało się zapisać transakcji. Sprawdź API.",
-                false
-            );
+                error:
+                    "Supabase odrzucił zapis",
 
-            return;
+                status:
+                    response.status,
+
+                details:
+                    text
+
+            });
+
         }
 
 
-        const transaction =
-            data.transaction;
+        const data =
+            JSON.parse(text);
 
 
-        const number =
-            transaction &&
-            transaction.id
-                ? transaction.id
-                : "MP-TEST";
+        return res.status(201).json({
 
+            success: true,
 
-        document.getElementById(
-            "receiptNumber"
-        ).textContent =
-            number;
+            transaction:
+                data[0]
 
-
-        document.getElementById(
-            "receiptCustomer"
-        ).textContent =
-            customer;
-
-
-        document.getElementById(
-            "receiptDocument"
-        ).textContent =
-            documentType === "receipt"
-                ? "Paragon"
-                : "Faktura";
-
-
-        document.getElementById(
-            "receiptFuel"
-        ).textContent =
-            fuel;
-
-
-        document.getElementById(
-            "receiptLiters"
-        ).textContent =
-            liters.toFixed(2) +
-            " L";
-
-
-        document.getElementById(
-            "receiptAmount"
-        ).textContent =
-            amount
-            .toFixed(2)
-            .replace(".", ",") +
-            " zł";
-
-
-        document.getElementById(
-            "receipt"
-        ).style.display =
-            "block";
-
-
-        showMessage(
-            "✅ Transakcja została zapisana!",
-            true
-        );
+        });
 
 
     } catch (error) {
 
-        console.error(
-            "CONNECTION ERROR:",
-            error
-        );
+        return res.status(500).json({
 
-        showMessage(
-            "❌ Błąd połączenia z API.",
-            false
-        );
+            error:
+                "Błąd serwera",
 
+            details:
+                error.message
 
-    } finally {
+        });
 
-        button.disabled = false;
-
-        button.textContent =
-            "🧾 WYSTAW DOKUMENT";
     }
 
 }
-
-
-function showMessage(
-    text,
-    success
-) {
-
-    const message =
-        document.getElementById("message");
-
-
-    message.textContent =
-        text;
-
-
-    message.className =
-        "message " +
-        (
-            success
-                ? "success"
-                : "error"
-        );
-
-
-    message.style.display =
-        "block";
-}
-
-
-calculateTotal();
-
-</script>
-
-</body>
-</html>
