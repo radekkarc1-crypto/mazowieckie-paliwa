@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sprawdź paragon | Mazowieckie Paliwa S.A.</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #071525;
+            color: white;
+        }
+
+        header {
+            background: #0b1f35;
+            border-bottom: 3px solid #f5c400;
+            padding: 20px 7%;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #f5c400;
+        }
+
+        .content {
+            max-width: 600px;
+            margin: 70px auto;
+            padding: 0 25px;
+        }
+
+        .box {
+            background: #0b1f35;
+            border: 1px solid #203b55;
+            border-radius: 15px;
+            padding: 35px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: #f5c400;
+        }
+
+        .description {
+            color: #aebdcb;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #38516a;
+            background: #071525;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #f5c400;
+            color: #071525;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ffd92e;
+        }
+
+        .result {
+            display: none;
+            margin-top: 25px;
+            padding: 25px;
+            background: #071525;
+            border: 1px solid #203b55;
+            border-radius: 10px;
+        }
+
+        .result h2 {
+            color: #f5c400;
+            margin-bottom: 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px solid #203b55;
+        }
+
+        .paid {
+            color: #58d68d;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            margin-top: 25px;
+            color: #f5c400;
+            text-decoration: none;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        MAZOWIECKIE <span>PALIWA</span> S.A.
+    </div>
+</header>
+
+<main class="content">
+
+    <div class="box">
+
+        <h1>Sprawdź <span>paragon</span></h1>
+
+        <p class="description">
+            Wpisz numer paragonu, aby sprawdzić transakcję.
+        </p>
+
+        <label for="receipt">
+            Numer paragonu
+        </label>
+
+        <input
+            id="receipt"
+            type="text"
+            placeholder="np. MP-000001"
+        >
+
+        <button onclick="checkReceipt()">
+            🧾 SPRAWDŹ PARAGON
+        </button>
+
+        <div id="result" class="result">
+
+            <h2>⛽ Mazowieckie Paliwa S.A.</h2>
+
+            <div class="row">
+                <span>Numer</span>
+                <strong id="number"></strong>
+            </div>
+
+            <div class="row">
+                <span>Klient</span>
+                <strong>TEST</strong>
+            </div>
+
+            <div class="row">
+                <span>Paliwo</span>
+                <strong>Benzyna 95</strong>
+            </div>
+
+            <div class="row">
+                <span>Ilość</span>
+                <strong>10 L</strong>
+            </div>
+
+            <div class="row">
+                <span>Kwota</span>
+                <strong>59,90 zł</strong>
+            </div>
+
+            <div class="row">
+                <span>Płatność</span>
+                <strong class="paid">OCZEKUJE</strong>
+            </div>
+
+        </div>
+
+        <a class="back" href="/">
+            ← Wróć na stronę główną
+        </a>
+
+    </div>
+
+</main>
+
+<script>
+
+function checkReceipt() {
+
+    const receipt = document
+        .getElementById("receipt")
+        .value
+        .trim();
+
+    if (receipt === "") {
+        alert("Wpisz numer paragonu.");
+        return;
+    }
+
+    document.getElementById("number").textContent = receipt;
+
+    document.getElementById("result").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
