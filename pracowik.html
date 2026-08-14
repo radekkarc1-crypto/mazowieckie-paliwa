@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Strefa pracownika | Mazowieckie Paliwa S.A.</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #071525;
+            color: white;
+        }
+
+        header {
+            background: #0b1f35;
+            border-bottom: 3px solid #f5c400;
+            padding: 20px 7%;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #f5c400;
+        }
+
+        .content {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .top {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: #f5c400;
+        }
+
+        .description {
+            color: #aebdcb;
+        }
+
+        .panel {
+            background: #0b1f35;
+            border: 1px solid #203b55;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .status {
+            display: inline-block;
+            background: #123c2a;
+            color: #58d68d;
+            padding: 9px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #38516a;
+            background: #071525;
+            color: white;
+            font-size: 16px;
+        }
+
+        .price-box {
+            background: #071525;
+            border: 1px solid #203b55;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        .price-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #b9c8d7;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #38516a;
+            padding-top: 15px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .total span:last-child {
+            color: #f5c400;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 9px;
+            background: #f5c400;
+            color: #071525;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #ffd92e;
+        }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #123c2a;
+            color: #58d68d;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #f5c400;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        MAZOWIECKIE <span>PALIWA</span> S.A.
+    </div>
+</header>
+
+<main class="content">
+
+    <div class="top">
+        <h1>Strefa <span>pracownika</span></h1>
+
+        <p class="description">
+            Panel wystawiania paragonów i faktur.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <div class="status">
+            🟢 STACJA OTWARTA
+        </div>
+
+        <div class="field">
+
+            <label for="document">
+                Rodzaj dokumentu
+            </label>
+
+            <select id="document">
+
+                <option value="receipt">
+                    🧾 Paragon
+                </option>
+
+                <option value="invoice">
+                    📄 Faktura
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label for="customer">
+                ID klienta Roblox
+            </label>
+
+            <input
+                id="customer"
+                type="text"
+                placeholder="np. 123456789"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label for="fuel">
+                Rodzaj paliwa
+            </label>
+
+            <select id="fuel">
+
+                <option value="5.99">
+                    Benzyna 95 — 5,99 zł/L
+                </option>
+
+                <option value="6.49">
+                    Benzyna 98 — 6,49 zł/L
+                </option>
+
+                <option value="6.19">
+                    Diesel — 6,19 zł/L
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label for="liters">
+                Ilość paliwa (litry)
+            </label>
+
+            <input
+                id="liters"
+                type="number"
+                min="0.01"
+                step="0.01"
+                placeholder="np. 45"
+                oninput="calculateTotal()"
+            >
+
+        </div>
+
+        <div class="price-box">
+
+            <div class="price-line">
+
+                <span>
+                    Cena za litr
+                </span>
+
+                <strong id="price">
+                    5,99 zł
+                </strong>
+
+            </div>
+
+            <div class="total">
+
+                <span>
+                    RAZEM
+                </span>
+
+                <span id="total">
+                    0,00 zł
+                </span>
+
+            </div>
+
+        </div>
+
+        <button onclick="createReceipt()">
+            🧾 WYSTAW DOKUMENT
+        </button>
+
+        <div id="message" class="message"></div>
+
+    </div>
+
+    <a class="back" href="/">
+        ← Wróć na stronę główną
+    </a>
+
+</main>
+
+<script>
+
+const fuel = document.getElementById("fuel");
+const liters = document.getElementById("liters");
+const price = document.getElementById("price");
+const total = document.getElementById("total");
+const message = document.getElementById("message");
+
+function calculateTotal() {
+
+    const selectedPrice = Number(fuel.value);
+    const amount = Number(liters.value);
+
+    price.textContent =
+        selectedPrice.toFixed(2).replace(".", ",") + " zł";
+
+    if (!amount || amount <= 0) {
+
+        total.textContent = "0,00 zł";
+
+        return;
+    }
+
+    const result = selectedPrice * amount;
+
+    total.textContent =
+        result.toFixed(2).replace(".", ",") + " zł";
+}
+
+fuel.addEventListener("change", calculateTotal);
+
+function createReceipt() {
+
+    const customer =
+        document.getElementById("customer").value.trim();
+
+    const documentType =
+        document.getElementById("document").value;
+
+    const amount =
+        Number(liters.value);
+
+    if (!customer) {
+
+        alert("Wpisz ID klienta Roblox.");
+
+        return;
+    }
+
+    if (!amount || amount <= 0) {
+
+        alert("Wpisz ilość paliwa.");
+
+        return;
+    }
+
+    const selectedPrice =
+        Number(fuel.value);
+
+    const result =
+        selectedPrice * amount;
+
+    const type =
+        documentType === "receipt"
+        ? "paragon"
+        : "fakturę";
+
+    message.style.display = "block";
+
+    message.textContent =
+        "✅ Przygotowano " +
+        type +
+        " dla klienta " +
+        customer +
+        ". Kwota: " +
+        result.toFixed(2).replace(".", ",") +
+        " zł";
+
+}
+
+</script>
+
+</body>
+</html>
