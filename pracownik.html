@@ -1,10 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>👷 Strefa pracownika | Mazowieckie Paliwa S.A.</title>
+    <title>Mazowieckie Paliwa S.A.</title>
 
     <style>
         * {
@@ -24,7 +25,6 @@
             background: #0b1f35;
             border-bottom: 3px solid #f5c400;
             padding: 20px 7%;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -91,21 +91,26 @@
         }
 
         .button {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 16px 22px;
             border-radius: 9px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.2s;
+            cursor: pointer;
         }
 
         .primary {
             background: #f5c400;
             color: #071525;
+            border: 1px solid #f5c400;
         }
 
         .primary:hover {
             background: #ffd92e;
+            border-color: #ffd92e;
         }
 
         .secondary {
@@ -117,6 +122,35 @@
         .secondary:hover {
             border-color: #f5c400;
             color: #f5c400;
+        }
+
+        /* STREFA PRACOWNIKA */
+        .worker-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 16px 22px;
+
+            background: #0b1f35;
+            color: white;
+
+            border: 1px solid #38516a;
+            border-radius: 9px;
+
+            text-decoration: none;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .worker-button:hover {
+            background: #0b1f35;
+            color: #f5c400;
+            border-color: #f5c400;
+            transform: translateY(-1px);
         }
 
         .cards {
@@ -186,7 +220,9 @@
                 flex-direction: column;
             }
 
-            .button {
+            .button,
+            .worker-button {
+                width: 100%;
                 text-align: center;
             }
         }
@@ -249,7 +285,7 @@
 
 
         <a
-            class="button secondary"
+            class="worker-button"
             href="/pracownik.html"
         >
             👷 Strefa pracownika
@@ -261,7 +297,6 @@
 
 
 <section class="cards">
-
 
     <div class="card">
 
@@ -316,7 +351,6 @@
 
     </div>
 
-
 </section>
 
 
@@ -336,6 +370,6 @@
 
 </footer>
 
-
 </body>
 </html>
+```
