@@ -1,347 +1,361 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+export default async function handler(req, res) {
 
-    <title>Mazowieckie Paliwa S.A.</title>
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    if (!supabaseUrl || !supabaseKey) {
+        return res.status(500).json({
+            success: false,
+            error: "Brak konfiguracji Supabase"
+        });
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #071525;
-            color: white;
-            min-height: 100vh;
-        }
 
-        header {
-            background: #0b1f35;
-            border-bottom: 3px solid #f5c400;
-            padding: 20px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    // =========================
+    // UTWORZENIE TRANSAKCJI
+    // =========================
 
-        .logo {
-            font-size: 23px;
-            font-weight: bold;
-        }
+    if (req.method === "POST") {
 
-        .logo span {
-            color: #f5c400;
-        }
+        try {
 
-        .nav {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
+            const {
+                identyfikator_pracownika,
+                identyfikator_klienta,
+                typ_dokumentu,
+                typ_paliwa,
+                litry,
+                kwota
+            } = req.body;
 
-        .nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
 
-        .nav a:hover {
-            color: #f5c400;
-        }
+            if (
+                !identyfikator_pracownika ||
+                !identyfikator_klienta ||
+                !typ_dokumentu ||
+                !typ_paliwa ||
+                !litry ||
+                !kwota
+            ) {
 
-        .hero {
-            width: 90%;
-            max-width: 1100px;
-            margin: 90px auto 60px;
-            text-align: center;
-        }
+                return res.status(400).json({
+                    success: false,
+                    error: "Brak wymaganych danych"
+                });
 
-        .hero h1 {
-            font-size: 58px;
-            line-height: 1.05;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: #f5c400;
-        }
-
-        .hero p {
-            max-width: 700px;
-            margin: auto;
-            color: #a9b8c7;
-            font-size: 19px;
-            line-height: 1.6;
-        }
-
-        .buttons {
-            margin-top: 35px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            min-width: 230px;
-            padding: 16px 28px;
-
-            border-radius: 9px;
-            border: 2px solid transparent;
-
-            font-size: 17px;
-            font-weight: bold;
-
-            text-decoration: none;
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .button-primary {
-            background: #f5c400;
-            color: #071525;
-            border-color: #f5c400;
-        }
-
-        .button-primary:hover {
-            background: #ffd92e;
-            border-color: #ffd92e;
-            transform: translateY(-2px);
-        }
-
-        .button-worker {
-            background: #2ecc71;
-            color: white;
-            border-color: #2ecc71;
-        }
-
-        .button-worker:hover {
-            background: #27ae60;
-            border-color: #27ae60;
-            transform: translateY(-2px);
-        }
-
-        .cards {
-            width: 90%;
-            max-width: 1100px;
-            margin: 60px auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background: #0b1f35;
-            border: 1px solid #203b55;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .icon {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
-
-        .card h2 {
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            color: #9fb0c0;
-            line-height: 1.5;
-        }
-
-        footer {
-            margin-top: 80px;
-            padding: 30px;
-            text-align: center;
-            background: #0b1f35;
-            border-top: 1px solid #203b55;
-            color: #8193a5;
-        }
-
-        footer strong {
-            color: #f5c400;
-        }
-
-        @media (max-width: 800px) {
-
-            .hero h1 {
-                font-size: 44px;
             }
 
-            .cards {
-                grid-template-columns: 1fr;
+
+            const response = await fetch(
+                `${supabaseUrl}/rest/v1/transactions`,
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "apikey": supabaseKey,
+                        "Authorization": `Bearer ${supabaseKey}`,
+                        "Prefer": "return=representation"
+                    },
+
+                    body: JSON.stringify({
+
+                        identyfikator_pracownika,
+                        identyfikator_klienta,
+                        typ_dokumentu,
+                        typ_paliwa,
+                        litry,
+                        kwota,
+
+                        "stan_płatności": "oczekuje"
+
+                    })
+
+                }
+            );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                return res.status(
+                    response.status
+                ).json({
+
+                    success: false,
+
+                    error: data
+
+                });
+
             }
 
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
+
+            return res.status(201).json({
+
+                success: true,
+
+                transaction: data[0]
+
+            });
+
+
+        } catch (error) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                error: error.message
+
+            });
+
         }
 
-        @media (max-width: 500px) {
+    }
 
-            .hero {
-                margin-top: 55px;
+
+    // =========================
+    // POTWIERDZENIE PŁATNOŚCI
+    // =========================
+
+    if (req.method === "PATCH") {
+
+        try {
+
+            const {
+                id
+            } = req.body;
+
+
+            if (!id) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    error:
+                        "Brak identyfikatora transakcji"
+
+                });
+
             }
 
-            .hero h1 {
-                font-size: 36px;
+
+            const response = await fetch(
+
+                `${supabaseUrl}/rest/v1/transactions?id=eq.${encodeURIComponent(id)}`,
+
+                {
+
+                    method: "PATCH",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "apikey":
+                            supabaseKey,
+
+                        "Authorization":
+                            `Bearer ${supabaseKey}`,
+
+                        "Prefer":
+                            "return=representation"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        "stan_płatności":
+                            "opłacono"
+
+                    })
+
+                }
+
+            );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                return res.status(
+                    response.status
+                ).json({
+
+                    success: false,
+
+                    error: data
+
+                });
+
             }
 
-            .hero p {
-                font-size: 16px;
+
+            if (!data || data.length === 0) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    error:
+                        "Nie znaleziono transakcji"
+
+                });
+
             }
 
-            .button {
-                width: 100%;
-            }
+
+            return res.status(200).json({
+
+                success: true,
+
+                transaction: data[0]
+
+            });
+
+
+        } catch (error) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                error: error.message
+
+            });
+
         }
-    </style>
-</head>
 
-<body>
-
-<header>
-
-    <div class="logo">
-        MAZOWIECKIE <span>PALIWA</span> S.A.
-    </div>
-
-    <nav class="nav">
-        <a href="/">
-            Strona główna
-        </a>
-    </nav>
-
-</header>
+    }
 
 
-<main>
+    // =========================
+    // POBRANIE TRANSAKCJI
+    // =========================
 
-    <section class="hero">
+    if (req.method === "GET") {
 
-        <h1>
-            MAZOWIECKIE
-            <span>PALIWA</span>
-        </h1>
+        try {
 
-        <p>
-            Witamy na oficjalnej stronie Mazowieckie Paliwa S.A.
-            Tankuj szybko, wygodnie i bezpiecznie.
-        </p>
+            const {
+                id
+            } = req.query;
 
 
-        <div class="buttons">
+            if (!id) {
 
-            <a
-                href="#oferta"
-                class="button button-primary"
-            >
-                ⛽ NASZA OFERTA
-            </a>
+                return res.status(400).json({
 
+                    success: false,
 
-            <a
-                href="/pracownik.html"
-                class="button button-worker"
-            >
-                👷 STREFA PRACOWNIKA
-            </a>
+                    error:
+                        "Brak identyfikatora transakcji"
 
-        </div>
+                });
 
-    </section>
+            }
 
 
-    <section
-        class="cards"
-        id="oferta"
-    >
+            const response = await fetch(
 
-        <div class="card">
+                `${supabaseUrl}/rest/v1/transactions?id=eq.${encodeURIComponent(id)}`,
 
-            <div class="icon">
-                ⛽
-            </div>
+                {
 
-            <h2>
-                Paliwa
-            </h2>
+                    method: "GET",
 
-            <p>
-                Benzyna 95, Benzyna 98 oraz Diesel.
-                Wysoka jakość paliwa w atrakcyjnych cenach.
-            </p>
+                    headers: {
 
-        </div>
+                        "apikey":
+                            supabaseKey,
 
+                        "Authorization":
+                            `Bearer ${supabaseKey}`
 
-        <div class="card">
+                    }
 
-            <div class="icon">
-                💳
-            </div>
+                }
 
-            <h2>
-                Wygodne płatności
-            </h2>
-
-            <p>
-                Zapłać szybko i wygodnie wybraną
-                przez siebie metodą.
-            </p>
-
-        </div>
+            );
 
 
-        <div class="card">
-
-            <div class="icon">
-                🕐
-            </div>
-
-            <h2>
-                Stacja otwarta
-            </h2>
-
-            <p>
-                Jesteśmy gotowi obsłużyć Cię
-                wtedy, kiedy tego potrzebujesz.
-            </p>
-
-        </div>
-
-    </section>
-
-</main>
+            const data =
+                await response.json();
 
 
-<footer>
+            if (!response.ok) {
 
-    © 2026
-    <strong>
-        Mazowieckie Paliwa S.A.
-    </strong>
+                return res.status(
+                    response.status
+                ).json({
 
-    <br>
+                    success: false,
 
-    Wszystkie prawa zastrzeżone.
+                    error: data
 
-</footer>
+                });
 
-</body>
-</html>
+            }
+
+
+            if (!data || data.length === 0) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    error:
+                        "Nie znaleziono transakcji"
+
+                });
+
+            }
+
+
+            return res.status(200).json({
+
+                success: true,
+
+                transaction: data[0]
+
+            });
+
+
+        } catch (error) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                error: error.message
+
+            });
+
+        }
+
+    }
+
+
+    // =========================
+    // NIEOBSŁUGIWANA METODA
+    // =========================
+
+    return res.status(405).json({
+
+        success: false,
+
+        error: "Method not allowed"
+
+    });
+
+}
