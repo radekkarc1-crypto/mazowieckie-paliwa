@@ -17,12 +17,16 @@
             font-family: Arial, sans-serif;
             background: #071525;
             color: white;
+            min-height: 100vh;
         }
 
         header {
             background: #0b1f35;
             border-bottom: 3px solid #f5c400;
             padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
@@ -34,27 +38,52 @@
             color: #f5c400;
         }
 
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #f5c400;
+        }
+
         .content {
-            max-width: 850px;
+            max-width: 900px;
             margin: 50px auto;
             padding: 0 20px;
         }
 
-        .top {
+        .title {
             margin-bottom: 30px;
         }
 
-        h1 {
-            font-size: 40px;
+        .title h1 {
+            font-size: 42px;
             margin-bottom: 10px;
         }
 
-        h1 span {
+        .title h1 span {
             color: #f5c400;
         }
 
-        .description {
+        .title p {
             color: #aebdcb;
+        }
+
+        .status {
+            display: inline-block;
+            background: #123c2a;
+            color: #58d68d;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 25px;
         }
 
         .panel {
@@ -64,14 +93,10 @@
             padding: 30px;
         }
 
-        .status {
-            display: inline-block;
-            background: #123c2a;
-            color: #58d68d;
-            padding: 9px 14px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-bottom: 25px;
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #f5c400;
         }
 
         .field {
@@ -87,45 +112,61 @@
         input,
         select {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             border-radius: 8px;
             border: 1px solid #38516a;
             background: #071525;
             color: white;
             font-size: 16px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #f5c400;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
         .price-box {
             background: #071525;
             border: 1px solid #203b55;
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 22px;
             margin-top: 10px;
         }
 
-        .price-line {
+        .price-line,
+        .total-line {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            color: #b9c8d7;
+            gap: 20px;
         }
 
-        .total {
-            display: flex;
-            justify-content: space-between;
+        .price-line {
+            color: #aebdcb;
+            padding-bottom: 15px;
+        }
+
+        .total-line {
             border-top: 1px solid #38516a;
             padding-top: 15px;
-            font-size: 25px;
+            font-size: 27px;
             font-weight: bold;
         }
 
-        .total span:last-child {
+        .total-line span:last-child {
             color: #f5c400;
         }
 
         button {
             width: 100%;
-            padding: 16px;
+            padding: 17px;
+            margin-top: 25px;
             border: none;
             border-radius: 9px;
             background: #f5c400;
@@ -133,21 +174,66 @@
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
         }
 
         button:hover {
             background: #ffd92e;
         }
 
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         .message {
             display: none;
             margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 18px;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        .success {
             background: #123c2a;
             color: #58d68d;
+        }
+
+        .error {
+            background: #421b1b;
+            color: #ff8c8c;
+        }
+
+        .receipt-preview {
+            display: none;
+            margin-top: 25px;
+            background: #f5f5f5;
+            color: #111;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .receipt-preview h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .receipt-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            font-size: 24px;
             font-weight: bold;
+        }
+
+        .receipt-total span:last-child {
+            color: #b08a00;
         }
 
         .back {
@@ -156,6 +242,42 @@
             margin-top: 25px;
             color: #f5c400;
             text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 70px;
+            background: #06111e;
+            border-top: 1px solid #203b55;
+            text-align: center;
+            padding: 30px;
+            color: #8495a6;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title h1 {
+                font-size: 34px;
+            }
         }
     </style>
 </head>
@@ -163,26 +285,55 @@
 <body>
 
 <header>
+
     <div class="logo">
         MAZOWIECKIE <span>PALIWA</span> S.A.
     </div>
+
+    <nav>
+
+        <a href="/">
+            Strona główna
+        </a>
+
+        <a href="/ceny.html">
+            Ceny paliw
+        </a>
+
+        <a href="/paragon.html">
+            Paragon
+        </a>
+
+    </nav>
+
 </header>
+
 
 <main class="content">
 
-    <div class="top">
-        <h1>Strefa <span>pracownika</span></h1>
-
-        <p class="description">
-            Panel wystawiania paragonów i faktur.
-        </p>
-    </div>
-
-    <div class="panel">
+    <div class="title">
 
         <div class="status">
             🟢 STACJA OTWARTA
         </div>
+
+        <h1>
+            Strefa <span>pracownika</span>
+        </h1>
+
+        <p>
+            Panel kasjera do wystawiania paragonów i faktur.
+        </p>
+
+    </div>
+
+
+    <div class="panel">
+
+        <div class="section-title">
+            🧾 Nowa transakcja
+        </div>
+
 
         <div class="field">
 
@@ -204,19 +355,40 @@
 
         </div>
 
-        <div class="field">
 
-            <label for="customer">
-                ID klienta Roblox
-            </label>
+        <div class="grid">
 
-            <input
-                id="customer"
-                type="text"
-                placeholder="np. 123456789"
-            >
+            <div class="field">
+
+                <label for="customer">
+                    ID klienta Roblox
+                </label>
+
+                <input
+                    id="customer"
+                    type="text"
+                    placeholder="np. 123456789"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="employee">
+                    ID pracownika
+                </label>
+
+                <input
+                    id="employee"
+                    type="text"
+                    placeholder="np. 987654321"
+                >
+
+            </div>
 
         </div>
+
 
         <div class="field">
 
@@ -226,26 +398,27 @@
 
             <select id="fuel">
 
-                <option value="5.99">
-                    Benzyna 95 — 5,99 zł/L
+                <option value="Benzyna 95" data-price="5.99">
+                    ⛽ Benzyna 95 — 5,99 zł/L
                 </option>
 
-                <option value="6.49">
-                    Benzyna 98 — 6,49 zł/L
+                <option value="Benzyna 98" data-price="6.49">
+                    🚗 Benzyna 98 — 6,49 zł/L
                 </option>
 
-                <option value="6.19">
-                    Diesel — 6,19 zł/L
+                <option value="Diesel" data-price="6.19">
+                    🚛 Diesel — 6,19 zł/L
                 </option>
 
             </select>
 
         </div>
 
+
         <div class="field">
 
             <label for="liters">
-                Ilość paliwa (litry)
+                Ilość paliwa
             </label>
 
             <input
@@ -258,6 +431,7 @@
             >
 
         </div>
+
 
         <div class="price-box">
 
@@ -273,7 +447,8 @@
 
             </div>
 
-            <div class="total">
+
+            <div class="total-line">
 
                 <span>
                     RAZEM
@@ -287,97 +462,407 @@
 
         </div>
 
-        <button onclick="createReceipt()">
+
+        <button
+            id="createButton"
+            onclick="createTransaction()"
+        >
             🧾 WYSTAW DOKUMENT
         </button>
 
-        <div id="message" class="message"></div>
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <div
+            id="receiptPreview"
+            class="receipt-preview"
+        >
+
+            <h2>
+                MAZOWIECKIE PALIWA S.A.
+            </h2>
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Numer
+                </span>
+
+                <strong id="previewNumber">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Klient
+                </span>
+
+                <strong id="previewCustomer">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Paliwo
+                </span>
+
+                <strong id="previewFuel">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Ilość
+                </span>
+
+                <strong id="previewLiters">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-total">
+
+                <span>
+                    RAZEM
+                </span>
+
+                <span id="previewAmount">
+                    0,00 zł
+                </span>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <a class="back" href="/">
+
+    <a
+        class="back"
+        href="/"
+    >
         ← Wróć na stronę główną
     </a>
 
 </main>
 
+
+<footer>
+
+    <strong>
+        MAZOWIECKIE PALIWA S.A.
+    </strong>
+
+    <br><br>
+
+    „Napędzamy Twoją drogę.”
+
+    <br><br>
+
+    © 2026 Mazowieckie Paliwa S.A.
+
+</footer>
+
+
 <script>
 
-const fuel = document.getElementById("fuel");
-const liters = document.getElementById("liters");
-const price = document.getElementById("price");
-const total = document.getElementById("total");
-const message = document.getElementById("message");
+const fuelSelect =
+    document.getElementById("fuel");
+
+const litersInput =
+    document.getElementById("liters");
+
+const priceElement =
+    document.getElementById("price");
+
+const totalElement =
+    document.getElementById("total");
+
+
+function getSelectedPrice() {
+
+    const option =
+        fuelSelect.options[
+            fuelSelect.selectedIndex
+        ];
+
+    return Number(
+        option.dataset.price
+    );
+}
+
 
 function calculateTotal() {
 
-    const selectedPrice = Number(fuel.value);
-    const amount = Number(liters.value);
+    const price =
+        getSelectedPrice();
 
-    price.textContent =
-        selectedPrice.toFixed(2).replace(".", ",") + " zł";
+    const liters =
+        Number(litersInput.value);
 
-    if (!amount || amount <= 0) {
+    priceElement.textContent =
+        price.toFixed(2).replace(".", ",")
+        + " zł";
 
-        total.textContent = "0,00 zł";
 
-        return;
+    if (!liters || liters <= 0) {
+
+        totalElement.textContent =
+            "0,00 zł";
+
+        return 0;
     }
 
-    const result = selectedPrice * amount;
 
-    total.textContent =
-        result.toFixed(2).replace(".", ",") + " zł";
+    const total =
+        price * liters;
+
+    totalElement.textContent =
+        total.toFixed(2).replace(".", ",")
+        + " zł";
+
+    return total;
 }
 
-fuel.addEventListener("change", calculateTotal);
 
-function createReceipt() {
+fuelSelect.addEventListener(
+    "change",
+    calculateTotal
+);
+
+
+async function createTransaction() {
 
     const customer =
-        document.getElementById("customer").value.trim();
+        document
+            .getElementById("customer")
+            .value
+            .trim();
+
+    const employee =
+        document
+            .getElementById("employee")
+            .value
+            .trim();
 
     const documentType =
-        document.getElementById("document").value;
+        document
+            .getElementById("document")
+            .value;
 
-    const amount =
-        Number(liters.value);
+    const fuel =
+        fuelSelect.value;
+
+    const liters =
+        Number(litersInput.value);
+
+    const total =
+        calculateTotal();
+
+    const button =
+        document.getElementById("createButton");
+
+    const message =
+        document.getElementById("message");
+
+    const preview =
+        document.getElementById("receiptPreview");
+
+
+    message.style.display = "none";
+    preview.style.display = "none";
+
 
     if (!customer) {
 
-        alert("Wpisz ID klienta Roblox.");
+        showError(
+            "Wpisz ID klienta Roblox."
+        );
 
         return;
     }
 
-    if (!amount || amount <= 0) {
 
-        alert("Wpisz ilość paliwa.");
+    if (!employee) {
+
+        showError(
+            "Wpisz ID pracownika."
+        );
 
         return;
     }
 
-    const selectedPrice =
-        Number(fuel.value);
 
-    const result =
-        selectedPrice * amount;
+    if (!liters || liters <= 0) {
 
-    const type =
-        documentType === "receipt"
-        ? "paragon"
-        : "fakturę";
+        showError(
+            "Wpisz poprawną ilość paliwa."
+        );
 
-    message.style.display = "block";
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "⏳ TWORZENIE DOKUMENTU...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/transactions.js",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        customer_id:
+                            customer,
+
+                        employee_id:
+                            employee,
+
+                        document_type:
+                            documentType,
+
+                        fuel_type:
+                            fuel,
+
+                        liters:
+                            liters,
+
+                        amount:
+                            total
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Nie udało się utworzyć dokumentu."
+            );
+
+        }
+
+
+        message.className =
+            "message success";
+
+        message.style.display =
+            "block";
+
+        message.textContent =
+            "✅ Dokument został utworzony!";
+
+
+        const transaction =
+            data.transaction;
+
+
+        document
+            .getElementById("previewNumber")
+            .textContent =
+                transaction.receipt_number;
+
+
+        document
+            .getElementById("previewCustomer")
+            .textContent =
+                customer;
+
+
+        document
+            .getElementById("previewFuel")
+            .textContent =
+                fuel;
+
+
+        document
+            .getElementById("previewLiters")
+            .textContent =
+                liters + " L";
+
+
+        document
+            .getElementById("previewAmount")
+            .textContent =
+                Number(total)
+                    .toFixed(2)
+                    .replace(".", ",")
+                + " zł";
+
+
+        preview.style.display =
+            "block";
+
+
+    } catch (error) {
+
+        showError(
+            error.message
+        );
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "🧾 WYSTAW DOKUMENT";
+
+    }
+
+}
+
+
+function showError(text) {
+
+    const message =
+        document.getElementById("message");
+
+    message.className =
+        "message error";
+
+    message.style.display =
+        "block";
 
     message.textContent =
-        "✅ Przygotowano " +
-        type +
-        " dla klienta " +
-        customer +
-        ". Kwota: " +
-        result.toFixed(2).replace(".", ",") +
-        " zł";
+        "❌ " + text;
 
 }
 
