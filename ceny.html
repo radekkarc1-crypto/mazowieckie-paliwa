@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ceny paliw | Mazowieckie Paliwa S.A.</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #071525;
+            color: white;
+        }
+
+        header {
+            background: #0b1f35;
+            border-bottom: 3px solid #f5c400;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #f5c400;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #f5c400;
+        }
+
+        .content {
+            padding: 60px 7%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: #f5c400;
+        }
+
+        .description {
+            color: #aebdcb;
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+        .status {
+            display: inline-block;
+            background: #123c2a;
+            color: #58d68d;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .prices {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .fuel {
+            background: #0b1f35;
+            border: 1px solid #203b55;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .fuel-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .fuel h2 {
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #f5c400;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .unit {
+            color: #aebdcb;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 14px 20px;
+            background: #f5c400;
+            color: #071525;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 60px;
+            background: #06111e;
+            text-align: center;
+            padding: 30px;
+            color: #8495a6;
+        }
+
+        @media (max-width: 700px) {
+            .prices {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        MAZOWIECKIE <span>PALIWA</span> S.A.
+    </div>
+
+    <nav>
+        <a href="/">Strona główna</a>
+        <a href="/pracownik">Strefa pracownika</a>
+        <a href="/paragon">Paragon</a>
+    </nav>
+
+</header>
+
+
+<main class="content">
+
+    <div class="status">
+        🟢 STACJA OTWARTA
+    </div>
+
+    <h1>
+        Ceny <span>paliw</span>
+    </h1>
+
+    <p class="description">
+        Aktualne ceny paliw na stacji Mazowieckie Paliwa S.A.
+    </p>
+
+
+    <div class="prices">
+
+        <div class="fuel">
+            <div class="fuel-icon">⛽</div>
+            <h2>Benzyna 95</h2>
+
+            <div class="price">
+                5,99 zł
+            </div>
+
+            <div class="unit">
+                za litr
+            </div>
+        </div>
+
+
+        <div class="fuel">
+            <div class="fuel-icon">🚗</div>
+            <h2>Benzyna 98</h2>
+
+            <div class="price">
+                6,49 zł
+            </div>
+
+            <div class="unit">
+                za litr
+            </div>
+        </div>
+
+
+        <div class="fuel">
+            <div class="fuel-icon">🚛</div>
+            <h2>Diesel</h2>
+
+            <div class="price">
+                6,19 zł
+            </div>
+
+            <div class="unit">
+                za litr
+            </div>
+        </div>
+
+    </div>
+
+
+    <a class="back" href="/">
+        ← Wróć na stronę główną
+    </a>
+
+</main>
+
+
+<footer>
+
+    © 2026 Mazowieckie Paliwa S.A.
+    <br>
+    „Napędzamy Twoją drogę.”
+
+</footer>
+
+</body>
+</html>
