@@ -29,6 +29,124 @@ const server = http.createServer((req, res) => {
 
     if (req.method === "POST" && req.url === "/send-receipt") {
 
+    let body = "";
+
+    req.on("data", chunk => {
+        body += chunk;
+    });
+
+    req.on("end", async () => {
+
+        try {
+
+            const authorization =
+                req.headers.authorization;
+
+            const apiKey =
+                process.env.PARAGON_API_KEY;
+
+            if (
+                !apiKey ||
+                authorization !== `Bearer ${apiKey}`
+            ) {
+                res.writeHead(401);
+                return res.end(JSON.stringify({
+                    success: false,
+                    error: "Nieprawidłowy klucz API"
+                }));
+            }
+
+            let data;
+
+            try {
+                data = JSON.parse(body);
+            } catch {
+                res.writeHead(400);
+                return res.end(JSON.stringify({
+                    success: false,
+                    error: "Nieprawidłowy JSON"
+                }));
+            }
+
+            console.log("📨 Otrzymano żądanie paragonu");
+
+            if (!data.discordUserId) {
+                res.writeHead(400);
+                return res.end(JSON.stringify({
+                    success: false,
+                    error: "Brakuje discordUserId"
+                }));
+            }
+
+            const user =
+                await client.users.fetch(
+                    data.discordUserId
+                );
+
+            console.log(
+                `👤 Znaleziono użytkownika ${user.tag}`
+            );
+
+            let receipt =
+                "🧾 **MAZOWIECKIE PALIWA S.A.**\n\n";
+
+            receipt +=
+                `**Paragon #${data.receiptNumber || "TEST"}**\n`;
+
+            receipt +=
+                "━━━━━━━━━━━━━━━━━━\n";
+
+            if (Array.isArray(data.items)) {
+
+                for (const item of data.items) {
+
+                    receipt +=
+                        `⛽ ${item.name} — **${Number(item.price).toFixed(2)} zł**\n`;
+
+                }
+
+            }
+
+            receipt +=
+                "━━━━━━━━━━━━━━━━━━\n";
+
+            receipt +=
+                `💰 **SUMA: ${Number(data.total || 0).toFixed(2)} zł**`;
+
+            await user.send(receipt);
+
+            console.log(
+                "✅ Paragon wysłany na PV"
+            );
+
+            res.writeHead(200);
+
+            return res.end(JSON.stringify({
+                success: true,
+                message: "Paragon wysłany"
+            }));
+
+        } catch (error) {
+
+            console.error(
+                "❌ SEND RECEIPT ERROR:",
+                error
+            );
+
+            res.writeHead(500);
+
+            return res.end(JSON.stringify({
+                success: false,
+                error: error.message
+            }));
+
+        }
+
+    });
+
+    return;
+}
+
         let body = "";
 
         req.on("data", chunk => {
