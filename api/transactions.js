@@ -1,4 +1,3 @@
-```javascript
 export default async function handler(req, res) {
 
     if (req.method !== "POST") {
@@ -203,12 +202,16 @@ export default async function handler(req, res) {
             });
 
         }
-                /*
-         * Wysyłamy paragon do Discorda.
+
+
+        /*
+         * Transakcja została zapisana.
+         * Teraz wysyłamy paragon do Discorda.
          */
 
         let discordSent = false;
         let discordError = null;
+
 
         try {
 
@@ -218,79 +221,110 @@ export default async function handler(req, res) {
             const paragonApiKey =
                 process.env.PARAGON_API_KEY;
 
+
             if (!railwayUrl) {
+
                 throw new Error(
                     "Brakuje RAILWAY_BOT_URL w Vercel"
                 );
+
             }
 
+
             if (!paragonApiKey) {
+
                 throw new Error(
                     "Brakuje PARAGON_API_KEY w Vercel"
                 );
+
             }
+
 
             const savedTransaction =
                 Array.isArray(responseData)
                     ? responseData[0]
                     : responseData;
 
+
             const discordResponse =
                 await fetch(
+
                     "https://" +
-                    railwayUrl.replace(/^https?:\/\//, "").replace(/\/+$/, "") +
+                    railwayUrl
+                        .replace(/^https?:\/\//, "")
+                        .replace(/\/+$/, "") +
                     "/send-receipt",
+
                     {
+
                         method: "POST",
 
                         headers: {
-                            "Content-Type": "application/json",
+
+                            "Content-Type":
+                                "application/json",
+
                             "Authorization":
-                                "Bearer " + paragonApiKey
+                                "Bearer " +
+                                paragonApiKey
+
                         },
 
-                        body: JSON.stringify({
+                        body:
+                            JSON.stringify({
 
-                            discordUserId:
-                                identyfikator_klienta,
+                                discordUserId:
+                                    identyfikator_klienta,
 
-                            receiptNumber:
-                                savedTransaction.id ||
-                                Date.now(),
+                                receiptNumber:
+                                    savedTransaction.id ||
+                                    Date.now(),
 
-                            items: [
-                                {
-                                    name:
-                                        typ_paliwa +
-                                        " (" +
-                                        litry +
-                                        " l)",
+                                items: [
 
-                                    price:
-                                        kwota
-                                }
-                            ],
+                                    {
 
-                            total:
-                                kwota
+                                        name:
+                                            typ_paliwa +
+                                            " (" +
+                                            litry +
+                                            " l)",
 
-                        })
+                                        price:
+                                            kwota
+
+                                    }
+
+                                ],
+
+                                total:
+                                    kwota
+
+                            })
+
                     }
+
                 );
+
 
             const discordData =
                 await discordResponse.json();
 
+
             if (!discordResponse.ok) {
 
                 throw new Error(
+
                     discordData.error ||
                     "Discord Bot odrzucił paragon"
+
                 );
 
             }
 
+
             discordSent = true;
+
 
         } catch (discordSendError) {
 
@@ -299,11 +333,16 @@ export default async function handler(req, res) {
                 discordSendError
             );
 
+
             discordError =
                 discordSendError.message;
 
         }
 
+
+        /*
+         * Zwracamy wynik całej operacji.
+         */
 
         return res.status(201).json({
 
@@ -312,7 +351,13 @@ export default async function handler(req, res) {
             transaction:
                 Array.isArray(responseData)
                     ? responseData[0]
-                    : responseData
+                    : responseData,
+
+            discord_sent:
+                discordSent,
+
+            discord_error:
+                discordError
 
         });
 
@@ -340,4 +385,3 @@ export default async function handler(req, res) {
     }
 
 }
-```
