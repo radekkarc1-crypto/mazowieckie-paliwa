@@ -95,9 +95,9 @@ const server = http.createServer(async (req, res) => {
 client.once("ready", () => {
   console.log(`✅ Zalogowano jako ${client.user.tag}`);
 
-  server.listen(PORT, () => {
-    console.log(`🌐 API działa na porcie ${PORT}`);
-  });
+  server.listen(PORT, "0.0.0.0", () => {
+    console.log(`🌐 API działa na 0.0.0.0:${PORT}`);
+});
 });
 
 client.login(process.env.DISCORD_TOKEN);
