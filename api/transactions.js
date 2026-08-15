@@ -74,10 +74,6 @@ export default async function handler(req, res) {
         }
 
 
-        /*
-         * Czyścimy adres Supabase.
-         */
-
         const cleanUrl =
             supabaseUrl
                 .trim()
@@ -205,8 +201,8 @@ export default async function handler(req, res) {
 
 
         /*
-         * Transakcja została zapisana.
-         * Teraz wysyłamy paragon do Discorda.
+         * Transakcja została zapisana w Supabase.
+         * Teraz wysyłamy paragon do działającego bota Railway.
          */
 
         let discordSent = false;
@@ -339,10 +335,6 @@ export default async function handler(req, res) {
 
         }
 
-
-        /*
-         * Zwracamy wynik całej operacji.
-         */
 
         return res.status(201).json({
 
