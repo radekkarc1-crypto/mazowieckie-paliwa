@@ -10,7 +10,7 @@ client.once("ready", async () => {
   console.log(`✅ Zalogowano jako ${client.user.tag}`);
 
   try {
-    const user = await client.users.fetch("TUTAJ_TWOJE_DISCORD_ID");
+    const user = await client.users.fetch("1409194890629353608");
 
     await user.send(
       "🧾 **Mazowieckie Paliwa S.A.**\n\nTest systemu paragonów zakończony pomyślnie! ⛽"
