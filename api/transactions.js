@@ -203,6 +203,106 @@ export default async function handler(req, res) {
             });
 
         }
+                /*
+         * Wysyłamy paragon do Discorda.
+         */
+
+        let discordSent = false;
+        let discordError = null;
+
+        try {
+
+            const railwayUrl =
+                process.env.RAILWAY_BOT_URL;
+
+            const paragonApiKey =
+                process.env.PARAGON_API_KEY;
+
+            if (!railwayUrl) {
+                throw new Error(
+                    "Brakuje RAILWAY_BOT_URL w Vercel"
+                );
+            }
+
+            if (!paragonApiKey) {
+                throw new Error(
+                    "Brakuje PARAGON_API_KEY w Vercel"
+                );
+            }
+
+            const savedTransaction =
+                Array.isArray(responseData)
+                    ? responseData[0]
+                    : responseData;
+
+            const discordResponse =
+                await fetch(
+                    "https://" +
+                    railwayUrl.replace(/^https?:\/\//, "").replace(/\/+$/, "") +
+                    "/send-receipt",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization":
+                                "Bearer " + paragonApiKey
+                        },
+
+                        body: JSON.stringify({
+
+                            discordUserId:
+                                identyfikator_klienta,
+
+                            receiptNumber:
+                                savedTransaction.id ||
+                                Date.now(),
+
+                            items: [
+                                {
+                                    name:
+                                        typ_paliwa +
+                                        " (" +
+                                        litry +
+                                        " l)",
+
+                                    price:
+                                        kwota
+                                }
+                            ],
+
+                            total:
+                                kwota
+
+                        })
+                    }
+                );
+
+            const discordData =
+                await discordResponse.json();
+
+            if (!discordResponse.ok) {
+
+                throw new Error(
+                    discordData.error ||
+                    "Discord Bot odrzucił paragon"
+                );
+
+            }
+
+            discordSent = true;
+
+        } catch (discordSendError) {
+
+            console.error(
+                "DISCORD RECEIPT ERROR:",
+                discordSendError
+            );
+
+            discordError =
+                discordSendError.message;
+
+        }
 
 
         return res.status(201).json({
