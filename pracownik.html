@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -25,7 +24,6 @@ header {
     background: #0b1f35;
     border-bottom: 3px solid #f5c400;
     padding: 15px 6%;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -240,6 +238,11 @@ input[readonly] {
     transform: translateY(-1px);
 }
 
+.main-button:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
 .payment-box {
     text-align: center;
     padding: 35px 20px;
@@ -257,11 +260,9 @@ input[readonly] {
     padding: 22px;
     margin: 25px auto;
     max-width: 650px;
-
     font-family: monospace;
     font-size: 19px;
     color: #f5c400;
-
     word-break: break-word;
 }
 
@@ -365,7 +366,6 @@ footer strong {
 }
 
 @media (max-width: 700px) {
-
     header {
         flex-direction: column;
         gap: 15px;
@@ -424,13 +424,7 @@ footer strong {
 
 </header>
 
-
 <main class="container">
-
-
-<!-- ==================================================
-     STRONA 1 - WYSTAWIANIE
-================================================== -->
 
 <section id="pageForm" class="page active">
 
@@ -445,7 +439,6 @@ footer strong {
     <p class="description">
         Wystaw paragon lub fakturę dla klienta.
     </p>
-
 
     <div class="panel">
 
@@ -470,7 +463,6 @@ footer strong {
 
         </div>
 
-
         <div class="section">
 
             <h2>👷 Dane</h2>
@@ -491,7 +483,6 @@ footer strong {
 
                 </div>
 
-
                 <div class="field">
 
                     <label>
@@ -509,9 +500,6 @@ footer strong {
             </div>
 
         </div>
-
-
-        <!-- DANE FIRMY -->
 
         <div
             class="section hidden"
@@ -536,7 +524,6 @@ footer strong {
 
                 </div>
 
-
                 <div class="field">
 
                     <label>
@@ -550,7 +537,6 @@ footer strong {
                     >
 
                 </div>
-
 
                 <div class="field">
 
@@ -569,9 +555,6 @@ footer strong {
             </div>
 
         </div>
-
-
-        <!-- PALIWO -->
 
         <div class="section">
 
@@ -614,7 +597,6 @@ footer strong {
 
                 </div>
 
-
                 <div class="field">
 
                     <label>
@@ -632,7 +614,6 @@ footer strong {
 
                 </div>
 
-
                 <div class="field">
 
                     <label>
@@ -646,7 +627,6 @@ footer strong {
                     >
 
                 </div>
-
 
                 <div class="field">
 
@@ -664,56 +644,31 @@ footer strong {
 
             </div>
 
-
             <div class="summary">
 
                 <div class="summary-row">
-
                     <span>Paliwo</span>
-
-                    <span id="summaryFuel">
-                        -
-                    </span>
-
+                    <span id="summaryFuel">-</span>
                 </div>
 
-
                 <div class="summary-row">
-
                     <span>Ilość</span>
-
-                    <span id="summaryLiters">
-                        0,00 l
-                    </span>
-
+                    <span id="summaryLiters">0,00 l</span>
                 </div>
-
 
                 <div class="summary-row">
-
                     <span>Cena</span>
-
-                    <span id="summaryPrice">
-                        0,00 zł/l
-                    </span>
-
+                    <span id="summaryPrice">0,00 zł/l</span>
                 </div>
-
 
                 <div class="summary-row total">
-
                     <span>DO ZAPŁATY</span>
-
-                    <span id="summaryTotal">
-                        0,00 zł
-                    </span>
-
+                    <span id="summaryTotal">0,00 zł</span>
                 </div>
 
             </div>
 
         </div>
-
 
         <button
             type="button"
@@ -726,11 +681,6 @@ footer strong {
     </div>
 
 </section>
-
-
-<!-- ==================================================
-     STRONA 2 - PŁATNOŚĆ
-================================================== -->
 
 <section id="pagePayment" class="page">
 
@@ -749,16 +699,13 @@ footer strong {
             w systemie płatności.
         </p>
 
-
         <div class="payment-command">
             !pay @konto bankowe Mazowieckie paliwa S.A
         </div>
 
-
         <div class="waiting">
             ⏳ Czekam na potwierdzenie płatności...
         </div>
-
 
         <button
             class="main-button"
@@ -770,11 +717,6 @@ footer strong {
     </div>
 
 </section>
-
-
-<!-- ==================================================
-     STRONA 3 - PARAGON / FAKTURA
-================================================== -->
 
 <section id="pageReceipt" class="page">
 
@@ -804,127 +746,67 @@ footer strong {
 
             </div>
 
-
             <div class="receipt-row">
-
                 <strong>Pracownik</strong>
-
-                <span id="receiptEmployee">
-                    -
-                </span>
-
+                <span id="receiptEmployee">-</span>
             </div>
-
 
             <div class="receipt-row">
-
                 <strong>Klient</strong>
-
-                <span id="receiptClient">
-                    -
-                </span>
-
+                <span id="receiptClient">-</span>
             </div>
-
 
             <div
                 id="receiptCompanyRow"
                 class="receipt-row hidden"
             >
-
                 <strong>Firma</strong>
-
-                <span id="receiptCompany">
-                    -
-                </span>
-
+                <span id="receiptCompany">-</span>
             </div>
-
 
             <div
                 id="receiptNipRow"
                 class="receipt-row hidden"
             >
-
                 <strong>NIP</strong>
-
-                <span id="receiptNip">
-                    -
-                </span>
-
+                <span id="receiptNip">-</span>
             </div>
-
 
             <div
                 id="receiptAddressRow"
                 class="receipt-row hidden"
             >
-
                 <strong>Adres</strong>
-
-                <span id="receiptAddress">
-                    -
-                </span>
-
+                <span id="receiptAddress">-</span>
             </div>
 
-
             <div class="receipt-row">
-
                 <strong>Paliwo</strong>
-
-                <span id="receiptFuel">
-                    -
-                </span>
-
+                <span id="receiptFuel">-</span>
             </div>
 
-
             <div class="receipt-row">
-
                 <strong>Ilość</strong>
-
-                <span id="receiptLiters">
-                    -
-                </span>
-
+                <span id="receiptLiters">-</span>
             </div>
-
 
             <div class="receipt-row">
-
                 <strong>Cena</strong>
-
-                <span id="receiptPrice">
-                    -
-                </span>
-
+                <span id="receiptPrice">-</span>
             </div>
-
 
             <div class="receipt-total">
-
                 <span>RAZEM</span>
-
-                <span id="receiptTotal">
-                    0,00 zł
-                </span>
-
+                <span id="receiptTotal">0,00 zł</span>
             </div>
 
-
             <div class="receipt-footer">
-
                 Płatność potwierdzona ✅
-
                 <br><br>
-
                 Dziękujemy za zakupy!
-
             </div>
 
         </div>
-
 
         <button
             class="main-button"
@@ -936,11 +818,6 @@ footer strong {
     </div>
 
 </section>
-
-
-<!-- ==================================================
-     STRONA 4 - KONIEC
-================================================== -->
 
 <section id="pageFinish" class="page">
 
@@ -963,14 +840,10 @@ footer strong {
             Miłego dnia i szerokiej drogi! 🚗
         </p>
 
-
         <a
             href="/"
             class="main-button"
-            style="
-                display:block;
-                text-decoration:none;
-            "
+            style="display:block;text-decoration:none;"
         >
             🏠 Wróć na stronę główną
         </a>
@@ -980,7 +853,6 @@ footer strong {
 </section>
 
 </main>
-
 
 <footer>
 
@@ -998,33 +870,16 @@ footer strong {
 
 </footer>
 
-
 <script>
 
-/* ==========================================
-   CENNIK
-========================================== */
-
 const prices = {
-
     "Benzyna 95": 6.20,
     "Benzyna 98": 6.70,
     "Diesel": 6.35,
     "LPG": 3.20
-
 };
 
-
-/* ==========================================
-   DANE
-========================================== */
-
 let documentType = "paragon";
-
-
-/* ==========================================
-   WYBÓR DOKUMENTU
-========================================== */
 
 function chooseDocument(type) {
 
@@ -1039,31 +894,20 @@ function chooseDocument(type) {
     const section =
         document.getElementById("fakturaSection");
 
-
     if (type === "faktura") {
 
         paragon.classList.remove("active");
-
         faktura.classList.add("active");
-
         section.classList.remove("hidden");
 
     } else {
 
         faktura.classList.remove("active");
-
         paragon.classList.add("active");
-
         section.classList.add("hidden");
 
     }
-
 }
-
-
-/* ==========================================
-   OBLICZANIE CENY
-========================================== */
 
 function calculate() {
 
@@ -1081,41 +925,29 @@ function calculate() {
     const total =
         liters * price;
 
-
     document.getElementById("price").value =
-        price.toFixed(2).replace(".", ",")
-        + " zł/l";
-
+        price.toFixed(2).replace(".", ",") +
+        " zł/l";
 
     document.getElementById("total").value =
-        total.toFixed(2).replace(".", ",")
-        + " zł";
-
+        total.toFixed(2).replace(".", ",") +
+        " zł";
 
     document.getElementById("summaryFuel").textContent =
         fuel || "-";
 
-
     document.getElementById("summaryLiters").textContent =
-        liters.toFixed(2).replace(".", ",")
-        + " l";
-
+        liters.toFixed(2).replace(".", ",") +
+        " l";
 
     document.getElementById("summaryPrice").textContent =
-        price.toFixed(2).replace(".", ",")
-        + " zł/l";
-
+        price.toFixed(2).replace(".", ",") +
+        " zł/l";
 
     document.getElementById("summaryTotal").textContent =
-        total.toFixed(2).replace(".", ",")
-        + " zł";
-
+        total.toFixed(2).replace(".", ",") +
+        " zł";
 }
-
-
-/* ==========================================
-   PRZEJŚCIE DO PŁATNOŚCI
-========================================== */
 
 function goToPayment() {
 
@@ -1133,39 +965,20 @@ function goToPayment() {
             document.getElementById("liters").value
         ) || 0;
 
-
     if (!employee) {
-
-        alert(
-            "Podaj identyfikator pracownika."
-        );
-
+        alert("Podaj identyfikator pracownika.");
         return;
-
     }
-
 
     if (!client) {
-
-        alert(
-            "Podaj identyfikator klienta."
-        );
-
+        alert("Podaj identyfikator klienta.");
         return;
-
     }
-
 
     if (!fuel || liters <= 0) {
-
-        alert(
-            "Wybierz paliwo i podaj liczbę litrów."
-        );
-
+        alert("Wybierz paliwo i podaj liczbę litrów.");
         return;
-
     }
-
 
     if (documentType === "faktura") {
 
@@ -1178,28 +991,16 @@ function goToPayment() {
         const address =
             document.getElementById("address").value.trim();
 
-
         if (!company || !nip || !address) {
-
             alert(
                 "Przy fakturze podaj nazwę firmy, NIP i adres."
             );
-
             return;
-
         }
-
     }
 
-
     showPage("pagePayment");
-
 }
-
-
-/* ==========================================
-   POTWIERDZENIE PŁATNOŚCI
-========================================== */
 
 async function confirmPayment() {
 
@@ -1213,7 +1014,9 @@ async function confirmPayment() {
         document.getElementById("fuel").value;
 
     const liters =
-        Number(document.getElementById("liters").value) || 0;
+        Number(
+            document.getElementById("liters").value
+        ) || 0;
 
     const price =
         prices[fuel] || 0;
@@ -1221,55 +1024,57 @@ async function confirmPayment() {
     const total =
         liters * price;
 
-
     const button =
-        document.querySelector("#pagePayment .main-button");
+        document.querySelector(
+            "#pagePayment .main-button"
+        );
 
     button.disabled = true;
-    button.textContent = "⏳ Zapisywanie transakcji...";
-
+    button.textContent =
+        "⏳ Zapisywanie transakcji...";
 
     try {
 
-        const response = await fetch(
-            "/api/transactions",
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                "/api/transactions",
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify({
+                    body:
+                        JSON.stringify({
 
-                    identyfikator_pracownika:
-                        employee,
+                            identyfikator_pracownika:
+                                employee,
 
-                    identyfikator_klienta:
-                        client,
+                            identyfikator_klienta:
+                                client,
 
-                    typ_dokumentu:
-                        documentType === "faktura"
-                            ? "Faktura VAT"
-                            : "Paragon",
+                            typ_dokumentu:
+                                documentType === "faktura"
+                                    ? "Faktura VAT"
+                                    : "Paragon",
 
-                    typ_paliwa:
-                        fuel,
+                            typ_paliwa:
+                                fuel,
 
-                    litry:
-                        liters,
+                            litry:
+                                liters,
 
-                    kwota:
-                        total
+                            kwota:
+                                total
 
-                })
-            }
-        );
-
+                        })
+                }
+            );
 
         const data =
             await response.json();
-
 
         if (!response.ok || !data.success) {
 
@@ -1277,14 +1082,11 @@ async function confirmPayment() {
                 data.error ||
                 "Nie udało się zapisać transakcji."
             );
-
         }
-
 
         prepareReceipt();
 
         showPage("pageReceipt");
-
 
     } catch (error) {
 
@@ -1298,23 +1100,14 @@ async function confirmPayment() {
             error.message
         );
 
-
     } finally {
 
         button.disabled = false;
+
         button.textContent =
             "✅ Potwierdź płatność";
-
     }
-
 }
-
-}
-
-
-/* ==========================================
-   PRZYGOTOWANIE PARAGONU
-========================================== */
 
 function prepareReceipt() {
 
@@ -1338,7 +1131,6 @@ function prepareReceipt() {
     const total =
         liters * price;
 
-
     document.getElementById(
         "receiptDocumentType"
     ).textContent =
@@ -1346,45 +1138,38 @@ function prepareReceipt() {
             ? "FAKTURA VAT"
             : "PARAGON";
 
-
     document.getElementById(
         "receiptEmployee"
     ).textContent =
         employee;
-
 
     document.getElementById(
         "receiptClient"
     ).textContent =
         client;
 
-
     document.getElementById(
         "receiptFuel"
     ).textContent =
         fuel;
 
-
     document.getElementById(
         "receiptLiters"
     ).textContent =
-        liters.toFixed(2).replace(".", ",")
-        + " l";
-
+        liters.toFixed(2).replace(".", ",") +
+        " l";
 
     document.getElementById(
         "receiptPrice"
     ).textContent =
-        price.toFixed(2).replace(".", ",")
-        + " zł/l";
-
+        price.toFixed(2).replace(".", ",") +
+        " zł/l";
 
     document.getElementById(
         "receiptTotal"
     ).textContent =
-        total.toFixed(2).replace(".", ",")
-        + " zł";
-
+        total.toFixed(2).replace(".", ",") +
+        " zł";
 
     if (documentType === "faktura") {
 
@@ -1393,28 +1178,23 @@ function prepareReceipt() {
         ).textContent =
             document.getElementById("company").value;
 
-
         document.getElementById(
             "receiptNip"
         ).textContent =
             document.getElementById("nip").value;
-
 
         document.getElementById(
             "receiptAddress"
         ).textContent =
             document.getElementById("address").value;
 
-
         document.getElementById(
             "receiptCompanyRow"
         ).classList.remove("hidden");
 
-
         document.getElementById(
             "receiptNipRow"
         ).classList.remove("hidden");
-
 
         document.getElementById(
             "receiptAddressRow"
@@ -1426,35 +1206,21 @@ function prepareReceipt() {
             "receiptCompanyRow"
         ).classList.add("hidden");
 
-
         document.getElementById(
             "receiptNipRow"
         ).classList.add("hidden");
 
-
         document.getElementById(
             "receiptAddressRow"
         ).classList.add("hidden");
-
     }
-
 }
-
-
-/* ==========================================
-   ZAKOŃCZENIE
-========================================== */
 
 function finishOrder() {
 
     showPage("pageFinish");
 
 }
-
-
-/* ==========================================
-   ZMIANA STRONY
-========================================== */
 
 function showPage(pageId) {
 
@@ -1466,21 +1232,17 @@ function showPage(pageId) {
 
         });
 
-
     document
         .getElementById(pageId)
         .classList.add("active");
-
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
-
 }
 
 </script>
 
 </body>
 </html>
-```
