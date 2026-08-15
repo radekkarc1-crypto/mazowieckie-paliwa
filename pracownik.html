@@ -1201,11 +1201,113 @@ function goToPayment() {
    POTWIERDZENIE PŁATNOŚCI
 ========================================== */
 
-function confirmPayment() {
+async function confirmPayment() {
 
-    prepareReceipt();
+    const employee =
+        document.getElementById("employee").value.trim();
 
-    showPage("pageReceipt");
+    const client =
+        document.getElementById("client").value.trim();
+
+    const fuel =
+        document.getElementById("fuel").value;
+
+    const liters =
+        Number(document.getElementById("liters").value) || 0;
+
+    const price =
+        prices[fuel] || 0;
+
+    const total =
+        liters * price;
+
+
+    const button =
+        document.querySelector("#pagePayment .main-button");
+
+    button.disabled = true;
+    button.textContent = "⏳ Zapisywanie transakcji...";
+
+
+    try {
+
+        const response = await fetch(
+            "/api/transactions",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    identyfikator_pracownika:
+                        employee,
+
+                    identyfikator_klienta:
+                        client,
+
+                    typ_dokumentu:
+                        documentType === "faktura"
+                            ? "Faktura VAT"
+                            : "Paragon",
+
+                    typ_paliwa:
+                        fuel,
+
+                    litry:
+                        liters,
+
+                    kwota:
+                        total
+
+                })
+            }
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok || !data.success) {
+
+            throw new Error(
+                data.error ||
+                "Nie udało się zapisać transakcji."
+            );
+
+        }
+
+
+        prepareReceipt();
+
+        showPage("pageReceipt");
+
+
+    } catch (error) {
+
+        console.error(
+            "BŁĄD ZAPISU TRANSAKCJI:",
+            error
+        );
+
+        alert(
+            "❌ Nie udało się zapisać transakcji.\n\n" +
+            error.message
+        );
+
+
+    } finally {
+
+        button.disabled = false;
+        button.textContent =
+            "✅ Potwierdź płatność";
+
+    }
+
+}
 
 }
 
