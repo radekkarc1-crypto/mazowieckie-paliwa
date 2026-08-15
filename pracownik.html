@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -115,8 +116,7 @@ h1 span {
     margin-bottom: 30px;
 }
 
-.document-buttons button,
-.payment-button {
+.document-buttons button {
     padding: 17px;
     border-radius: 10px;
     border: 1px solid #38516a;
@@ -127,8 +127,7 @@ h1 span {
     cursor: pointer;
 }
 
-.document-buttons button.active,
-.payment-button.active {
+.document-buttons button.active {
     background: #f5c400;
     color: #071525;
     border-color: #f5c400;
@@ -235,12 +234,6 @@ input[readonly] {
 
 .main-button:hover {
     background: #ffd92e;
-    transform: translateY(-1px);
-}
-
-.main-button:disabled {
-    opacity: 0.7;
-    cursor: wait;
 }
 
 .payment-box {
@@ -263,7 +256,6 @@ input[readonly] {
     font-family: monospace;
     font-size: 19px;
     color: #f5c400;
-    word-break: break-word;
 }
 
 .waiting {
@@ -279,7 +271,6 @@ input[readonly] {
     color: #111;
     border-radius: 8px;
     padding: 30px;
-    font-family: Arial, sans-serif;
 }
 
 .receipt-header {
@@ -301,6 +292,7 @@ input[readonly] {
 .receipt-row {
     display: flex;
     justify-content: space-between;
+    gap: 20px;
     padding: 9px 0;
     border-bottom: 1px solid #ddd;
 }
@@ -331,10 +323,6 @@ input[readonly] {
     margin-bottom: 25px;
 }
 
-.success-box h1 {
-    font-size: 42px;
-}
-
 .success-box p {
     color: #aebdcb;
     font-size: 20px;
@@ -347,10 +335,6 @@ input[readonly] {
     margin-top: 22px;
     color: #aebdcb;
     text-decoration: none;
-}
-
-.back:hover {
-    color: #f5c400;
 }
 
 footer {
@@ -366,6 +350,7 @@ footer strong {
 }
 
 @media (max-width: 700px) {
+
     header {
         flex-direction: column;
         gap: 15px;
@@ -374,10 +359,6 @@ footer strong {
 
     .grid {
         grid-template-columns: 1fr;
-    }
-
-    .full {
-        grid-column: auto;
     }
 
     .document-buttons {
@@ -391,10 +372,6 @@ footer strong {
     .panel {
         padding: 20px;
     }
-
-    .payment-command {
-        font-size: 15px;
-    }
 }
 </style>
 </head>
@@ -405,10 +382,7 @@ footer strong {
 
     <div class="logo">
 
-        <img
-            src="/1000013536.png"
-            alt="Mazowieckie Paliwa S.A."
-        >
+        <img src="/1000013536.png" alt="Mazowieckie Paliwa S.A.">
 
         <div class="logo-text">
             MAZOWIECKIE
@@ -425,6 +399,10 @@ footer strong {
 </header>
 
 <main class="container">
+
+<!-- ================================
+     FORMULARZ
+================================ -->
 
 <section id="pageForm" class="page active">
 
@@ -445,7 +423,6 @@ footer strong {
         <div class="document-buttons">
 
             <button
-                type="button"
                 id="paragonButton"
                 class="active"
                 onclick="chooseDocument('paragon')"
@@ -454,7 +431,6 @@ footer strong {
             </button>
 
             <button
-                type="button"
                 id="fakturaButton"
                 onclick="chooseDocument('faktura')"
             >
@@ -471,9 +447,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Identyfikator pracownika
-                    </label>
+                    <label>Identyfikator pracownika</label>
 
                     <input
                         id="employee"
@@ -485,9 +459,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Identyfikator klienta
-                    </label>
+                    <label>Identyfikator klienta</label>
 
                     <input
                         id="client"
@@ -502,8 +474,8 @@ footer strong {
         </div>
 
         <div
-            class="section hidden"
             id="fakturaSection"
+            class="section hidden"
         >
 
             <h2>🏢 Dane firmy</h2>
@@ -512,42 +484,33 @@ footer strong {
 
                 <div class="field full">
 
-                    <label>
-                        Nazwa firmy
-                    </label>
+                    <label>Nazwa firmy</label>
 
                     <input
                         id="company"
                         type="text"
-                        placeholder="np. Mazowieckie Paliwa S.A."
                     >
 
                 </div>
 
                 <div class="field">
 
-                    <label>
-                        NIP
-                    </label>
+                    <label>NIP</label>
 
                     <input
                         id="nip"
                         type="text"
-                        placeholder="np. 1234567890"
                     >
 
                 </div>
 
                 <div class="field">
 
-                    <label>
-                        Adres
-                    </label>
+                    <label>Adres</label>
 
                     <input
                         id="address"
                         type="text"
-                        placeholder="Ulica, kod, miejscowość"
                     >
 
                 </div>
@@ -564,14 +527,9 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Typ paliwa
-                    </label>
+                    <label>Typ paliwa</label>
 
-                    <select
-                        id="fuel"
-                        onchange="calculate()"
-                    >
+                    <select id="fuel" onchange="calculate()">
 
                         <option value="">
                             Wybierz paliwo
@@ -599,9 +557,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Litry
-                    </label>
+                    <label>Litry</label>
 
                     <input
                         id="liters"
@@ -616,9 +572,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Cena za litr
-                    </label>
+                    <label>Cena za litr</label>
 
                     <input
                         id="price"
@@ -630,9 +584,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Kwota
-                    </label>
+                    <label>Kwota</label>
 
                     <input
                         id="total"
@@ -671,7 +623,6 @@ footer strong {
         </div>
 
         <button
-            type="button"
             class="main-button"
             onclick="goToPayment()"
         >
@@ -682,6 +633,11 @@ footer strong {
 
 </section>
 
+
+<!-- ================================
+     PŁATNOŚĆ
+================================ -->
+
 <section id="pagePayment" class="page">
 
     <div class="panel payment-box">
@@ -691,16 +647,19 @@ footer strong {
         </div>
 
         <h1>
-            Czekam na <span>transakcję</span>
+            Czekam na <span>płatność</span>
         </h1>
 
         <p class="description">
-            Klient musi wykonać poniższą komendę
-            w systemie płatności.
+            Po otrzymaniu płatności potwierdź transakcję.
         </p>
 
         <div class="payment-command">
-            !pay @konto bankowe Mazowieckie paliwa S.A
+            💰 KWOTA DO ZAPŁATY:
+            <br><br>
+            <strong id="paymentAmount">
+                0,00 zł
+            </strong>
         </div>
 
         <div class="waiting">
@@ -718,6 +677,11 @@ footer strong {
 
 </section>
 
+
+<!-- ================================
+     PARAGON
+================================ -->
+
 <section id="pageReceipt" class="page">
 
     <div class="panel">
@@ -732,9 +696,7 @@ footer strong {
 
             <div class="receipt-header">
 
-                <h2>
-                    MAZOWIECKIE PALIWA S.A.
-                </h2>
+                <h2>MAZOWIECKIE PALIWA S.A.</h2>
 
                 <p>
                     ENERGIA DLA MAZOWSZA
@@ -742,6 +704,11 @@ footer strong {
 
                 <p id="receiptDocumentType">
                     PARAGON
+                </p>
+
+                <p>
+                    Nr:
+                    <strong id="receiptNumber"></strong>
                 </p>
 
             </div>
@@ -796,14 +763,23 @@ footer strong {
             </div>
 
             <div class="receipt-total">
+
                 <span>RAZEM</span>
-                <span id="receiptTotal">0,00 zł</span>
+
+                <span id="receiptTotal">
+                    0,00 zł
+                </span>
+
             </div>
 
             <div class="receipt-footer">
+
                 Płatność potwierdzona ✅
+
                 <br><br>
+
                 Dziękujemy za zakupy!
+
             </div>
 
         </div>
@@ -818,6 +794,11 @@ footer strong {
     </div>
 
 </section>
+
+
+<!-- ================================
+     KONIEC
+================================ -->
 
 <section id="pageFinish" class="page">
 
@@ -843,7 +824,10 @@ footer strong {
         <a
             href="/"
             class="main-button"
-            style="display:block;text-decoration:none;"
+            style="
+                display:block;
+                text-decoration:none;
+            "
         >
             🏠 Wróć na stronę główną
         </a>
@@ -870,7 +854,12 @@ footer strong {
 
 </footer>
 
+
 <script>
+
+/* ================================
+   CENNIK
+================================ */
 
 const prices = {
     "Benzyna 95": 6.20,
@@ -881,33 +870,45 @@ const prices = {
 
 let documentType = "paragon";
 
+
+/* ================================
+   WYBÓR DOKUMENTU
+================================ */
+
 function chooseDocument(type) {
 
     documentType = type;
 
-    const paragon =
+    const paragonButton =
         document.getElementById("paragonButton");
 
-    const faktura =
+    const fakturaButton =
         document.getElementById("fakturaButton");
 
-    const section =
+    const fakturaSection =
         document.getElementById("fakturaSection");
 
     if (type === "faktura") {
 
-        paragon.classList.remove("active");
-        faktura.classList.add("active");
-        section.classList.remove("hidden");
+        paragonButton.classList.remove("active");
+        fakturaButton.classList.add("active");
+
+        fakturaSection.classList.remove("hidden");
 
     } else {
 
-        faktura.classList.remove("active");
-        paragon.classList.add("active");
-        section.classList.add("hidden");
+        fakturaButton.classList.remove("active");
+        paragonButton.classList.add("active");
+
+        fakturaSection.classList.add("hidden");
 
     }
 }
+
+
+/* ================================
+   OBLICZANIE
+================================ */
 
 function calculate() {
 
@@ -925,29 +926,41 @@ function calculate() {
     const total =
         liters * price;
 
+
     document.getElementById("price").value =
-        price.toFixed(2).replace(".", ",") +
-        " zł/l";
+        price.toFixed(2).replace(".", ",")
+        + " zł/l";
+
 
     document.getElementById("total").value =
-        total.toFixed(2).replace(".", ",") +
-        " zł";
+        total.toFixed(2).replace(".", ",")
+        + " zł";
+
 
     document.getElementById("summaryFuel").textContent =
         fuel || "-";
 
+
     document.getElementById("summaryLiters").textContent =
-        liters.toFixed(2).replace(".", ",") +
-        " l";
+        liters.toFixed(2).replace(".", ",")
+        + " l";
+
 
     document.getElementById("summaryPrice").textContent =
-        price.toFixed(2).replace(".", ",") +
-        " zł/l";
+        price.toFixed(2).replace(".", ",")
+        + " zł/l";
+
 
     document.getElementById("summaryTotal").textContent =
-        total.toFixed(2).replace(".", ",") +
-        " zł";
+        total.toFixed(2).replace(".", ",")
+        + " zł";
+
 }
+
+
+/* ================================
+   PRZEJŚCIE DO PŁATNOŚCI
+================================ */
 
 function goToPayment() {
 
@@ -965,6 +978,7 @@ function goToPayment() {
             document.getElementById("liters").value
         ) || 0;
 
+
     if (!employee) {
         alert("Podaj identyfikator pracownika.");
         return;
@@ -975,10 +989,16 @@ function goToPayment() {
         return;
     }
 
-    if (!fuel || liters <= 0) {
-        alert("Wybierz paliwo i podaj liczbę litrów.");
+    if (!fuel) {
+        alert("Wybierz paliwo.");
         return;
     }
+
+    if (liters <= 0) {
+        alert("Podaj liczbę litrów większą od 0.");
+        return;
+    }
+
 
     if (documentType === "faktura") {
 
@@ -991,18 +1011,53 @@ function goToPayment() {
         const address =
             document.getElementById("address").value.trim();
 
+
         if (!company || !nip || !address) {
+
             alert(
                 "Przy fakturze podaj nazwę firmy, NIP i adres."
             );
+
             return;
         }
     }
 
+
+    calculate();
+
+
+    const total =
+        liters * (prices[fuel] || 0);
+
+
+    document.getElementById(
+        "paymentAmount"
+    ).textContent =
+        total.toFixed(2).replace(".", ",")
+        + " zł";
+
+
     showPage("pagePayment");
 }
 
-async function confirmPayment() {
+
+/* ================================
+   POTWIERDZENIE PŁATNOŚCI
+================================ */
+
+function confirmPayment() {
+
+    prepareReceipt();
+
+    showPage("pageReceipt");
+}
+
+
+/* ================================
+   PARAGON
+================================ */
+
+function prepareReceipt() {
 
     const employee =
         document.getElementById("employee").value.trim();
@@ -1024,112 +1079,17 @@ async function confirmPayment() {
     const total =
         liters * price;
 
-    const button =
-        document.querySelector(
-            "#pagePayment .main-button"
-        );
 
-    button.disabled = true;
-    button.textContent =
-        "⏳ Zapisywanie transakcji...";
+    const receiptNumber =
+        "MP-" +
+        Date.now().toString().slice(-6);
 
-    try {
 
-        const response =
-            await fetch(
-                "/api/transactions",
-                {
-                    method: "POST",
+    document.getElementById(
+        "receiptNumber"
+    ).textContent =
+        receiptNumber;
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            identyfikator_pracownika:
-                                employee,
-
-                            identyfikator_klienta:
-                                client,
-
-                            typ_dokumentu:
-                                documentType === "faktura"
-                                    ? "Faktura VAT"
-                                    : "Paragon",
-
-                            typ_paliwa:
-                                fuel,
-
-                            litry:
-                                liters,
-
-                            kwota:
-                                total
-
-                        })
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok || !data.success) {
-
-            throw new Error(
-                data.error ||
-                "Nie udało się zapisać transakcji."
-            );
-        }
-
-        prepareReceipt();
-
-        showPage("pageReceipt");
-
-    } catch (error) {
-
-        console.error(
-            "BŁĄD ZAPISU TRANSAKCJI:",
-            error
-        );
-
-        alert(
-            "❌ Nie udało się zapisać transakcji.\n\n" +
-            error.message
-        );
-
-    } finally {
-
-        button.disabled = false;
-
-        button.textContent =
-            "✅ Potwierdź płatność";
-    }
-}
-
-function prepareReceipt() {
-
-    const employee =
-        document.getElementById("employee").value;
-
-    const client =
-        document.getElementById("client").value;
-
-    const fuel =
-        document.getElementById("fuel").value;
-
-    const liters =
-        Number(
-            document.getElementById("liters").value
-        ) || 0;
-
-    const price =
-        prices[fuel] || 0;
-
-    const total =
-        liters * price;
 
     document.getElementById(
         "receiptDocumentType"
@@ -1138,38 +1098,45 @@ function prepareReceipt() {
             ? "FAKTURA VAT"
             : "PARAGON";
 
+
     document.getElementById(
         "receiptEmployee"
     ).textContent =
         employee;
+
 
     document.getElementById(
         "receiptClient"
     ).textContent =
         client;
 
+
     document.getElementById(
         "receiptFuel"
     ).textContent =
         fuel;
 
+
     document.getElementById(
         "receiptLiters"
     ).textContent =
-        liters.toFixed(2).replace(".", ",") +
-        " l";
+        liters.toFixed(2).replace(".", ",")
+        + " l";
+
 
     document.getElementById(
         "receiptPrice"
     ).textContent =
-        price.toFixed(2).replace(".", ",") +
-        " zł/l";
+        price.toFixed(2).replace(".", ",")
+        + " zł/l";
+
 
     document.getElementById(
         "receiptTotal"
     ).textContent =
-        total.toFixed(2).replace(".", ",") +
-        " zł";
+        total.toFixed(2).replace(".", ",")
+        + " zł";
+
 
     if (documentType === "faktura") {
 
@@ -1178,15 +1145,18 @@ function prepareReceipt() {
         ).textContent =
             document.getElementById("company").value;
 
+
         document.getElementById(
             "receiptNip"
         ).textContent =
             document.getElementById("nip").value;
 
+
         document.getElementById(
             "receiptAddress"
         ).textContent =
             document.getElementById("address").value;
+
 
         document.getElementById(
             "receiptCompanyRow"
@@ -1216,11 +1186,20 @@ function prepareReceipt() {
     }
 }
 
+
+/* ================================
+   KONIEC
+================================ */
+
 function finishOrder() {
 
     showPage("pageFinish");
-
 }
+
+
+/* ================================
+   ZMIANA STRONY
+================================ */
 
 function showPage(pageId) {
 
@@ -1232,9 +1211,11 @@ function showPage(pageId) {
 
         });
 
+
     document
         .getElementById(pageId)
         .classList.add("active");
+
 
     window.scrollTo({
         top: 0,
@@ -1246,3 +1227,4 @@ function showPage(pageId) {
 
 </body>
 </html>
+```
