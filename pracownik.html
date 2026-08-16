@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -236,6 +235,11 @@ input[readonly] {
     background: #ffd92e;
 }
 
+.main-button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
 .payment-box {
     text-align: center;
     padding: 35px 20px;
@@ -331,6 +335,16 @@ input[readonly] {
     line-height: 1.6;
 }
 
+.error-box {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #421b1b;
+    color: #ff8c8c;
+    text-align: center;
+}
+
 @media (max-width: 700px) {
 
     header {
@@ -361,6 +375,11 @@ input[readonly] {
 
     .payment-command {
         font-size: 15px;
+    }
+
+    .receipt-row {
+        flex-direction: column;
+        gap: 4px;
     }
 }
 </style>
@@ -628,7 +647,11 @@ input[readonly] {
         </div>
 
 
+        <div id="errorBox" class="error-box"></div>
+
+
         <button
+            id="issueButton"
             class="main-button"
             onclick="goToPayment()"
         >
@@ -666,6 +689,7 @@ input[readonly] {
         </div>
 
         <button
+            id="paymentButton"
             class="main-button"
             onclick="confirmPayment()"
         >
@@ -691,9 +715,13 @@ input[readonly] {
 
             <div class="receipt-header">
 
-                <h2>MAZOWIECKIE PALIWA S.A.</h2>
+                <h2>
+                    MAZOWIECKIE PALIWA S.A.
+                </h2>
 
-                <p>ENERGIA DLA MAZOWSZA</p>
+                <p>
+                    ENERGIA DLA MAZOWSZA
+                </p>
 
                 <p id="receiptDocumentType">
                     PARAGON
@@ -821,23 +849,18 @@ input[readonly] {
 <script>
 
 const prices = {
-
     "Benzyna 95": 6.20,
     "Benzyna 98": 6.70,
     "Diesel": 6.35,
     "LPG": 3.20
-
 };
 
-
 let documentType = "paragon";
-
 let documentNumber = "";
 
-let receiptCounter =
-    Number(
-        localStorage.getItem("mp_receipt_counter") || 0
-    );
+let receiptCounter = Number(
+    localStorage.getItem("mp_receipt_counter") || 0
+);
 
 
 function chooseDocument(type) {
@@ -853,11 +876,9 @@ function chooseDocument(type) {
     const section =
         document.getElementById("fakturaSection");
 
-
     if (type === "faktura") {
 
         paragon.classList.remove("active");
-
         faktura.classList.add("active");
 
         section.classList.remove("hidden");
@@ -865,13 +886,10 @@ function chooseDocument(type) {
     } else {
 
         faktura.classList.remove("active");
-
         paragon.classList.add("active");
 
         section.classList.add("hidden");
-
     }
-
 }
 
 
@@ -919,11 +937,30 @@ function calculate() {
     document.getElementById("summaryTotal").textContent =
         total.toFixed(2).replace(".", ",")
         + " zł";
+}
 
+
+function showError(message) {
+
+    const box =
+        document.getElementById("errorBox");
+
+    box.textContent = message;
+    box.style.display = "block";
+}
+
+
+function hideError() {
+
+    document.getElementById(
+        "errorBox"
+    ).style.display = "none";
 }
 
 
 function goToPayment() {
+
+    hideError();
 
     const employee =
         document.getElementById("employee").value.trim();
@@ -941,27 +978,25 @@ function goToPayment() {
 
 
     if (!employee) {
-
-        alert("Podaj identyfikator pracownika.");
-
+        showError(
+            "❌ Podaj identyfikator pracownika."
+        );
         return;
     }
 
 
     if (!client) {
-
-        alert("Podaj identyfikator klienta.");
-
+        showError(
+            "❌ Podaj identyfikator klienta."
+        );
         return;
     }
 
 
     if (!fuel || liters <= 0) {
-
-        alert(
-            "Wybierz paliwo i podaj liczbę litrów."
+        showError(
+            "❌ Wybierz paliwo i podaj liczbę litrów."
         );
-
         return;
     }
 
@@ -980,8 +1015,8 @@ function goToPayment() {
 
         if (!company || !nip || !address) {
 
-            alert(
-                "Przy fakturze podaj nazwę firmy, NIP i adres."
+            showError(
+                "❌ Przy fakturze podaj nazwę firmy, NIP i adres."
             );
 
             return;
@@ -990,20 +1025,54 @@ function goToPayment() {
 
 
     showPage("pagePayment");
-
 }
 
 
-function confirmPayment() {
+async function confirmPayment() {
 
-    prepareReceipt();
+    const button =
+        document.getElementById("paymentButton");
 
-    showPage("pageReceipt");
+    button.disabled = true;
 
+    button.textContent =
+        "⏳ Zapisywanie dokumentu...";
+
+
+    try {
+
+        const result =
+            await createReceipt();
+
+
+        if (!result.success) {
+
+            throw new Error(
+                result.error || "Błąd zapisu dokumentu"
+            );
+        }
+
+
+        showPage("pageReceipt");
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Nie udało się zapisać dokumentu.\n\n" +
+            error.message
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+            "✅ Potwierdź płatność";
+    }
 }
 
 
-function prepareReceipt() {
+async function createReceipt() {
 
     receiptCounter++;
 
@@ -1039,6 +1108,22 @@ function prepareReceipt() {
         liters * price;
 
 
+    const company =
+        documentType === "faktura"
+            ? document.getElementById("company").value.trim()
+            : "";
+
+    const nip =
+        documentType === "faktura"
+            ? document.getElementById("nip").value.trim()
+            : "";
+
+    const address =
+        documentType === "faktura"
+            ? document.getElementById("address").value.trim()
+            : "";
+
+
     const receiptData = {
 
         number: documentNumber,
@@ -1057,50 +1142,46 @@ function prepareReceipt() {
 
         total: total,
 
-        company:
-            documentType === "faktura"
-                ? document.getElementById("company").value.trim()
-                : "",
+        company: company,
 
-        nip:
-            documentType === "faktura"
-                ? document.getElementById("nip").value.trim()
-                : "",
+        nip: nip,
 
-        address:
-            documentType === "faktura"
-                ? document.getElementById("address").value.trim()
-                : "",
+        address: address,
 
-        paymentStatus: "opłacono",
-
-        createdAt: new Date().toISOString()
-
+        paymentStatus: "opłacono"
     };
 
 
+    const response =
+        await fetch("/api/receipts", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(receiptData)
+
+        });
+
+
+    const data =
+        await response.json();
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            data.error ||
+            data.details ||
+            "Błąd serwera"
+        );
+    }
+
+
     /*
-     * ZAPIS DOKUMENTU
-     */
-
-    localStorage.setItem(
-        "mp_receipt_" + documentNumber,
-        JSON.stringify(receiptData)
-    );
-
-
-    /*
-     * ZAPIS OSTATNIEGO DOKUMENTU
-     */
-
-    localStorage.setItem(
-        "mp_last_receipt",
-        JSON.stringify(receiptData)
-    );
-
-
-    /*
-     * WYŚWIETLENIE PARAGONU
+     * WYŚWIETLENIE DOKUMENTU
      */
 
     document.getElementById(
@@ -1155,13 +1236,14 @@ function prepareReceipt() {
         total.toFixed(2).replace(".", ",")
         + " zł";
 
+
+    return data;
 }
 
 
 function finishOrder() {
 
     showPage("pageFinish");
-
 }
 
 
@@ -1185,11 +1267,9 @@ function showPage(pageId) {
         top: 0,
         behavior: "smooth"
     });
-
 }
 
 </script>
 
 </body>
 </html>
-```
