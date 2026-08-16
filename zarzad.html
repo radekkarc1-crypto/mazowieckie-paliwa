@@ -1,13 +1,19 @@
-```html
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>👑 Panel Zarządu | Mazowieckie Paliwa S.A.</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>👔 Zarząd | Mazowieckie Paliwa S.A.</title>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,244 +21,390 @@
 }
 
 body {
+
     font-family: Arial, sans-serif;
+
     background: #071525;
+
     color: white;
+
     min-height: 100vh;
 }
 
+
 header {
+
     background: #0b1f35;
+
     border-bottom: 3px solid #f5c400;
-    padding: 18px 6%;
+
+    padding: 15px 6%;
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 }
 
+
 .logo {
-    font-size: 21px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.logo img {
+
+    width: 75px;
+
+    height: 55px;
+
+    object-fit: contain;
+}
+
+
+.logo-text {
+
+    font-size: 20px;
+
     font-weight: bold;
 }
 
-.logo span {
+
+.logo-text span {
+
     color: #f5c400;
 }
+
 
 header a {
+
     color: white;
+
     text-decoration: none;
+
     font-weight: bold;
 }
+
 
 header a:hover {
+
     color: #f5c400;
 }
+
 
 .container {
+
     width: 92%;
+
     max-width: 900px;
-    margin: 55px auto 80px;
+
+    margin: 60px auto;
 }
+
 
 .panel {
+
     background: #0b1f35;
+
     border: 1px solid #203b55;
+
     border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+
+    padding: 35px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.25);
 }
 
-.login {
+
+#loginScreen {
+
     max-width: 500px;
-    margin: auto;
+
+    margin: 100px auto;
+
     text-align: center;
 }
 
-.crown {
-    font-size: 70px;
-    margin-bottom: 20px;
-}
 
 h1 {
-    font-size: 42px;
-    margin-bottom: 12px;
-}
 
-h1 span {
-    color: #f5c400;
-}
+    font-size: 45px;
 
-.description {
-    color: #aebdcb;
-    font-size: 17px;
-    line-height: 1.5;
-    margin-bottom: 28px;
-}
-
-input {
-    width: 100%;
-    padding: 15px;
-    border-radius: 9px;
-    border: 1px solid #38516a;
-    background: #071525;
-    color: white;
-    font-size: 17px;
-    outline: none;
-}
-
-input:focus {
-    border-color: #f5c400;
-}
-
-button {
-    width: 100%;
-    margin-top: 15px;
-    padding: 16px;
-    border: none;
-    border-radius: 9px;
-    background: #f5c400;
-    color: #071525;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #ffd92e;
-}
-
-.error {
-    display: none;
-    margin-top: 18px;
-    padding: 13px;
-    border-radius: 8px;
-    background: #421b1b;
-    color: #ff9696;
-    font-weight: bold;
-}
-
-.dashboard {
-    display: none;
-}
-
-.top {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.status {
-    margin: 25px 0;
-    padding: 30px;
-    border-radius: 14px;
-    text-align: center;
-    border: 1px solid #38516a;
-}
-
-.status.open {
-    background: #123c2a;
-    border-color: #2d8a55;
-}
-
-.status.closed {
-    background: #421b1b;
-    border-color: #8a3535;
-}
-
-.status-icon {
-    font-size: 70px;
     margin-bottom: 15px;
 }
 
-.status h2 {
-    font-size: 30px;
-    margin-bottom: 8px;
+
+h1 span {
+
+    color: #f5c400;
 }
 
-.status p {
-    color: #b9c7d3;
+
+.description {
+
+    color: #aebdcb;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    margin-bottom: 30px;
 }
 
-.control-buttons {
+
+input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 8px;
+
+    border: 1px solid #38516a;
+
+    background: #071525;
+
+    color: white;
+
+    font-size: 16px;
+}
+
+
+input:focus {
+
+    outline: none;
+
+    border-color: #f5c400;
+}
+
+
+.main-button {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 17px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #f5c400;
+
+    color: #071525;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.main-button:hover {
+
+    background: #ffd92e;
+}
+
+
+.login-error {
+
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background: #421b1b;
+
+    color: #ff8c8c;
+
+    font-weight: bold;
+}
+
+
+#managementPanel {
+
+    display: none;
+}
+
+
+.status {
+
+    text-align: center;
+
+    padding: 35px;
+
+    border-radius: 14px;
+
+    margin: 30px 0;
+}
+
+
+.status.open {
+
+    background: #123c2a;
+
+    border: 1px solid #58d68d;
+}
+
+
+.status.closed {
+
+    background: #421b1b;
+
+    border: 1px solid #ff6b6b;
+}
+
+
+.status-icon {
+
+    font-size: 70px;
+
+    margin-bottom: 15px;
+}
+
+
+.status-title {
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+
+.status-text {
+
+    color: #cbd6df;
+
+    font-size: 17px;
+}
+
+
+.actions {
+
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 15px;
 }
 
-.open-button {
-    background: #2ecc71;
-    color: #071525;
+
+.action {
+
+    padding: 22px;
+
+    border-radius: 10px;
+
+    border: 1px solid #38516a;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
 }
 
-.open-button:hover {
-    background: #48e889;
+
+.open-button {
+
+    background: #123c2a;
+
+    color: #58d68d;
+
+    border-color: #58d68d;
 }
+
 
 .close-button {
-    background: #e74c3c;
-    color: white;
+
+    background: #421b1b;
+
+    color: #ff7777;
+
+    border-color: #ff7777;
 }
 
-.close-button:hover {
-    background: #ff5c4d;
-}
 
-.logout {
-    background: #203b55;
-    color: white;
-    margin-top: 25px;
-}
+.message {
 
-.logout:hover {
-    background: #2d506e;
-}
-
-.info {
-    margin-top: 25px;
-    padding: 18px;
-    background: #071525;
-    border: 1px solid #38516a;
-    border-radius: 10px;
-    color: #aebdcb;
     text-align: center;
-}
 
-.loading {
-    text-align: center;
-    color: #f5c400;
     margin-top: 20px;
+
+    color: #f5c400;
+
+    font-weight: bold;
 }
 
-@media (max-width: 700px) {
+
+@media(max-width:700px) {
 
     header {
+
         flex-direction: column;
+
         gap: 15px;
+
         text-align: center;
     }
 
+    .actions {
+
+        grid-template-columns: 1fr;
+    }
+
     h1 {
-        font-size: 34px;
+
+        font-size: 36px;
     }
 
     .panel {
-        padding: 22px;
-    }
 
-    .control-buttons {
-        grid-template-columns: 1fr;
+        padding: 20px;
     }
 }
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <header>
 
     <div class="logo">
-        MAZOWIECKIE <span>PALIWA</span> S.A.
+
+        <img
+            src="/1000013536.png"
+            alt="Mazowieckie Paliwa S.A."
+        >
+
+        <div class="logo-text">
+
+            MAZOWIECKIE
+            <span>PALIWA</span>
+            S.A.
+
+        </div>
+
     </div>
+
 
     <a href="/">
         ← Strona główna
@@ -263,232 +415,209 @@ button:hover {
 
 <main class="container">
 
-    <!-- LOGOWANIE -->
 
-    <section id="loginPanel" class="panel login">
+<!-- LOGOWANIE -->
 
-        <div class="crown">
-            👑
-        </div>
+<section
+    id="loginScreen"
+    class="panel"
+>
 
-        <h1>
-            Panel <span>Zarządu</span>
-        </h1>
+    <div style="font-size:70px;">
+        👔
+    </div>
 
-        <p class="description">
-            Dostęp wyłącznie dla uprawnionych członków zarządu.
-        </p>
 
-        <input
-            id="managementCode"
-            type="password"
-            placeholder="Kod dostępu"
-            autocomplete="off"
-        >
+    <h1>
+        Panel <span>zarządu</span>
+    </h1>
 
-        <button
-            type="button"
-            onclick="login()"
-        >
-            🔐 ZALOGUJ SIĘ
-        </button>
+
+    <p class="description">
+
+        Podaj kod dostępu zarządu,
+        aby zarządzać stacją.
+
+    </p>
+
+
+    <input
+        id="accessCode"
+        type="password"
+        placeholder="Kod dostępu"
+        autocomplete="off"
+    >
+
+
+    <button
+        class="main-button"
+        onclick="login()"
+    >
+
+        🔓 WEJDŹ DO PANELU
+
+    </button>
+
+
+    <div
+        id="loginError"
+        class="login-error"
+    >
+
+        ❌ Nieprawidłowy kod dostępu.
+
+    </div>
+
+</section>
+
+
+
+<!-- PANEL ZARZĄDU -->
+
+<section
+    id="managementPanel"
+    class="panel"
+>
+
+    <h1>
+        Zarządzanie <span>stacją</span>
+    </h1>
+
+
+    <p class="description">
+
+        Tutaj zarząd może otwierać
+        i zamykać stację.
+
+    </p>
+
+
+    <div
+        id="statusBox"
+        class="status"
+    >
 
         <div
-            id="loginError"
-            class="error"
+            id="statusIcon"
+            class="status-icon"
         >
-            Nieprawidłowy kod.
-        </div>
-
-    </section>
-
-
-    <!-- PANEL ZARZĄDU -->
-
-    <section id="dashboard" class="dashboard">
-
-        <div class="top">
-
-            <h1>
-                Panel <span>Zarządu</span> 👑
-            </h1>
-
-            <p class="description">
-                Zarządzanie statusem stacji Mazowieckie Paliwa S.A.
-            </p>
-
+            ⏳
         </div>
 
 
-        <div class="panel">
-
-            <div
-                id="statusBox"
-                class="status"
-            >
-
-                <div
-                    id="statusIcon"
-                    class="status-icon"
-                >
-                    ⏳
-                </div>
-
-                <h2 id="statusText">
-                    Sprawdzanie statusu...
-                </h2>
-
-                <p id="statusUpdated">
-                    Łączenie z serwerem...
-                </p>
-
-            </div>
-
-
-            <div class="control-buttons">
-
-                <button
-                    type="button"
-                    class="open-button"
-                    onclick="setStationStatus(true)"
-                >
-                    🟢 OTWÓRZ STACJĘ
-                </button>
-
-                <button
-                    type="button"
-                    class="close-button"
-                    onclick="setStationStatus(false)"
-                >
-                    🔴 ZAMKNIJ STACJĘ
-                </button>
-
-            </div>
-
-
-            <div class="info">
-                ⚠️ Zmiana statusu stacji jest zapisywana w bazie Neon.
-            </div>
-
-
-            <button
-                type="button"
-                class="logout"
-                onclick="logout()"
-            >
-                🔒 WYLOGUJ
-            </button>
-
+        <div
+            id="statusTitle"
+            class="status-title"
+        >
+            Sprawdzanie...
         </div>
 
-    </section>
+
+        <div
+            id="statusText"
+            class="status-text"
+        >
+            Pobieranie statusu stacji...
+        </div>
+
+    </div>
+
+
+    <div class="actions">
+
+        <button
+            class="action open-button"
+            onclick="changeStationStatus(true)"
+        >
+
+            🟢 OTWÓRZ STACJĘ
+
+        </button>
+
+
+        <button
+            class="action close-button"
+            onclick="changeStationStatus(false)"
+        >
+
+            🔴 ZAMKNIJ STACJĘ
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+</section>
 
 </main>
 
 
+
 <script>
 
-let managementCode = "";
+
+const ACCESS_CODE =
+    "Zarząd_Mazowieckie_Paliwa";
 
 
-// ================================
-// LOGOWANIE
-// ================================
+function login() {
 
-async function login() {
-
-    const code =
+    const input =
         document
-            .getElementById("managementCode")
-            .value
-            .trim();
+            .getElementById("accessCode")
+            .value;
 
     const error =
-        document.getElementById("loginError");
+        document
+            .getElementById("loginError");
 
 
-    error.style.display = "none";
+    if (input === ACCESS_CODE) {
+
+        document
+            .getElementById("loginScreen")
+            .style.display = "none";
 
 
-    if (!code) {
+        document
+            .getElementById("managementPanel")
+            .style.display = "block";
 
-        error.textContent =
-            "❌ Wpisz kod dostępu.";
 
-        error.style.display = "block";
+        error.style.display = "none";
+
+
+        loadStatus();
 
         return;
     }
 
 
-    try {
-
-        const response =
-            await fetch(
-                "/api/management",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        action: "login",
-                        code: code
-                    })
-                }
-            );
-
-
-        const result =
-            await response.json();
-
-
-        if (!response.ok || !result.success) {
-
-            error.textContent =
-                "❌ " +
-                (
-                    result.error ||
-                    "Nieprawidłowy kod."
-                );
-
-            error.style.display = "block";
-
-            return;
-        }
-
-
-        managementCode = code;
-
-        document
-            .getElementById("loginPanel")
-            .style.display = "none";
-
-
-        document
-            .getElementById("dashboard")
-            .style.display = "block";
-
-
-        loadStatus();
-
-    } catch (error) {
-
-        console.error(error);
-
-        error.textContent =
-            "❌ Nie udało się połączyć z serwerem.";
-
-        error.style.display = "block";
-    }
+    error.style.display = "block";
 }
 
 
-// ================================
-// POBIERANIE STATUSU
-// ================================
+document
+    .getElementById("accessCode")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                login();
+
+            }
+
+        }
+    );
+
+
 
 async function loadStatus() {
 
@@ -498,23 +627,20 @@ async function loadStatus() {
             await fetch("/api/station");
 
 
-        const result =
+        const data =
             await response.json();
 
 
         if (!response.ok) {
 
             throw new Error(
-                result.error ||
-                "Błąd pobierania statusu."
+                data.error || "Błąd"
             );
+
         }
 
 
-        updateStatus(
-            result.isOpen,
-            result.updatedAt
-        );
+        updateStatus(data.is_open);
 
 
     } catch (error) {
@@ -522,23 +648,23 @@ async function loadStatus() {
         console.error(error);
 
         document
-            .getElementById("statusText")
+            .getElementById("statusTitle")
             .textContent =
-                "❌ Błąd połączenia";
+                "Błąd";
+
 
         document
-            .getElementById("statusUpdated")
+            .getElementById("statusText")
             .textContent =
-                error.message;
+                "Nie udało się pobrać statusu stacji.";
+
     }
+
 }
 
 
-// ================================
-// WYŚWIETLENIE STATUSU
-// ================================
 
-function updateStatus(isOpen, updatedAt) {
+function updateStatus(isOpen) {
 
     const box =
         document.getElementById("statusBox");
@@ -546,184 +672,115 @@ function updateStatus(isOpen, updatedAt) {
     const icon =
         document.getElementById("statusIcon");
 
+    const title =
+        document.getElementById("statusTitle");
+
     const text =
         document.getElementById("statusText");
 
-    const updated =
-        document.getElementById("statusUpdated");
 
-
-    box.classList.remove(
-        "open",
-        "closed"
-    );
+    box.className =
+        "status " +
+        (
+            isOpen
+                ? "open"
+                : "closed"
+        );
 
 
     if (isOpen) {
 
-        box.classList.add("open");
-
         icon.textContent = "🟢";
 
-        text.textContent =
+        title.textContent =
             "STACJA OTWARTA";
+
+        text.textContent =
+            "Klienci mogą korzystać ze stacji.";
 
     } else {
 
-        box.classList.add("closed");
-
         icon.textContent = "🔴";
 
-        text.textContent =
+        title.textContent =
             "STACJA ZAMKNIĘTA";
+
+        text.textContent =
+            "Stacja jest obecnie zamknięta.";
+
     }
 
-
-    if (updatedAt) {
-
-        const date =
-            new Date(updatedAt);
-
-
-        updated.textContent =
-            "Ostatnia zmiana: " +
-            date.toLocaleString("pl-PL");
-    }
 }
 
 
-// ================================
-// ZMIANA STATUSU
-// ================================
 
-async function setStationStatus(isOpen) {
+async function changeStationStatus(isOpen) {
 
-    if (!managementCode) {
-
-        alert("Brak autoryzacji.");
-
-        logout();
-
-        return;
-    }
+    const message =
+        document.getElementById("message");
 
 
-    const action =
-        isOpen
-            ? "otworzyć"
-            : "zamknąć";
-
-
-    const confirmed =
-        confirm(
-            "Czy na pewno chcesz " +
-            action +
-            " stację?"
-        );
-
-
-    if (!confirmed) {
-        return;
-    }
+    message.textContent =
+        "⏳ Zapisywanie...";
 
 
     try {
 
         const response =
             await fetch(
-                "/api/management",
+                "/api/station",
                 {
                     method: "POST",
 
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type":
+                            "application/json"
                     },
 
-                    body: JSON.stringify({
-                        action: "setStatus",
-                        code: managementCode,
-                        isOpen: isOpen
-                    })
+                    body:
+                        JSON.stringify({
+                            is_open: isOpen
+                        })
                 }
             );
 
 
-        const result =
+        const data =
             await response.json();
 
 
-        if (!response.ok || !result.success) {
+        if (!response.ok) {
 
-            alert(
-                "❌ " +
-                (
-                    result.error ||
-                    "Nie udało się zmienić statusu."
-                )
+            throw new Error(
+                data.error || "Błąd serwera"
             );
 
-            return;
         }
 
 
-        updateStatus(
-            result.isOpen,
-            result.updatedAt
-        );
+        updateStatus(data.is_open);
+
+
+        message.textContent =
+            isOpen
+                ? "✅ Stacja została otwarta."
+                : "🔴 Stacja została zamknięta.";
 
 
     } catch (error) {
 
         console.error(error);
 
-        alert(
-            "❌ Nie udało się połączyć z serwerem."
-        );
+        message.textContent =
+            "❌ Nie udało się zmienić statusu.";
+
     }
+
 }
-
-
-// ================================
-// WYLOGOWANIE
-// ================================
-
-function logout() {
-
-    managementCode = "";
-
-    document
-        .getElementById("managementCode")
-        .value = "";
-
-
-    document
-        .getElementById("dashboard")
-        .style.display = "none";
-
-
-    document
-        .getElementById("loginPanel")
-        .style.display = "block";
-}
-
-
-// ENTER = LOGOWANIE
-
-document
-    .getElementById("managementCode")
-    .addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Enter") {
-                login();
-            }
-
-        }
-    );
 
 </script>
 
+
 </body>
+
 </html>
-```
