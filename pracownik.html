@@ -116,8 +116,7 @@ h1 span {
     margin-bottom: 30px;
 }
 
-.document-buttons button,
-.payment-button {
+.document-buttons button {
     padding: 17px;
     border-radius: 10px;
     border: 1px solid #38516a;
@@ -128,8 +127,7 @@ h1 span {
     cursor: pointer;
 }
 
-.document-buttons button.active,
-.payment-button.active {
+.document-buttons button.active {
     background: #f5c400;
     color: #071525;
     border-color: #f5c400;
@@ -236,7 +234,6 @@ input[readonly] {
 
 .main-button:hover {
     background: #ffd92e;
-    transform: translateY(-1px);
 }
 
 .payment-box {
@@ -275,7 +272,6 @@ input[readonly] {
     color: #111;
     border-radius: 8px;
     padding: 30px;
-    font-family: Arial, sans-serif;
 }
 
 .receipt-header {
@@ -328,38 +324,11 @@ input[readonly] {
     margin-bottom: 25px;
 }
 
-.success-box h1 {
-    font-size: 42px;
-}
-
 .success-box p {
     color: #aebdcb;
     font-size: 20px;
     margin: 20px auto 30px;
     line-height: 1.6;
-}
-
-.back {
-    display: inline-block;
-    margin-top: 22px;
-    color: #aebdcb;
-    text-decoration: none;
-}
-
-.back:hover {
-    color: #f5c400;
-}
-
-footer {
-    background: #06111e;
-    border-top: 1px solid #203b55;
-    text-align: center;
-    padding: 30px;
-    color: #8495a6;
-}
-
-footer strong {
-    color: #f5c400;
 }
 
 @media (max-width: 700px) {
@@ -392,11 +361,6 @@ footer strong {
 
     .payment-command {
         font-size: 15px;
-    }
-
-    .receipt-row {
-        flex-direction: column;
-        gap: 4px;
     }
 }
 </style>
@@ -451,7 +415,6 @@ footer strong {
         <div class="document-buttons">
 
             <button
-                type="button"
                 id="paragonButton"
                 class="active"
                 onclick="chooseDocument('paragon')"
@@ -460,7 +423,6 @@ footer strong {
             </button>
 
             <button
-                type="button"
                 id="fakturaButton"
                 onclick="chooseDocument('faktura')"
             >
@@ -478,9 +440,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Identyfikator pracownika
-                    </label>
+                    <label>Identyfikator pracownika</label>
 
                     <input
                         id="employee"
@@ -493,9 +453,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Identyfikator klienta
-                    </label>
+                    <label>Identyfikator klienta</label>
 
                     <input
                         id="client"
@@ -521,9 +479,7 @@ footer strong {
 
                 <div class="field full">
 
-                    <label>
-                        Nazwa firmy
-                    </label>
+                    <label>Nazwa firmy</label>
 
                     <input
                         id="company"
@@ -536,9 +492,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        NIP
-                    </label>
+                    <label>NIP</label>
 
                     <input
                         id="nip"
@@ -551,9 +505,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Adres
-                    </label>
+                    <label>Adres</label>
 
                     <input
                         id="address"
@@ -576,14 +528,9 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Typ paliwa
-                    </label>
+                    <label>Typ paliwa</label>
 
-                    <select
-                        id="fuel"
-                        onchange="calculate()"
-                    >
+                    <select id="fuel" onchange="calculate()">
 
                         <option value="">
                             Wybierz paliwo
@@ -612,9 +559,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Litry
-                    </label>
+                    <label>Litry</label>
 
                     <input
                         id="liters"
@@ -630,9 +575,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Cena za litr
-                    </label>
+                    <label>Cena za litr</label>
 
                     <input
                         id="price"
@@ -645,9 +588,7 @@ footer strong {
 
                 <div class="field">
 
-                    <label>
-                        Kwota
-                    </label>
+                    <label>Kwota</label>
 
                     <input
                         id="total"
@@ -663,46 +604,23 @@ footer strong {
             <div class="summary">
 
                 <div class="summary-row">
-
                     <span>Paliwo</span>
-
-                    <span id="summaryFuel">
-                        -
-                    </span>
-
+                    <span id="summaryFuel">-</span>
                 </div>
 
-
                 <div class="summary-row">
-
                     <span>Ilość</span>
-
-                    <span id="summaryLiters">
-                        0,00 l
-                    </span>
-
+                    <span id="summaryLiters">0,00 l</span>
                 </div>
-
 
                 <div class="summary-row">
-
                     <span>Cena</span>
-
-                    <span id="summaryPrice">
-                        0,00 zł/l
-                    </span>
-
+                    <span id="summaryPrice">0,00 zł/l</span>
                 </div>
-
 
                 <div class="summary-row total">
-
                     <span>DO ZAPŁATY</span>
-
-                    <span id="summaryTotal">
-                        0,00 zł
-                    </span>
-
+                    <span id="summaryTotal">0,00 zł</span>
                 </div>
 
             </div>
@@ -711,7 +629,6 @@ footer strong {
 
 
         <button
-            type="button"
             class="main-button"
             onclick="goToPayment()"
         >
@@ -740,16 +657,13 @@ footer strong {
             w systemie płatności.
         </p>
 
-
         <div class="payment-command">
             !pay @konto bankowe Mazowieckie paliwa S.A
         </div>
 
-
         <div class="waiting">
             ⏳ Czekam na potwierdzenie płatności...
         </div>
-
 
         <button
             class="main-button"
@@ -777,13 +691,9 @@ footer strong {
 
             <div class="receipt-header">
 
-                <h2>
-                    MAZOWIECKIE PALIWA S.A.
-                </h2>
+                <h2>MAZOWIECKIE PALIWA S.A.</h2>
 
-                <p>
-                    ENERGIA DLA MAZOWSZA
-                </p>
+                <p>ENERGIA DLA MAZOWSZA</p>
 
                 <p id="receiptDocumentType">
                     PARAGON
@@ -793,132 +703,51 @@ footer strong {
 
 
             <div class="receipt-row">
-
                 <strong>Numer dokumentu</strong>
-
-                <span id="receiptNumber">
-                    -
-                </span>
-
+                <span id="receiptNumber">-</span>
             </div>
 
 
             <div class="receipt-row">
-
                 <strong>Pracownik</strong>
-
-                <span id="receiptEmployee">
-                    -
-                </span>
-
+                <span id="receiptEmployee">-</span>
             </div>
 
 
             <div class="receipt-row">
-
                 <strong>Klient</strong>
-
-                <span id="receiptClient">
-                    -
-                </span>
-
-            </div>
-
-
-            <div
-                id="receiptCompanyRow"
-                class="receipt-row hidden"
-            >
-
-                <strong>Firma</strong>
-
-                <span id="receiptCompany">
-                    -
-                </span>
-
-            </div>
-
-
-            <div
-                id="receiptNipRow"
-                class="receipt-row hidden"
-            >
-
-                <strong>NIP</strong>
-
-                <span id="receiptNip">
-                    -
-                </span>
-
-            </div>
-
-
-            <div
-                id="receiptAddressRow"
-                class="receipt-row hidden"
-            >
-
-                <strong>Adres</strong>
-
-                <span id="receiptAddress">
-                    -
-                </span>
-
+                <span id="receiptClient">-</span>
             </div>
 
 
             <div class="receipt-row">
-
                 <strong>Paliwo</strong>
-
-                <span id="receiptFuel">
-                    -
-                </span>
-
+                <span id="receiptFuel">-</span>
             </div>
 
 
             <div class="receipt-row">
-
                 <strong>Ilość</strong>
-
-                <span id="receiptLiters">
-                    -
-                </span>
-
+                <span id="receiptLiters">-</span>
             </div>
 
 
             <div class="receipt-row">
-
                 <strong>Cena</strong>
-
-                <span id="receiptPrice">
-                    -
-                </span>
-
+                <span id="receiptPrice">-</span>
             </div>
 
 
             <div class="receipt-total">
-
                 <span>RAZEM</span>
-
-                <span id="receiptTotal">
-                    0,00 zł
-                </span>
-
+                <span id="receiptTotal">0,00 zł</span>
             </div>
 
 
             <div class="receipt-footer">
-
                 Płatność potwierdzona ✅
-
                 <br><br>
-
                 Dziękujemy za zakupy!
-
             </div>
 
         </div>
@@ -957,14 +786,10 @@ footer strong {
             Miłego dnia i szerokiej drogi! 🚗
         </p>
 
-
         <a
             href="/"
             class="main-button"
-            style="
-                display:block;
-                text-decoration:none;
-            "
+            style="display:block;text-decoration:none;"
         >
             🏠 Wróć na stronę główną
         </a>
@@ -1117,23 +942,17 @@ function goToPayment() {
 
     if (!employee) {
 
-        alert(
-            "Podaj identyfikator pracownika."
-        );
+        alert("Podaj identyfikator pracownika.");
 
         return;
-
     }
 
 
     if (!client) {
 
-        alert(
-            "Podaj identyfikator klienta."
-        );
+        alert("Podaj identyfikator klienta.");
 
         return;
-
     }
 
 
@@ -1144,7 +963,6 @@ function goToPayment() {
         );
 
         return;
-
     }
 
 
@@ -1167,9 +985,7 @@ function goToPayment() {
             );
 
             return;
-
         }
-
     }
 
 
@@ -1203,10 +1019,10 @@ function prepareReceipt() {
 
 
     const employee =
-        document.getElementById("employee").value;
+        document.getElementById("employee").value.trim();
 
     const client =
-        document.getElementById("client").value;
+        document.getElementById("client").value.trim();
 
     const fuel =
         document.getElementById("fuel").value;
@@ -1222,6 +1038,70 @@ function prepareReceipt() {
     const total =
         liters * price;
 
+
+    const receiptData = {
+
+        number: documentNumber,
+
+        type: documentType,
+
+        employee: employee,
+
+        client: client,
+
+        fuel: fuel,
+
+        liters: liters,
+
+        price: price,
+
+        total: total,
+
+        company:
+            documentType === "faktura"
+                ? document.getElementById("company").value.trim()
+                : "",
+
+        nip:
+            documentType === "faktura"
+                ? document.getElementById("nip").value.trim()
+                : "",
+
+        address:
+            documentType === "faktura"
+                ? document.getElementById("address").value.trim()
+                : "",
+
+        paymentStatus: "opłacono",
+
+        createdAt: new Date().toISOString()
+
+    };
+
+
+    /*
+     * ZAPIS DOKUMENTU
+     */
+
+    localStorage.setItem(
+        "mp_receipt_" + documentNumber,
+        JSON.stringify(receiptData)
+    );
+
+
+    /*
+     * ZAPIS OSTATNIEGO DOKUMENTU
+     */
+
+    localStorage.setItem(
+        "mp_last_receipt",
+        JSON.stringify(receiptData)
+    );
+
+
+    /*
+     * WYŚWIETLENIE PARAGONU
+     */
 
     document.getElementById(
         "receiptNumber"
@@ -1274,59 +1154,6 @@ function prepareReceipt() {
     ).textContent =
         total.toFixed(2).replace(".", ",")
         + " zł";
-
-
-    if (documentType === "faktura") {
-
-        document.getElementById(
-            "receiptCompany"
-        ).textContent =
-            document.getElementById("company").value;
-
-
-        document.getElementById(
-            "receiptNip"
-        ).textContent =
-            document.getElementById("nip").value;
-
-
-        document.getElementById(
-            "receiptAddress"
-        ).textContent =
-            document.getElementById("address").value;
-
-
-        document.getElementById(
-            "receiptCompanyRow"
-        ).classList.remove("hidden");
-
-
-        document.getElementById(
-            "receiptNipRow"
-        ).classList.remove("hidden");
-
-
-        document.getElementById(
-            "receiptAddressRow"
-        ).classList.remove("hidden");
-
-    } else {
-
-        document.getElementById(
-            "receiptCompanyRow"
-        ).classList.add("hidden");
-
-
-        document.getElementById(
-            "receiptNipRow"
-        ).classList.add("hidden");
-
-
-        document.getElementById(
-            "receiptAddressRow"
-        ).classList.add("hidden");
-
-    }
 
 }
 
