@@ -235,11 +235,6 @@ input[readonly] {
     background: #ffd92e;
 }
 
-.main-button:disabled {
-    opacity: 0.6;
-    cursor: wait;
-}
-
 .payment-box {
     text-align: center;
     padding: 35px 20px;
@@ -335,18 +330,7 @@ input[readonly] {
     line-height: 1.6;
 }
 
-.error-box {
-    display: none;
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    background: #421b1b;
-    color: #ff8c8c;
-    text-align: center;
-}
-
 @media (max-width: 700px) {
-
     header {
         flex-direction: column;
         gap: 15px;
@@ -375,11 +359,6 @@ input[readonly] {
 
     .payment-command {
         font-size: 15px;
-    }
-
-    .receipt-row {
-        flex-direction: column;
-        gap: 4px;
     }
 }
 </style>
@@ -410,9 +389,7 @@ input[readonly] {
 
 </header>
 
-
 <main class="container">
-
 
 <section id="pageForm" class="page active">
 
@@ -428,12 +405,12 @@ input[readonly] {
         Wystaw paragon lub fakturę dla klienta.
     </p>
 
-
     <div class="panel">
 
         <div class="document-buttons">
 
             <button
+                type="button"
                 id="paragonButton"
                 class="active"
                 onclick="chooseDocument('paragon')"
@@ -442,6 +419,7 @@ input[readonly] {
             </button>
 
             <button
+                type="button"
                 id="fakturaButton"
                 onclick="chooseDocument('faktura')"
             >
@@ -449,7 +427,6 @@ input[readonly] {
             </button>
 
         </div>
-
 
         <div class="section">
 
@@ -459,7 +436,9 @@ input[readonly] {
 
                 <div class="field">
 
-                    <label>Identyfikator pracownika</label>
+                    <label>
+                        Identyfikator pracownika
+                    </label>
 
                     <input
                         id="employee"
@@ -469,10 +448,11 @@ input[readonly] {
 
                 </div>
 
-
                 <div class="field">
 
-                    <label>Identyfikator klienta</label>
+                    <label>
+                        Identyfikator klienta
+                    </label>
 
                     <input
                         id="client"
@@ -486,7 +466,6 @@ input[readonly] {
 
         </div>
 
-
         <div
             class="section hidden"
             id="fakturaSection"
@@ -498,7 +477,9 @@ input[readonly] {
 
                 <div class="field full">
 
-                    <label>Nazwa firmy</label>
+                    <label>
+                        Nazwa firmy
+                    </label>
 
                     <input
                         id="company"
@@ -508,10 +489,11 @@ input[readonly] {
 
                 </div>
 
-
                 <div class="field">
 
-                    <label>NIP</label>
+                    <label>
+                        NIP
+                    </label>
 
                     <input
                         id="nip"
@@ -521,10 +503,11 @@ input[readonly] {
 
                 </div>
 
-
                 <div class="field">
 
-                    <label>Adres</label>
+                    <label>
+                        Adres
+                    </label>
 
                     <input
                         id="address"
@@ -538,7 +521,6 @@ input[readonly] {
 
         </div>
 
-
         <div class="section">
 
             <h2>⛽ Tankowanie</h2>
@@ -547,9 +529,14 @@ input[readonly] {
 
                 <div class="field">
 
-                    <label>Typ paliwa</label>
+                    <label>
+                        Typ paliwa
+                    </label>
 
-                    <select id="fuel" onchange="calculate()">
+                    <select
+                        id="fuel"
+                        onchange="calculate()"
+                    >
 
                         <option value="">
                             Wybierz paliwo
@@ -575,10 +562,11 @@ input[readonly] {
 
                 </div>
 
-
                 <div class="field">
 
-                    <label>Litry</label>
+                    <label>
+                        Litry
+                    </label>
 
                     <input
                         id="liters"
@@ -591,10 +579,11 @@ input[readonly] {
 
                 </div>
 
-
                 <div class="field">
 
-                    <label>Cena za litr</label>
+                    <label>
+                        Cena za litr
+                    </label>
 
                     <input
                         id="price"
@@ -604,10 +593,11 @@ input[readonly] {
 
                 </div>
 
-
                 <div class="field">
 
-                    <label>Kwota</label>
+                    <label>
+                        Kwota
+                    </label>
 
                     <input
                         id="total"
@@ -618,7 +608,6 @@ input[readonly] {
                 </div>
 
             </div>
-
 
             <div class="summary">
 
@@ -646,12 +635,8 @@ input[readonly] {
 
         </div>
 
-
-        <div id="errorBox" class="error-box"></div>
-
-
         <button
-            id="issueButton"
+            type="button"
             class="main-button"
             onclick="goToPayment()"
         >
@@ -661,7 +646,6 @@ input[readonly] {
     </div>
 
 </section>
-
 
 <section id="pagePayment" class="page">
 
@@ -689,7 +673,7 @@ input[readonly] {
         </div>
 
         <button
-            id="paymentButton"
+            type="button"
             class="main-button"
             onclick="confirmPayment()"
         >
@@ -699,7 +683,6 @@ input[readonly] {
     </div>
 
 </section>
-
 
 <section id="pageReceipt" class="page">
 
@@ -729,48 +712,40 @@ input[readonly] {
 
             </div>
 
-
             <div class="receipt-row">
                 <strong>Numer dokumentu</strong>
                 <span id="receiptNumber">-</span>
             </div>
-
 
             <div class="receipt-row">
                 <strong>Pracownik</strong>
                 <span id="receiptEmployee">-</span>
             </div>
 
-
             <div class="receipt-row">
                 <strong>Klient</strong>
                 <span id="receiptClient">-</span>
             </div>
-
 
             <div class="receipt-row">
                 <strong>Paliwo</strong>
                 <span id="receiptFuel">-</span>
             </div>
 
-
             <div class="receipt-row">
                 <strong>Ilość</strong>
                 <span id="receiptLiters">-</span>
             </div>
-
 
             <div class="receipt-row">
                 <strong>Cena</strong>
                 <span id="receiptPrice">-</span>
             </div>
 
-
             <div class="receipt-total">
                 <span>RAZEM</span>
                 <span id="receiptTotal">0,00 zł</span>
             </div>
-
 
             <div class="receipt-footer">
                 Płatność potwierdzona ✅
@@ -780,8 +755,8 @@ input[readonly] {
 
         </div>
 
-
         <button
+            type="button"
             class="main-button"
             onclick="finishOrder()"
         >
@@ -791,7 +766,6 @@ input[readonly] {
     </div>
 
 </section>
-
 
 <section id="pageFinish" class="page">
 
@@ -828,7 +802,6 @@ input[readonly] {
 
 </main>
 
-
 <footer>
 
     <strong>
@@ -845,7 +818,6 @@ input[readonly] {
 
 </footer>
 
-
 <script>
 
 const prices = {
@@ -856,11 +828,13 @@ const prices = {
 };
 
 let documentType = "paragon";
+
 let documentNumber = "";
 
-let receiptCounter = Number(
-    localStorage.getItem("mp_receipt_counter") || 0
-);
+let receiptCounter =
+    Number(
+        localStorage.getItem("mp_receipt_counter") || 0
+    );
 
 
 function chooseDocument(type) {
@@ -880,15 +854,14 @@ function chooseDocument(type) {
 
         paragon.classList.remove("active");
         faktura.classList.add("active");
-
         section.classList.remove("hidden");
 
     } else {
 
         faktura.classList.remove("active");
         paragon.classList.add("active");
-
         section.classList.add("hidden");
+
     }
 }
 
@@ -909,30 +882,24 @@ function calculate() {
     const total =
         liters * price;
 
-
     document.getElementById("price").value =
         price.toFixed(2).replace(".", ",")
         + " zł/l";
-
 
     document.getElementById("total").value =
         total.toFixed(2).replace(".", ",")
         + " zł";
 
-
     document.getElementById("summaryFuel").textContent =
         fuel || "-";
-
 
     document.getElementById("summaryLiters").textContent =
         liters.toFixed(2).replace(".", ",")
         + " l";
 
-
     document.getElementById("summaryPrice").textContent =
         price.toFixed(2).replace(".", ",")
         + " zł/l";
-
 
     document.getElementById("summaryTotal").textContent =
         total.toFixed(2).replace(".", ",")
@@ -940,27 +907,7 @@ function calculate() {
 }
 
 
-function showError(message) {
-
-    const box =
-        document.getElementById("errorBox");
-
-    box.textContent = message;
-    box.style.display = "block";
-}
-
-
-function hideError() {
-
-    document.getElementById(
-        "errorBox"
-    ).style.display = "none";
-}
-
-
 function goToPayment() {
-
-    hideError();
 
     const employee =
         document.getElementById("employee").value.trim();
@@ -976,30 +923,22 @@ function goToPayment() {
             document.getElementById("liters").value
         ) || 0;
 
-
     if (!employee) {
-        showError(
-            "❌ Podaj identyfikator pracownika."
-        );
+        alert("Podaj identyfikator pracownika.");
         return;
     }
-
 
     if (!client) {
-        showError(
-            "❌ Podaj identyfikator klienta."
-        );
+        alert("Podaj identyfikator klienta.");
         return;
     }
-
 
     if (!fuel || liters <= 0) {
-        showError(
-            "❌ Wybierz paliwo i podaj liczbę litrów."
+        alert(
+            "Wybierz paliwo i podaj liczbę litrów."
         );
         return;
     }
-
 
     if (documentType === "faktura") {
 
@@ -1012,67 +951,27 @@ function goToPayment() {
         const address =
             document.getElementById("address").value.trim();
 
-
         if (!company || !nip || !address) {
 
-            showError(
-                "❌ Przy fakturze podaj nazwę firmy, NIP i adres."
+            alert(
+                "Przy fakturze podaj nazwę firmy, NIP i adres."
             );
 
             return;
         }
     }
 
-
     showPage("pagePayment");
 }
 
 
-async function confirmPayment() {
+/*
+========================================
+ZAPIS DOKUMENTU DO NEON
+========================================
+*/
 
-    const button =
-        document.getElementById("paymentButton");
-
-    button.disabled = true;
-
-    button.textContent =
-        "⏳ Zapisywanie dokumentu...";
-
-
-    try {
-
-        const result =
-            await createReceipt();
-
-
-        if (!result.success) {
-
-            throw new Error(
-                result.error || "Błąd zapisu dokumentu"
-            );
-        }
-
-
-        showPage("pageReceipt");
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "❌ Nie udało się zapisać dokumentu.\n\n" +
-            error.message
-        );
-
-        button.disabled = false;
-
-        button.textContent =
-            "✅ Potwierdź płatność";
-    }
-}
-
-
-async function createReceipt() {
+async function prepareReceipt() {
 
     receiptCounter++;
 
@@ -1080,7 +979,6 @@ async function createReceipt() {
         "mp_receipt_counter",
         receiptCounter
     );
-
 
     documentNumber =
         "MP-" +
@@ -1108,31 +1006,30 @@ async function createReceipt() {
         liters * price;
 
 
-    const company =
-        documentType === "faktura"
-            ? document.getElementById("company").value.trim()
-            : "";
-
-    const nip =
-        documentType === "faktura"
-            ? document.getElementById("nip").value.trim()
-            : "";
-
-    const address =
-        documentType === "faktura"
-            ? document.getElementById("address").value.trim()
-            : "";
-
-
     const receiptData = {
 
-        number: documentNumber,
+        receipt_number: documentNumber,
 
-        type: documentType,
+        document_type: documentType,
 
         employee: employee,
 
         client: client,
+
+        company:
+            documentType === "faktura"
+                ? document.getElementById("company").value.trim()
+                : "",
+
+        nip:
+            documentType === "faktura"
+                ? document.getElementById("nip").value.trim()
+                : "",
+
+        address:
+            documentType === "faktura"
+                ? document.getElementById("address").value.trim()
+                : "",
 
         fuel: fuel,
 
@@ -1140,55 +1037,99 @@ async function createReceipt() {
 
         price: price,
 
-        total: total,
-
-        company: company,
-
-        nip: nip,
-
-        address: address,
-
-        paymentStatus: "opłacono"
+        total: total
     };
 
 
-    const response =
-        await fetch("/api/receipts", {
+    try {
 
-            method: "POST",
+        const response = await fetch(
+            "/api/receipts",
+            {
+                method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            body: JSON.stringify(receiptData)
-
-        });
-
-
-    const data =
-        await response.json();
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            data.error ||
-            data.details ||
-            "Błąd serwera"
+                body: JSON.stringify(receiptData)
+            }
         );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            console.error(
+                "API ERROR:",
+                result
+            );
+
+            alert(
+                "❌ Nie udało się zapisać dokumentu.\n\n" +
+                (result.error || "Nieznany błąd") +
+                (
+                    result.details
+                        ? "\n\n" + result.details
+                        : ""
+                )
+            );
+
+            return false;
+        }
+
+
+        console.log(
+            "Dokument zapisany w Neon:",
+            result
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "FETCH ERROR:",
+            error
+        );
+
+        alert(
+            "❌ Nie udało się połączyć z serwerem."
+        );
+
+        return false;
     }
 
 
     /*
-     * WYŚWIETLENIE DOKUMENTU
-     */
+    ========================================
+    KOPIA LOKALNA
+    ========================================
+    */
+
+    localStorage.setItem(
+        "mp_receipt_" + documentNumber,
+        JSON.stringify(receiptData)
+    );
+
+    localStorage.setItem(
+        "mp_last_receipt",
+        JSON.stringify(receiptData)
+    );
+
+
+    /*
+    ========================================
+    WYŚWIETLENIE PARAGONU
+    ========================================
+    */
 
     document.getElementById(
         "receiptNumber"
     ).textContent =
         documentNumber;
-
 
     document.getElementById(
         "receiptDocumentType"
@@ -1197,24 +1138,20 @@ async function createReceipt() {
             ? "FAKTURA VAT"
             : "PARAGON";
 
-
     document.getElementById(
         "receiptEmployee"
     ).textContent =
         employee;
-
 
     document.getElementById(
         "receiptClient"
     ).textContent =
         client;
 
-
     document.getElementById(
         "receiptFuel"
     ).textContent =
         fuel;
-
 
     document.getElementById(
         "receiptLiters"
@@ -1222,13 +1159,11 @@ async function createReceipt() {
         liters.toFixed(2).replace(".", ",")
         + " l";
 
-
     document.getElementById(
         "receiptPrice"
     ).textContent =
         price.toFixed(2).replace(".", ",")
         + " zł/l";
-
 
     document.getElementById(
         "receiptTotal"
@@ -1237,15 +1172,46 @@ async function createReceipt() {
         + " zł";
 
 
-    return data;
+    return true;
 }
 
+
+/*
+========================================
+POTWIERDZENIE PŁATNOŚCI
+========================================
+*/
+
+async function confirmPayment() {
+
+    const saved =
+        await prepareReceipt();
+
+    if (!saved) {
+        return;
+    }
+
+    showPage("pageReceipt");
+}
+
+
+/*
+========================================
+ZAKOŃCZENIE
+========================================
+*/
 
 function finishOrder() {
 
     showPage("pageFinish");
 }
 
+
+/*
+========================================
+ZMIANA STRONY
+========================================
+*/
 
 function showPage(pageId) {
 
