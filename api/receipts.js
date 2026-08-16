@@ -2,38 +2,76 @@ const { neon } = require("@neondatabase/serverless");
 
 const sql = neon(process.env.DATABASE_URL);
 
+
 module.exports = async (req, res) => {
+
     try {
 
-        // POBIERANIE PARAGONU
+        /*
+         * ==========================================
+         * GET
+         * SZUKANIE DOKUMENTU
+         * ==========================================
+         */
+
         if (req.method === "GET") {
 
             const number = req.query.number;
 
+
             if (!number) {
+
                 return res.status(400).json({
-                    error: "Brak numeru dokumentu"
+                    error: "Brak numeru dokumentu."
                 });
+
             }
 
+
             const result = await sql`
-                SELECT *
+                SELECT
+                    number,
+                    type,
+                    employee,
+                    client,
+                    fuel,
+                    liters,
+                    price,
+                    total,
+                    company,
+                    nip,
+                    address,
+                    payment_status,
+                    created_at
                 FROM receipts
                 WHERE number = ${number}
                 LIMIT 1
             `;
 
+
             if (result.length === 0) {
+
                 return res.status(404).json({
-                    error: "Nie znaleziono dokumentu"
+                    error: "Nie znaleziono dokumentu."
                 });
+
             }
 
-            return res.status(200).json(result[0]);
+
+            return res.status(200).json(
+                result[0]
+            );
+
         }
 
 
-        // ZAPIS PARAGONU
+        /*
+         * ==========================================
+         * POST
+         * ZAPIS DOKUMENTU
+         * ==========================================
+         */
+
         if (req.method === "POST") {
 
             const {
@@ -54,16 +92,19 @@ module.exports = async (req, res) => {
 
             if (
                 !number ||
+                !type ||
                 !employee ||
                 !client ||
                 !fuel ||
-                !liters ||
-                !price ||
-                !total
+                liters === undefined ||
+                price === undefined ||
+                total === undefined
             ) {
+
                 return res.status(400).json({
-                    error: "Brak wymaganych danych"
+                    error: "Brak wymaganych danych."
                 });
+
             }
 
 
@@ -100,23 +141,45 @@ module.exports = async (req, res) => {
 
 
             return res.status(200).json({
+
                 success: true,
-                number
+
+                number: number
+
             });
+
         }
 
 
+        /*
+         * ==========================================
+         * INNE METODY
+         * ==========================================
+         */
+
         return res.status(405).json({
-            error: "Metoda niedozwolona"
+
+            error: "Metoda niedozwolona."
+
         });
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "BŁĄD API:",
+            error
+        );
+
 
         return res.status(500).json({
-            error: "Błąd serwera",
+
+            error: "Błąd serwera.",
+
             details: error.message
+
         });
+
     }
+
 };
