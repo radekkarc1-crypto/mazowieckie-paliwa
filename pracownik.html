@@ -61,100 +61,6 @@ header a:hover {
     color: #f5c400;
 }
 
-/* ==============================
-   EKRAN KODU DOSTĘPU
-============================== */
-
-#loginScreen {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: #071525;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.login-box {
-    width: 100%;
-    max-width: 450px;
-    background: #0b1f35;
-    border: 1px solid #203b55;
-    border-top: 3px solid #f5c400;
-    border-radius: 16px;
-    padding: 35px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,.4);
-}
-
-.login-icon {
-    font-size: 65px;
-    margin-bottom: 20px;
-}
-
-.login-box h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-.login-box h1 span {
-    color: #f5c400;
-}
-
-.login-box p {
-    color: #aebdcb;
-    line-height: 1.5;
-    margin-bottom: 25px;
-}
-
-.login-box input {
-    width: 100%;
-    padding: 15px;
-    border-radius: 9px;
-    border: 1px solid #38516a;
-    background: #071525;
-    color: white;
-    font-size: 17px;
-    outline: none;
-    text-align: center;
-}
-
-.login-box input:focus {
-    border-color: #f5c400;
-}
-
-.login-button {
-    width: 100%;
-    margin-top: 15px;
-    padding: 16px;
-    border: none;
-    border-radius: 9px;
-    background: #f5c400;
-    color: #071525;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.login-button:hover {
-    background: #ffd92e;
-}
-
-.login-error {
-    display: none;
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 8px;
-    background: #421b1b;
-    color: #ff8c8c;
-    font-weight: bold;
-}
-
-#workerPanel {
-    display: none;
-}
-
 .container {
     width: 92%;
     max-width: 1050px;
@@ -425,16 +331,24 @@ input[readonly] {
     line-height: 1.6;
 }
 
-footer {
-    background: #06111e;
-    border-top: 1px solid #203b55;
+#loginScreen {
+    max-width: 500px;
+    margin: 100px auto;
     text-align: center;
-    padding: 30px;
-    color: #8495a6;
 }
 
-footer strong {
-    color: #f5c400;
+#loginScreen input {
+    margin-top: 20px;
+}
+
+.login-error {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #421b1b;
+    color: #ff8c8c;
+    font-weight: bold;
 }
 
 @media (max-width: 700px) {
@@ -468,70 +382,11 @@ footer strong {
     .payment-command {
         font-size: 15px;
     }
-
-    .login-box {
-        padding: 25px 20px;
-    }
 }
 </style>
 </head>
 
 <body>
-
-<!-- ==============================
-     KOD DOSTĘPU
-============================== -->
-
-<div id="loginScreen">
-
-    <div class="login-box">
-
-        <div class="login-icon">
-            🔐
-        </div>
-
-        <h1>
-            Strefa <span>pracownika</span>
-        </h1>
-
-        <p>
-            Ten panel jest dostępny tylko dla
-            upoważnionych pracowników stacji.
-        </p>
-
-        <input
-            id="accessCode"
-            type="password"
-            placeholder="Wpisz kod dostępu"
-            autocomplete="off"
-            onkeydown="if(event.key === 'Enter') checkAccess()"
-        >
-
-        <button
-            type="button"
-            class="login-button"
-            onclick="checkAccess()"
-        >
-            🔓 WEJDŹ DO PANELU
-        </button>
-
-        <div
-            id="loginError"
-            class="login-error"
-        >
-            ❌ Nieprawidłowy kod dostępu.
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ==============================
-     WŁAŚCIWY PANEL
-============================== -->
-
-<div id="workerPanel">
 
 <header>
 
@@ -560,7 +415,57 @@ footer strong {
 <main class="container">
 
 
-<section id="pageForm" class="page active">
+<!-- ============================= -->
+<!-- LOGOWANIE -->
+<!-- ============================= -->
+
+<section id="loginScreen" class="panel">
+
+    <div style="font-size:70px;">
+        🔐
+    </div>
+
+    <h1>
+        Strefa <span>pracownika</span>
+    </h1>
+
+    <p class="description">
+        Podaj kod dostępu, aby wejść do panelu.
+    </p>
+
+    <input
+        id="accessCode"
+        type="password"
+        placeholder="Kod dostępu"
+        autocomplete="off"
+    >
+
+    <button
+        type="button"
+        class="main-button"
+        onclick="login()"
+    >
+        🔓 WEJDŹ DO PANELU
+    </button>
+
+    <div
+        id="loginError"
+        class="login-error"
+    >
+        ❌ Nieprawidłowy kod dostępu.
+    </div>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- PANEL PRACOWNIKA -->
+<!-- ============================= -->
+
+<section
+    id="employeePanel"
+    class="page"
+>
 
     <div class="badge">
         🟢 STACJA OTWARTA
@@ -574,7 +479,11 @@ footer strong {
         Wystaw paragon lub fakturę dla klienta.
     </p>
 
+
     <div class="panel">
+
+
+        <!-- TYP DOKUMENTU -->
 
         <div class="document-buttons">
 
@@ -598,9 +507,13 @@ footer strong {
         </div>
 
 
+        <!-- DANE -->
+
         <div class="section">
 
-            <h2>👷 Dane</h2>
+            <h2>
+                👷 Dane
+            </h2>
 
             <div class="grid">
 
@@ -617,6 +530,7 @@ footer strong {
                     >
 
                 </div>
+
 
                 <div class="field">
 
@@ -637,12 +551,16 @@ footer strong {
         </div>
 
 
+        <!-- FAKTURA -->
+
         <div
             class="section hidden"
             id="fakturaSection"
         >
 
-            <h2>🏢 Dane firmy</h2>
+            <h2>
+                🏢 Dane firmy
+            </h2>
 
             <div class="grid">
 
@@ -660,6 +578,7 @@ footer strong {
 
                 </div>
 
+
                 <div class="field">
 
                     <label>
@@ -673,6 +592,7 @@ footer strong {
                     >
 
                 </div>
+
 
                 <div class="field">
 
@@ -693,16 +613,21 @@ footer strong {
         </div>
 
 
+        <!-- TANKOWANIE -->
+
         <div class="section">
 
-            <h2>⛽ Tankowanie</h2>
+            <h2>
+                ⛽ Tankowanie / ładowanie
+            </h2>
 
             <div class="grid">
+
 
                 <div class="field">
 
                     <label>
-                        Typ paliwa
+                        Rodzaj
                     </label>
 
                     <select
@@ -711,7 +636,7 @@ footer strong {
                     >
 
                         <option value="">
-                            Wybierz paliwo
+                            Wybierz rodzaj
                         </option>
 
                         <option value="Benzyna 95">
@@ -730,13 +655,18 @@ footer strong {
                             🟡 LPG
                         </option>
 
+                        <option value="Prąd">
+                            ⚡ Prąd
+                        </option>
+
                     </select>
 
                 </div>
 
+
                 <div class="field">
 
-                    <label>
+                    <label id="amountLabel">
                         Litry
                     </label>
 
@@ -751,10 +681,11 @@ footer strong {
 
                 </div>
 
+
                 <div class="field">
 
                     <label>
-                        Cena za litr
+                        Cena
                     </label>
 
                     <input
@@ -764,6 +695,7 @@ footer strong {
                     >
 
                 </div>
+
 
                 <div class="field">
 
@@ -782,26 +714,59 @@ footer strong {
             </div>
 
 
+            <!-- PODSUMOWANIE -->
+
             <div class="summary">
 
                 <div class="summary-row">
-                    <span>Paliwo</span>
-                    <span id="summaryFuel">-</span>
+
+                    <span>
+                        Rodzaj
+                    </span>
+
+                    <span id="summaryFuel">
+                        -
+                    </span>
+
                 </div>
 
-                <div class="summary-row">
-                    <span>Ilość</span>
-                    <span id="summaryLiters">0,00 l</span>
-                </div>
 
                 <div class="summary-row">
-                    <span>Cena</span>
-                    <span id="summaryPrice">0,00 zł/l</span>
+
+                    <span id="summaryAmountLabel">
+                        Ilość
+                    </span>
+
+                    <span id="summaryLiters">
+                        0,00 l
+                    </span>
+
                 </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Cena
+                    </span>
+
+                    <span id="summaryPrice">
+                        0,00 zł/l
+                    </span>
+
+                </div>
+
 
                 <div class="summary-row total">
-                    <span>DO ZAPŁATY</span>
-                    <span id="summaryTotal">0,00 zł</span>
+
+                    <span>
+                        DO ZAPŁATY
+                    </span>
+
+                    <span id="summaryTotal">
+                        0,00 zł
+                    </span>
+
                 </div>
 
             </div>
@@ -822,7 +787,14 @@ footer strong {
 </section>
 
 
-<section id="pagePayment" class="page">
+<!-- ============================= -->
+<!-- PŁATNOŚĆ -->
+<!-- ============================= -->
+
+<section
+    id="pagePayment"
+    class="page"
+>
 
     <div class="panel payment-box">
 
@@ -860,7 +832,14 @@ footer strong {
 </section>
 
 
-<section id="pageReceipt" class="page">
+<!-- ============================= -->
+<!-- PARAGON -->
+<!-- ============================= -->
+
+<section
+    id="pageReceipt"
+    class="page"
+>
 
     <div class="panel">
 
@@ -888,48 +867,110 @@ footer strong {
 
             </div>
 
-            <div class="receipt-row">
-                <strong>Numer dokumentu</strong>
-                <span id="receiptNumber">-</span>
-            </div>
 
             <div class="receipt-row">
-                <strong>Pracownik</strong>
-                <span id="receiptEmployee">-</span>
+
+                <strong>
+                    Numer dokumentu
+                </strong>
+
+                <span id="receiptNumber">
+                    -
+                </span>
+
             </div>
 
-            <div class="receipt-row">
-                <strong>Klient</strong>
-                <span id="receiptClient">-</span>
-            </div>
 
             <div class="receipt-row">
-                <strong>Paliwo</strong>
-                <span id="receiptFuel">-</span>
+
+                <strong>
+                    Pracownik
+                </strong>
+
+                <span id="receiptEmployee">
+                    -
+                </span>
+
             </div>
 
-            <div class="receipt-row">
-                <strong>Ilość</strong>
-                <span id="receiptLiters">-</span>
-            </div>
 
             <div class="receipt-row">
-                <strong>Cena</strong>
-                <span id="receiptPrice">-</span>
+
+                <strong>
+                    Klient
+                </strong>
+
+                <span id="receiptClient">
+                    -
+                </span>
+
             </div>
+
+
+            <div class="receipt-row">
+
+                <strong>
+                    Rodzaj
+                </strong>
+
+                <span id="receiptFuel">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <strong id="receiptAmountLabel">
+                    Ilość
+                </strong>
+
+                <span id="receiptLiters">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <strong>
+                    Cena
+                </strong>
+
+                <span id="receiptPrice">
+                    -
+                </span>
+
+            </div>
+
 
             <div class="receipt-total">
-                <span>RAZEM</span>
-                <span id="receiptTotal">0,00 zł</span>
+
+                <span>
+                    RAZEM
+                </span>
+
+                <span id="receiptTotal">
+                    0,00 zł
+                </span>
+
             </div>
 
+
             <div class="receipt-footer">
+
                 Płatność potwierdzona ✅
+
                 <br><br>
+
                 Dziękujemy za zakupy!
+
             </div>
 
         </div>
+
 
         <button
             type="button"
@@ -944,7 +985,14 @@ footer strong {
 </section>
 
 
-<section id="pageFinish" class="page">
+<!-- ============================= -->
+<!-- KONIEC -->
+<!-- ============================= -->
+
+<section
+    id="pageFinish"
+    class="page"
+>
 
     <div class="panel success-box">
 
@@ -957,13 +1005,20 @@ footer strong {
         </h1>
 
         <p>
+
             Zamówienie zostało zrealizowane.
+
             <br>
+
             Dziękujemy za skorzystanie
             z Mazowieckie Paliwa S.A.
+
             <br><br>
+
             Miłego dnia i szerokiej drogi! 🚗
+
         </p>
+
 
         <a
             href="/"
@@ -996,8 +1051,6 @@ footer strong {
 
 </footer>
 
-</div>
-
 
 <script>
 
@@ -1008,32 +1061,27 @@ footer strong {
 const ACCESS_CODE = "Mazowieckie_Paliwa";
 
 
-function checkAccess() {
+function login() {
 
     const input =
         document
             .getElementById("accessCode")
             .value;
 
-
     const error =
-        document.getElementById("loginError");
+        document
+            .getElementById("loginError");
 
 
     if (input === ACCESS_CODE) {
-
-        sessionStorage.setItem(
-            "mp_worker_access",
-            "true"
-        );
 
         document
             .getElementById("loginScreen")
             .style.display = "none";
 
         document
-            .getElementById("workerPanel")
-            .style.display = "block";
+            .getElementById("employeePanel")
+            .classList.add("active");
 
         error.style.display = "none";
 
@@ -1041,44 +1089,36 @@ function checkAccess() {
     }
 
 
-    error.textContent =
-        "❌ Nieprawidłowy kod dostępu.";
-
     error.style.display = "block";
-
 }
+
+
+document
+    .getElementById("accessCode")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+            login();
+        }
+
+    });
 
 
 /* ========================================
-   SPRAWDZENIE SESJI
+   CENY
 ======================================== */
-
-function checkExistingAccess() {
-
-    if (
-        sessionStorage.getItem(
-            "mp_worker_access"
-        ) === "true"
-    ) {
-
-        document
-            .getElementById("loginScreen")
-            .style.display = "none";
-
-        document
-            .getElementById("workerPanel")
-            .style.display = "block";
-    }
-
-}
-
 
 const prices = {
 
     "Benzyna 95": 6.20,
+
     "Benzyna 98": 6.70,
+
     "Diesel": 6.35,
-    "LPG": 3.20
+
+    "LPG": 3.20,
+
+    "Prąd": 2.13
 
 };
 
@@ -1089,30 +1129,26 @@ let documentNumber = "";
 
 let receiptCounter =
     Number(
-        localStorage.getItem(
-            "mp_receipt_counter"
-        ) || 0
+        localStorage.getItem("mp_receipt_counter") || 0
     );
 
+
+/* ========================================
+   WYBÓR DOKUMENTU
+======================================== */
 
 function chooseDocument(type) {
 
     documentType = type;
 
     const paragon =
-        document.getElementById(
-            "paragonButton"
-        );
+        document.getElementById("paragonButton");
 
     const faktura =
-        document.getElementById(
-            "fakturaButton"
-        );
+        document.getElementById("fakturaButton");
 
     const section =
-        document.getElementById(
-            "fakturaSection"
-        );
+        document.getElementById("fakturaSection");
 
 
     if (type === "faktura") {
@@ -1136,103 +1172,135 @@ function chooseDocument(type) {
 }
 
 
+/* ========================================
+   OBLICZANIE
+======================================== */
+
 function calculate() {
 
     const fuel =
-        document.getElementById(
-            "fuel"
-        ).value;
-
+        document.getElementById("fuel").value;
 
     const liters =
         Number(
-            document.getElementById(
-                "liters"
-            ).value
+            document.getElementById("liters").value
         ) || 0;
-
 
     const price =
         prices[fuel] || 0;
-
 
     const total =
         liters * price;
 
 
-    document.getElementById(
-        "price"
-    ).value =
-        price.toFixed(2)
-        .replace(".", ",")
-        + " zł/l";
+    const isElectric =
+        fuel === "Prąd";
 
 
-    document.getElementById(
-        "total"
-    ).value =
-        total.toFixed(2)
-        .replace(".", ",")
-        + " zł";
+    const unit =
+        isElectric
+            ? "kWh"
+            : "l";
 
 
-    document.getElementById(
-        "summaryFuel"
-    ).textContent =
-        fuel || "-";
+    const priceUnit =
+        isElectric
+            ? "zł/kWh"
+            : "zł/l";
 
 
-    document.getElementById(
-        "summaryLiters"
-    ).textContent =
-        liters.toFixed(2)
-        .replace(".", ",")
-        + " l";
+    document.getElementById("amountLabel")
+        .textContent =
+            isElectric
+                ? "Energia"
+                : "Litry";
 
 
-    document.getElementById(
-        "summaryPrice"
-    ).textContent =
-        price.toFixed(2)
-        .replace(".", ",")
-        + " zł/l";
+    document.getElementById("summaryAmountLabel")
+        .textContent =
+            isElectric
+                ? "Energia"
+                : "Ilość";
 
 
-    document.getElementById(
-        "summaryTotal"
-    ).textContent =
-        total.toFixed(2)
-        .replace(".", ",")
-        + " zł";
+    document.getElementById("price")
+        .value =
+            price
+                .toFixed(2)
+                .replace(".", ",")
+            + " "
+            + priceUnit;
+
+
+    document.getElementById("total")
+        .value =
+            total
+                .toFixed(2)
+                .replace(".", ",")
+            + " zł";
+
+
+    document.getElementById("summaryFuel")
+        .textContent =
+            fuel || "-";
+
+
+    document.getElementById("summaryLiters")
+        .textContent =
+            liters
+                .toFixed(2)
+                .replace(".", ",")
+            + " "
+            + unit;
+
+
+    document.getElementById("summaryPrice")
+        .textContent =
+            price
+                .toFixed(2)
+                .replace(".", ",")
+            + " "
+            + priceUnit;
+
+
+    document.getElementById("summaryTotal")
+        .textContent =
+            total
+                .toFixed(2)
+                .replace(".", ",")
+            + " zł";
 
 }
 
 
+/* ========================================
+   PRZEJŚCIE DO PŁATNOŚCI
+======================================== */
+
 function goToPayment() {
 
     const employee =
-        document.getElementById(
-            "employee"
-        ).value.trim();
-
+        document
+            .getElementById("employee")
+            .value
+            .trim();
 
     const client =
-        document.getElementById(
-            "client"
-        ).value.trim();
-
+        document
+            .getElementById("client")
+            .value
+            .trim();
 
     const fuel =
-        document.getElementById(
-            "fuel"
-        ).value;
-
+        document
+            .getElementById("fuel")
+            .value;
 
     const liters =
         Number(
-            document.getElementById(
-                "liters"
-            ).value
+            document
+                .getElementById("liters")
+                .value
         ) || 0;
 
 
@@ -1259,7 +1327,7 @@ function goToPayment() {
     if (!fuel || liters <= 0) {
 
         alert(
-            "Wybierz paliwo i podaj liczbę litrów."
+            "Wybierz rodzaj i podaj ilość."
         );
 
         return;
@@ -1269,28 +1337,25 @@ function goToPayment() {
     if (documentType === "faktura") {
 
         const company =
-            document.getElementById(
-                "company"
-            ).value.trim();
-
+            document
+                .getElementById("company")
+                .value
+                .trim();
 
         const nip =
-            document.getElementById(
-                "nip"
-            ).value.trim();
-
+            document
+                .getElementById("nip")
+                .value
+                .trim();
 
         const address =
-            document.getElementById(
-                "address"
-            ).value.trim();
+            document
+                .getElementById("address")
+                .value
+                .trim();
 
 
-        if (
-            !company ||
-            !nip ||
-            !address
-        ) {
+        if (!company || !nip || !address) {
 
             alert(
                 "Przy fakturze podaj nazwę firmy, NIP i adres."
@@ -1308,7 +1373,7 @@ function goToPayment() {
 
 
 /* ========================================
-   ZAPIS DOKUMENTU DO NEON
+   ZAPIS DO NEON
 ======================================== */
 
 async function prepareReceipt() {
@@ -1329,28 +1394,30 @@ async function prepareReceipt() {
 
 
     const employee =
-        document.getElementById(
-            "employee"
-        ).value.trim();
+        document
+            .getElementById("employee")
+            .value
+            .trim();
 
 
     const client =
-        document.getElementById(
-            "client"
-        ).value.trim();
+        document
+            .getElementById("client")
+            .value
+            .trim();
 
 
     const fuel =
-        document.getElementById(
-            "fuel"
-        ).value;
+        document
+            .getElementById("fuel")
+            .value;
 
 
     const liters =
         Number(
-            document.getElementById(
-                "liters"
-            ).value
+            document
+                .getElementById("liters")
+                .value
         ) || 0;
 
 
@@ -1379,9 +1446,7 @@ async function prepareReceipt() {
         company:
             documentType === "faktura"
                 ? document
-                    .getElementById(
-                        "company"
-                    )
+                    .getElementById("company")
                     .value
                     .trim()
                 : "",
@@ -1389,9 +1454,7 @@ async function prepareReceipt() {
         nip:
             documentType === "faktura"
                 ? document
-                    .getElementById(
-                        "nip"
-                    )
+                    .getElementById("nip")
                     .value
                     .trim()
                 : "",
@@ -1399,9 +1462,7 @@ async function prepareReceipt() {
         address:
             documentType === "faktura"
                 ? document
-                    .getElementById(
-                        "address"
-                    )
+                    .getElementById("address")
                     .value
                     .trim()
                 : "",
@@ -1495,80 +1556,105 @@ async function prepareReceipt() {
     }
 
 
+    /* KOPIA LOKALNA */
+
     localStorage.setItem(
-        "mp_receipt_" +
-        documentNumber,
-        JSON.stringify(
-            receiptData
-        )
+        "mp_receipt_" + documentNumber,
+        JSON.stringify(receiptData)
     );
 
 
     localStorage.setItem(
         "mp_last_receipt",
-        JSON.stringify(
-            receiptData
-        )
+        JSON.stringify(receiptData)
     );
 
 
-    document.getElementById(
-        "receiptNumber"
-    ).textContent =
-        documentNumber;
+    /* WYŚWIETLENIE */
+
+    const isElectric =
+        fuel === "Prąd";
 
 
-    document.getElementById(
-        "receiptDocumentType"
-    ).textContent =
-        documentType === "faktura"
-            ? "FAKTURA VAT"
-            : "PARAGON";
+    const unit =
+        isElectric
+            ? "kWh"
+            : "l";
 
 
-    document.getElementById(
-        "receiptEmployee"
-    ).textContent =
-        employee;
+    const priceUnit =
+        isElectric
+            ? "zł/kWh"
+            : "zł/l";
 
 
-    document.getElementById(
-        "receiptClient"
-    ).textContent =
-        client;
+    document
+        .getElementById("receiptNumber")
+        .textContent =
+            documentNumber;
 
 
-    document.getElementById(
-        "receiptFuel"
-    ).textContent =
-        fuel;
+    document
+        .getElementById("receiptDocumentType")
+        .textContent =
+            documentType === "faktura"
+                ? "FAKTURA VAT"
+                : "PARAGON";
 
 
-    document.getElementById(
-        "receiptLiters"
-    ).textContent =
-        liters
-            .toFixed(2)
-            .replace(".", ",")
-        + " l";
+    document
+        .getElementById("receiptEmployee")
+        .textContent =
+            employee;
 
 
-    document.getElementById(
-        "receiptPrice"
-    ).textContent =
-        price
-            .toFixed(2)
-            .replace(".", ",")
-        + " zł/l";
+    document
+        .getElementById("receiptClient")
+        .textContent =
+            client;
 
 
-    document.getElementById(
-        "receiptTotal"
-    ).textContent =
-        total
-            .toFixed(2)
-            .replace(".", ",")
-        + " zł";
+    document
+        .getElementById("receiptFuel")
+        .textContent =
+            fuel;
+
+
+    document
+        .getElementById("receiptAmountLabel")
+        .textContent =
+            isElectric
+                ? "Energia"
+                : "Ilość";
+
+
+    document
+        .getElementById("receiptLiters")
+        .textContent =
+            liters
+                .toFixed(2)
+                .replace(".", ",")
+            + " "
+            + unit;
+
+
+    document
+        .getElementById("receiptPrice")
+        .textContent =
+            price
+                .toFixed(2)
+                .replace(".", ",")
+            + " "
+            + priceUnit;
+
+
+    document
+        .getElementById("receiptTotal")
+        .textContent =
+            total
+                .toFixed(2)
+                .replace(".", ",")
+            + " zł";
 
 
     return true;
@@ -1602,9 +1688,7 @@ async function confirmPayment() {
 
 function finishOrder() {
 
-    showPage(
-        "pageFinish"
-    );
+    showPage("pageFinish");
 
 }
 
@@ -1620,9 +1704,8 @@ function showPage(pageId) {
         .forEach(
             function(page) {
 
-                page.classList.remove(
-                    "active"
-                );
+                page.classList
+                    .remove("active");
 
             }
         );
@@ -1630,22 +1713,19 @@ function showPage(pageId) {
 
     document
         .getElementById(pageId)
-        .classList.add("active");
+        .classList
+        .add("active");
 
 
     window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
 
 }
-
-
-/* ========================================
-   START
-======================================== */
-
-checkExistingAccess();
 
 </script>
 
