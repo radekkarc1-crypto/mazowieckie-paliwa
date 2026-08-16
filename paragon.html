@@ -428,73 +428,172 @@ function checkReceipt() {
         error.style.display = "block";
 
         return;
-
     }
 
 
     /*
-     * DANE TESTOWE
-     *
-     * Dzięki temu możemy od razu sprawdzić,
-     * czy strona działa.
+     * ODCZYT PRAWDZIWEGO DOKUMENTU
      */
 
-    if (input === "MP-000001") {
-
-        document.getElementById(
-            "numberResult"
-        ).textContent = "MP-000001";
-
-
-        document.getElementById(
-            "documentType"
-        ).textContent = "PARAGON";
+    const saved =
+        localStorage.getItem(
+            "mp_receipt_" + input
+        );
 
 
-        document.getElementById(
-            "employeeResult"
-        ).textContent = "PRAC-001";
+    if (!saved) {
 
+        error.textContent =
+            "❌ Nie znaleziono dokumentu o numerze " +
+            input +
+            ".";
 
-        document.getElementById(
-            "customerResult"
-        ).textContent = "KLIENT-001";
-
-
-        document.getElementById(
-            "fuelResult"
-        ).textContent = "Benzyna 95";
-
-
-        document.getElementById(
-            "litersResult"
-        ).textContent = "40,00 l";
-
-
-        document.getElementById(
-            "priceResult"
-        ).textContent = "6,20 zł/l";
-
-
-        document.getElementById(
-            "amountResult"
-        ).textContent = "248,00 zł";
-
-
-        receipt.style.display = "block";
+        error.style.display = "block";
 
         return;
     }
 
 
-    error.textContent =
-        "❌ Nie znaleziono dokumentu o numerze " +
-        input +
-        ".";
+    let data;
 
-    error.style.display = "block";
+    try {
+
+        data = JSON.parse(saved);
+
+    } catch (e) {
+
+        error.textContent =
+            "❌ Dokument jest uszkodzony.";
+
+        error.style.display = "block";
+
+        return;
+    }
+
+
+    /*
+     * NUMER
+     */
+
+    document.getElementById(
+        "numberResult"
+    ).textContent =
+        data.number || input;
+
+
+    /*
+     * TYP DOKUMENTU
+     */
+
+    document.getElementById(
+        "documentType"
+    ).textContent =
+        data.type === "faktura"
+            ? "FAKTURA VAT"
+            : "PARAGON";
+
+
+    /*
+     * PRACOWNIK
+     */
+
+    document.getElementById(
+        "employeeResult"
+    ).textContent =
+        data.employee || "-";
+
+
+    /*
+     * KLIENT
+     */
+
+    document.getElementById(
+        "customerResult"
+    ).textContent =
+        data.client || "-";
+
+
+    /*
+     * PALIWO
+     */
+
+    document.getElementById(
+        "fuelResult"
+    ).textContent =
+        data.fuel || "-";
+
+
+    /*
+     * LITRY
+     */
+
+    const liters =
+        Number(data.liters) || 0;
+
+    document.getElementById(
+        "litersResult"
+    ).textContent =
+        liters
+            .toFixed(2)
+            .replace(".", ",")
+        + " l";
+
+
+    /*
+     * CENA
+     */
+
+    const price =
+        Number(data.price) || 0;
+
+    document.getElementById(
+        "priceResult"
+    ).textContent =
+        price
+            .toFixed(2)
+            .replace(".", ",")
+        + " zł/l";
+
+
+    /*
+     * KWOTA
+     */
+
+    const total =
+        Number(data.total) || 0;
+
+    document.getElementById(
+        "amountResult"
+    ).textContent =
+        total
+            .toFixed(2)
+            .replace(".", ",")
+        + " zł";
+
+
+    /*
+     * POKAŻ DOKUMENT
+     */
+
+    receipt.style.display = "block";
 
 }
+
+
+document
+    .getElementById("receiptNumber")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                checkReceipt();
+
+            }
+
+        }
+    );
 
 </script>
 
