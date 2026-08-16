@@ -1,294 +1,516 @@
-```html
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mazowieckie Paliwa S.A.</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #071525;
-            color: white;
-            min-height: 100vh;
-        }
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-        header {
-            background: #0b1f35;
-            border-bottom: 3px solid #f5c400;
-            padding: 20px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+<title>Mazowieckie Paliwa S.A.</title>
 
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-        }
+<style>
 
-        .logo span {
-            color: #f5c400;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: bold;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #071525;
+    color: white;
+    min-height: 100vh;
+}
 
-        nav a:hover {
-            color: #f5c400;
-        }
+header {
+    background: #0b1f35;
+    border-bottom: 3px solid #f5c400;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .hero {
-            width: 90%;
-            max-width: 1100px;
-            margin: 80px auto;
-        }
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
 
-        .badge {
-            display: inline-block;
-            background: #123c2a;
-            color: #58d68d;
-            padding: 10px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
+.logo span {
+    color: #f5c400;
+}
 
-        h1 {
-            font-size: 58px;
-            line-height: 1.05;
-            margin-bottom: 20px;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: bold;
+}
 
-        h1 span {
-            color: #f5c400;
-        }
+nav a:hover {
+    color: #f5c400;
+}
 
-        .description {
-            max-width: 650px;
-            color: #aebdcb;
-            font-size: 19px;
-            line-height: 1.6;
-            margin-bottom: 35px;
-        }
+.hero {
+    width: 90%;
+    max-width: 1100px;
+    margin: 80px auto;
+}
 
-        .buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+.badge {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
 
-        .button,
-        .worker-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 22px;
-            border-radius: 9px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.2s;
-            cursor: pointer;
-        }
+.badge.open {
+    background: #123c2a;
+    color: #58d68d;
+}
 
-        .primary {
-            background: #f5c400;
-            color: #071525;
-            border: 1px solid #f5c400;
-        }
+.badge.closed {
+    background: #421b1b;
+    color: #ff7777;
+}
 
-        .primary:hover {
-            background: #ffd92e;
-        }
+.badge.loading {
+    background: #303030;
+    color: #f5c400;
+}
 
-        .secondary,
-        .worker-button {
-            background: #0b1f35;
-            color: white;
-            border: 1px solid #38516a;
-        }
+h1 {
+    font-size: 58px;
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
 
-        .secondary:hover,
-        .worker-button:hover {
-            border-color: #f5c400;
-            color: #f5c400;
-        }
+h1 span {
+    color: #f5c400;
+}
 
-        .cards {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto 80px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
+.description {
+    max-width: 650px;
+    color: #aebdcb;
+    font-size: 19px;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
 
-        .card {
-            background: #0b1f35;
-            border: 1px solid #203b55;
-            border-radius: 15px;
-            padding: 30px;
-        }
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 
-        .icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
+.button,
+.worker-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 22px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+    cursor: pointer;
+}
 
-        .card h2 {
-            margin-bottom: 10px;
-        }
+.primary {
+    background: #f5c400;
+    color: #071525;
+    border: 1px solid #f5c400;
+}
 
-        .card p {
-            color: #9fb0c0;
-            line-height: 1.5;
-        }
+.primary:hover {
+    background: #ffd92e;
+}
 
-        footer {
-            background: #06111e;
-            border-top: 1px solid #203b55;
-            text-align: center;
-            padding: 30px;
-            color: #8495a6;
-        }
+.secondary,
+.worker-button {
+    background: #0b1f35;
+    color: white;
+    border: 1px solid #38516a;
+}
 
-        footer strong {
-            color: #f5c400;
-        }
+.secondary:hover,
+.worker-button:hover {
+    border-color: #f5c400;
+    color: #f5c400;
+}
 
-        @media (max-width: 750px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
+.cards {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
 
-            nav a {
-                margin: 0 8px;
-                font-size: 14px;
-            }
+.card {
+    background: #0b1f35;
+    border: 1px solid #203b55;
+    border-radius: 15px;
+    padding: 30px;
+}
 
-            h1 {
-                font-size: 42px;
-            }
+.icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
 
-            .cards {
-                grid-template-columns: 1fr;
-            }
+.card h2 {
+    margin-bottom: 10px;
+}
 
-            .buttons {
-                flex-direction: column;
-            }
+.card p {
+    color: #9fb0c0;
+    line-height: 1.5;
+}
 
-            .button,
-            .worker-button {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
+.closed-info {
+    display: none;
+    background: #421b1b;
+    border: 1px solid #ff6b6b;
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 25px;
+    max-width: 650px;
+    color: #ffd0d0;
+}
+
+footer {
+    background: #06111e;
+    border-top: 1px solid #203b55;
+    text-align: center;
+    padding: 30px;
+    color: #8495a6;
+}
+
+footer strong {
+    color: #f5c400;
+}
+
+@media (max-width: 750px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 8px;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .button,
+    .worker-button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+</style>
+
 </head>
 
 <body>
 
 <header>
+
     <div class="logo">
         MAZOWIECKIE <span>PALIWA</span> S.A.
     </div>
 
     <nav>
-        <a href="/">Start</a>
-        <a href="/ceny.html">Ceny paliw</a>
-        <a href="/paragon.html">Paragon</a>
-        <a href="/pracownik.html">Pracownik</a>
+
+        <a href="/">
+            Start
+        </a>
+
+        <a href="/ceny.html">
+            Ceny paliw
+        </a>
+
+        <a href="/paragon.html">
+            Paragon
+        </a>
+
+        <a href="/pracownik.html">
+            Pracownik
+        </a>
+
     </nav>
+
 </header>
+
 
 <section class="hero">
 
-    <div class="badge">
-        🟢 STACJA OTWARTA
+    <div
+        id="stationBadge"
+        class="badge loading"
+    >
+        ⏳ SPRAWDZANIE STATUSU...
     </div>
 
+
     <h1>
+
         Mazowieckie<br>
+
         <span>Paliwa S.A.</span>
+
     </h1>
 
+
     <p class="description">
+
         Oficjalny system stacji benzynowej działającej
         na naszym prywatnym serwerze Roblox.
         Obsługa transakcji, paragony i płatności
         połączone z Discordem.
+
     </p>
+
 
     <div class="buttons">
 
-        <a class="button primary" href="/ceny.html">
+        <a
+            class="button primary"
+            href="/ceny.html"
+        >
             ⛽ Ceny paliw
         </a>
 
-        <a class="button secondary" href="/paragon.html">
+
+        <a
+            class="button secondary"
+            href="/paragon.html"
+        >
             🧾 Sprawdź paragon
         </a>
 
-        <a class="worker-button" href="/pracownik.html">
+
+        <a
+            class="worker-button"
+            href="/pracownik.html"
+        >
             👷 Strefa pracownika
         </a>
 
     </div>
 
+
+    <div
+        id="closedInfo"
+        class="closed-info"
+    >
+
+        🔴 <strong>Stacja jest obecnie zamknięta.</strong>
+
+        <br><br>
+
+        Pracownicy nie mogą obecnie realizować
+        nowych transakcji.
+
+    </div>
+
 </section>
+
 
 <section class="cards">
 
     <div class="card">
-        <div class="icon">⛽</div>
-        <h2>Paliwa</h2>
+
+        <div class="icon">
+            ⛽
+        </div>
+
+        <h2>
+            Paliwa
+        </h2>
+
         <p>
+
             Sprawdź aktualne ceny paliw
             dostępne na stacji.
+
         </p>
+
     </div>
 
+
     <div class="card">
-        <div class="icon">🧾</div>
-        <h2>Paragony</h2>
+
+        <div class="icon">
+            🧾
+        </div>
+
+        <h2>
+            Paragony
+        </h2>
+
         <p>
+
             Sprawdzaj wystawione paragony
             za pomocą ich numeru.
+
         </p>
+
     </div>
 
+
     <div class="card">
-        <div class="icon">👷</div>
-        <h2>Pracownicy</h2>
+
+        <div class="icon">
+            👷
+        </div>
+
+        <h2>
+            Pracownicy
+        </h2>
+
         <p>
+
             Kasjerzy mogą wystawiać paragony
             i faktury dla klientów.
+
         </p>
+
     </div>
 
 </section>
 
+
 <footer>
-    <strong>MAZOWIECKIE PALIWA S.A.</strong>
+
+    <strong>
+        MAZOWIECKIE PALIWA S.A.
+    </strong>
+
     <br><br>
+
     „Napędzamy Twoją drogę.”
+
     <br><br>
+
     © 2026 Mazowieckie Paliwa S.A.
+
 </footer>
 
+
+<script>
+
+async function loadStationStatus() {
+
+    const badge =
+        document.getElementById("stationBadge");
+
+    const closedInfo =
+        document.getElementById("closedInfo");
+
+
+    try {
+
+        const response =
+            await fetch("/api/station");
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error || "Błąd serwera"
+            );
+
+        }
+
+
+        if (data.is_open === true) {
+
+            badge.className =
+                "badge open";
+
+            badge.textContent =
+                "🟢 STACJA OTWARTA";
+
+            closedInfo.style.display =
+                "none";
+
+        } else {
+
+            badge.className =
+                "badge closed";
+
+            badge.textContent =
+                "🔴 STACJA ZAMKNIĘTA";
+
+            closedInfo.style.display =
+                "block";
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "STATION STATUS ERROR:",
+            error
+        );
+
+
+        badge.className =
+            "badge closed";
+
+        badge.textContent =
+            "⚠️ NIE MOŻNA POBRAĆ STATUSU";
+
+    }
+
+}
+
+
+/*
+    Pobierz status przy wejściu
+*/
+
+loadStationStatus();
+
+
+/*
+    Odświeżaj status co 10 sekund
+*/
+
+setInterval(
+    loadStationStatus,
+    10000
+);
+
+</script>
+
 </body>
+
 </html>
-```
