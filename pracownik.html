@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -58,6 +59,100 @@ header a {
 
 header a:hover {
     color: #f5c400;
+}
+
+/* ==============================
+   EKRAN KODU DOSTĘPU
+============================== */
+
+#loginScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #071525;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 450px;
+    background: #0b1f35;
+    border: 1px solid #203b55;
+    border-top: 3px solid #f5c400;
+    border-radius: 16px;
+    padding: 35px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+}
+
+.login-icon {
+    font-size: 65px;
+    margin-bottom: 20px;
+}
+
+.login-box h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.login-box h1 span {
+    color: #f5c400;
+}
+
+.login-box p {
+    color: #aebdcb;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 9px;
+    border: 1px solid #38516a;
+    background: #071525;
+    color: white;
+    font-size: 17px;
+    outline: none;
+    text-align: center;
+}
+
+.login-box input:focus {
+    border-color: #f5c400;
+}
+
+.login-button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 16px;
+    border: none;
+    border-radius: 9px;
+    background: #f5c400;
+    color: #071525;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #ffd92e;
+}
+
+.login-error {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #421b1b;
+    color: #ff8c8c;
+    font-weight: bold;
+}
+
+#workerPanel {
+    display: none;
 }
 
 .container {
@@ -330,7 +425,20 @@ input[readonly] {
     line-height: 1.6;
 }
 
+footer {
+    background: #06111e;
+    border-top: 1px solid #203b55;
+    text-align: center;
+    padding: 30px;
+    color: #8495a6;
+}
+
+footer strong {
+    color: #f5c400;
+}
+
 @media (max-width: 700px) {
+
     header {
         flex-direction: column;
         gap: 15px;
@@ -360,11 +468,70 @@ input[readonly] {
     .payment-command {
         font-size: 15px;
     }
+
+    .login-box {
+        padding: 25px 20px;
+    }
 }
 </style>
 </head>
 
 <body>
+
+<!-- ==============================
+     KOD DOSTĘPU
+============================== -->
+
+<div id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="login-icon">
+            🔐
+        </div>
+
+        <h1>
+            Strefa <span>pracownika</span>
+        </h1>
+
+        <p>
+            Ten panel jest dostępny tylko dla
+            upoważnionych pracowników stacji.
+        </p>
+
+        <input
+            id="accessCode"
+            type="password"
+            placeholder="Wpisz kod dostępu"
+            autocomplete="off"
+            onkeydown="if(event.key === 'Enter') checkAccess()"
+        >
+
+        <button
+            type="button"
+            class="login-button"
+            onclick="checkAccess()"
+        >
+            🔓 WEJDŹ DO PANELU
+        </button>
+
+        <div
+            id="loginError"
+            class="login-error"
+        >
+            ❌ Nieprawidłowy kod dostępu.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     WŁAŚCIWY PANEL
+============================== -->
+
+<div id="workerPanel">
 
 <header>
 
@@ -389,7 +556,9 @@ input[readonly] {
 
 </header>
 
+
 <main class="container">
+
 
 <section id="pageForm" class="page active">
 
@@ -428,6 +597,7 @@ input[readonly] {
 
         </div>
 
+
         <div class="section">
 
             <h2>👷 Dane</h2>
@@ -465,6 +635,7 @@ input[readonly] {
             </div>
 
         </div>
+
 
         <div
             class="section hidden"
@@ -520,6 +691,7 @@ input[readonly] {
             </div>
 
         </div>
+
 
         <div class="section">
 
@@ -609,6 +781,7 @@ input[readonly] {
 
             </div>
 
+
             <div class="summary">
 
                 <div class="summary-row">
@@ -635,6 +808,7 @@ input[readonly] {
 
         </div>
 
+
         <button
             type="button"
             class="main-button"
@@ -646,6 +820,7 @@ input[readonly] {
     </div>
 
 </section>
+
 
 <section id="pagePayment" class="page">
 
@@ -683,6 +858,7 @@ input[readonly] {
     </div>
 
 </section>
+
 
 <section id="pageReceipt" class="page">
 
@@ -767,6 +943,7 @@ input[readonly] {
 
 </section>
 
+
 <section id="pageFinish" class="page">
 
     <div class="panel success-box">
@@ -802,6 +979,7 @@ input[readonly] {
 
 </main>
 
+
 <footer>
 
     <strong>
@@ -818,14 +996,92 @@ input[readonly] {
 
 </footer>
 
+</div>
+
+
 <script>
 
+/* ========================================
+   KOD DOSTĘPU
+======================================== */
+
+const ACCESS_CODE = "Mazowieckie_Paliwa";
+
+
+function checkAccess() {
+
+    const input =
+        document
+            .getElementById("accessCode")
+            .value;
+
+
+    const error =
+        document.getElementById("loginError");
+
+
+    if (input === ACCESS_CODE) {
+
+        sessionStorage.setItem(
+            "mp_worker_access",
+            "true"
+        );
+
+        document
+            .getElementById("loginScreen")
+            .style.display = "none";
+
+        document
+            .getElementById("workerPanel")
+            .style.display = "block";
+
+        error.style.display = "none";
+
+        return;
+    }
+
+
+    error.textContent =
+        "❌ Nieprawidłowy kod dostępu.";
+
+    error.style.display = "block";
+
+}
+
+
+/* ========================================
+   SPRAWDZENIE SESJI
+======================================== */
+
+function checkExistingAccess() {
+
+    if (
+        sessionStorage.getItem(
+            "mp_worker_access"
+        ) === "true"
+    ) {
+
+        document
+            .getElementById("loginScreen")
+            .style.display = "none";
+
+        document
+            .getElementById("workerPanel")
+            .style.display = "block";
+    }
+
+}
+
+
 const prices = {
+
     "Benzyna 95": 6.20,
     "Benzyna 98": 6.70,
     "Diesel": 6.35,
     "LPG": 3.20
+
 };
+
 
 let documentType = "paragon";
 
@@ -833,7 +1089,9 @@ let documentNumber = "";
 
 let receiptCounter =
     Number(
-        localStorage.getItem("mp_receipt_counter") || 0
+        localStorage.getItem(
+            "mp_receipt_counter"
+        ) || 0
     );
 
 
@@ -842,116 +1100,197 @@ function chooseDocument(type) {
     documentType = type;
 
     const paragon =
-        document.getElementById("paragonButton");
+        document.getElementById(
+            "paragonButton"
+        );
 
     const faktura =
-        document.getElementById("fakturaButton");
+        document.getElementById(
+            "fakturaButton"
+        );
 
     const section =
-        document.getElementById("fakturaSection");
+        document.getElementById(
+            "fakturaSection"
+        );
+
 
     if (type === "faktura") {
 
         paragon.classList.remove("active");
+
         faktura.classList.add("active");
+
         section.classList.remove("hidden");
 
     } else {
 
         faktura.classList.remove("active");
+
         paragon.classList.add("active");
+
         section.classList.add("hidden");
 
     }
+
 }
 
 
 function calculate() {
 
     const fuel =
-        document.getElementById("fuel").value;
+        document.getElementById(
+            "fuel"
+        ).value;
+
 
     const liters =
         Number(
-            document.getElementById("liters").value
+            document.getElementById(
+                "liters"
+            ).value
         ) || 0;
+
 
     const price =
         prices[fuel] || 0;
 
+
     const total =
         liters * price;
 
-    document.getElementById("price").value =
-        price.toFixed(2).replace(".", ",")
+
+    document.getElementById(
+        "price"
+    ).value =
+        price.toFixed(2)
+        .replace(".", ",")
         + " zł/l";
 
-    document.getElementById("total").value =
-        total.toFixed(2).replace(".", ",")
+
+    document.getElementById(
+        "total"
+    ).value =
+        total.toFixed(2)
+        .replace(".", ",")
         + " zł";
 
-    document.getElementById("summaryFuel").textContent =
+
+    document.getElementById(
+        "summaryFuel"
+    ).textContent =
         fuel || "-";
 
-    document.getElementById("summaryLiters").textContent =
-        liters.toFixed(2).replace(".", ",")
+
+    document.getElementById(
+        "summaryLiters"
+    ).textContent =
+        liters.toFixed(2)
+        .replace(".", ",")
         + " l";
 
-    document.getElementById("summaryPrice").textContent =
-        price.toFixed(2).replace(".", ",")
+
+    document.getElementById(
+        "summaryPrice"
+    ).textContent =
+        price.toFixed(2)
+        .replace(".", ",")
         + " zł/l";
 
-    document.getElementById("summaryTotal").textContent =
-        total.toFixed(2).replace(".", ",")
+
+    document.getElementById(
+        "summaryTotal"
+    ).textContent =
+        total.toFixed(2)
+        .replace(".", ",")
         + " zł";
+
 }
 
 
 function goToPayment() {
 
     const employee =
-        document.getElementById("employee").value.trim();
+        document.getElementById(
+            "employee"
+        ).value.trim();
+
 
     const client =
-        document.getElementById("client").value.trim();
+        document.getElementById(
+            "client"
+        ).value.trim();
+
 
     const fuel =
-        document.getElementById("fuel").value;
+        document.getElementById(
+            "fuel"
+        ).value;
+
 
     const liters =
         Number(
-            document.getElementById("liters").value
+            document.getElementById(
+                "liters"
+            ).value
         ) || 0;
 
+
     if (!employee) {
-        alert("Podaj identyfikator pracownika.");
+
+        alert(
+            "Podaj identyfikator pracownika."
+        );
+
         return;
     }
+
 
     if (!client) {
-        alert("Podaj identyfikator klienta.");
+
+        alert(
+            "Podaj identyfikator klienta."
+        );
+
         return;
     }
 
+
     if (!fuel || liters <= 0) {
+
         alert(
             "Wybierz paliwo i podaj liczbę litrów."
         );
+
         return;
     }
+
 
     if (documentType === "faktura") {
 
         const company =
-            document.getElementById("company").value.trim();
+            document.getElementById(
+                "company"
+            ).value.trim();
+
 
         const nip =
-            document.getElementById("nip").value.trim();
+            document.getElementById(
+                "nip"
+            ).value.trim();
+
 
         const address =
-            document.getElementById("address").value.trim();
+            document.getElementById(
+                "address"
+            ).value.trim();
 
-        if (!company || !nip || !address) {
+
+        if (
+            !company ||
+            !nip ||
+            !address
+        ) {
 
             alert(
                 "Przy fakturze podaj nazwę firmy, NIP i adres."
@@ -959,48 +1298,65 @@ function goToPayment() {
 
             return;
         }
+
     }
 
+
     showPage("pagePayment");
+
 }
 
 
-/*
-========================================
-ZAPIS DOKUMENTU DO NEON
-========================================
-*/
+/* ========================================
+   ZAPIS DOKUMENTU DO NEON
+======================================== */
 
 async function prepareReceipt() {
 
     receiptCounter++;
+
 
     localStorage.setItem(
         "mp_receipt_counter",
         receiptCounter
     );
 
+
     documentNumber =
         "MP-" +
-        String(receiptCounter).padStart(6, "0");
+        String(receiptCounter)
+            .padStart(6, "0");
 
 
     const employee =
-        document.getElementById("employee").value.trim();
+        document.getElementById(
+            "employee"
+        ).value.trim();
+
 
     const client =
-        document.getElementById("client").value.trim();
+        document.getElementById(
+            "client"
+        ).value.trim();
+
 
     const fuel =
-        document.getElementById("fuel").value;
+        document.getElementById(
+            "fuel"
+        ).value;
+
 
     const liters =
         Number(
-            document.getElementById("liters").value
+            document.getElementById(
+                "liters"
+            ).value
         ) || 0;
+
 
     const price =
         prices[fuel] || 0;
+
 
     const total =
         liters * price;
@@ -1008,53 +1364,81 @@ async function prepareReceipt() {
 
     const receiptData = {
 
-        receipt_number: documentNumber,
+        receipt_number:
+            documentNumber,
 
-        document_type: documentType,
+        document_type:
+            documentType,
 
-        employee: employee,
+        employee:
+            employee,
 
-        client: client,
+        client:
+            client,
 
         company:
             documentType === "faktura"
-                ? document.getElementById("company").value.trim()
+                ? document
+                    .getElementById(
+                        "company"
+                    )
+                    .value
+                    .trim()
                 : "",
 
         nip:
             documentType === "faktura"
-                ? document.getElementById("nip").value.trim()
+                ? document
+                    .getElementById(
+                        "nip"
+                    )
+                    .value
+                    .trim()
                 : "",
 
         address:
             documentType === "faktura"
-                ? document.getElementById("address").value.trim()
+                ? document
+                    .getElementById(
+                        "address"
+                    )
+                    .value
+                    .trim()
                 : "",
 
-        fuel: fuel,
+        fuel:
+            fuel,
 
-        liters: liters,
+        liters:
+            liters,
 
-        price: price,
+        price:
+            price,
 
-        total: total
+        total:
+            total
     };
 
 
     try {
 
-        const response = await fetch(
-            "/api/receipts",
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                "/api/receipts",
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify(receiptData)
-            }
-        );
+                    body:
+                        JSON.stringify(
+                            receiptData
+                        )
+                }
+            );
 
 
         const result =
@@ -1068,15 +1452,21 @@ async function prepareReceipt() {
                 result
             );
 
+
             alert(
                 "❌ Nie udało się zapisać dokumentu.\n\n" +
-                (result.error || "Nieznany błąd") +
+                (
+                    result.error ||
+                    "Nieznany błąd"
+                ) +
                 (
                     result.details
-                        ? "\n\n" + result.details
+                        ? "\n\n" +
+                          result.details
                         : ""
                 )
             );
+
 
             return false;
         }
@@ -1095,41 +1485,38 @@ async function prepareReceipt() {
             error
         );
 
+
         alert(
             "❌ Nie udało się połączyć z serwerem."
         );
+
 
         return false;
     }
 
 
-    /*
-    ========================================
-    KOPIA LOKALNA
-    ========================================
-    */
-
     localStorage.setItem(
-        "mp_receipt_" + documentNumber,
-        JSON.stringify(receiptData)
+        "mp_receipt_" +
+        documentNumber,
+        JSON.stringify(
+            receiptData
+        )
     );
+
 
     localStorage.setItem(
         "mp_last_receipt",
-        JSON.stringify(receiptData)
+        JSON.stringify(
+            receiptData
+        )
     );
 
-
-    /*
-    ========================================
-    WYŚWIETLENIE PARAGONU
-    ========================================
-    */
 
     document.getElementById(
         "receiptNumber"
     ).textContent =
         documentNumber;
+
 
     document.getElementById(
         "receiptDocumentType"
@@ -1138,90 +1525,107 @@ async function prepareReceipt() {
             ? "FAKTURA VAT"
             : "PARAGON";
 
+
     document.getElementById(
         "receiptEmployee"
     ).textContent =
         employee;
+
 
     document.getElementById(
         "receiptClient"
     ).textContent =
         client;
 
+
     document.getElementById(
         "receiptFuel"
     ).textContent =
         fuel;
 
+
     document.getElementById(
         "receiptLiters"
     ).textContent =
-        liters.toFixed(2).replace(".", ",")
+        liters
+            .toFixed(2)
+            .replace(".", ",")
         + " l";
+
 
     document.getElementById(
         "receiptPrice"
     ).textContent =
-        price.toFixed(2).replace(".", ",")
+        price
+            .toFixed(2)
+            .replace(".", ",")
         + " zł/l";
+
 
     document.getElementById(
         "receiptTotal"
     ).textContent =
-        total.toFixed(2).replace(".", ",")
+        total
+            .toFixed(2)
+            .replace(".", ",")
         + " zł";
 
 
     return true;
+
 }
 
 
-/*
-========================================
-POTWIERDZENIE PŁATNOŚCI
-========================================
-*/
+/* ========================================
+   POTWIERDZENIE PŁATNOŚCI
+======================================== */
 
 async function confirmPayment() {
 
     const saved =
         await prepareReceipt();
 
+
     if (!saved) {
         return;
     }
 
+
     showPage("pageReceipt");
+
 }
 
 
-/*
-========================================
-ZAKOŃCZENIE
-========================================
-*/
+/* ========================================
+   ZAKOŃCZENIE
+======================================== */
 
 function finishOrder() {
 
-    showPage("pageFinish");
+    showPage(
+        "pageFinish"
+    );
+
 }
 
 
-/*
-========================================
-ZMIANA STRONY
-========================================
-*/
+/* ========================================
+   ZMIANA STRONY
+======================================== */
 
 function showPage(pageId) {
 
     document
         .querySelectorAll(".page")
-        .forEach(function(page) {
+        .forEach(
+            function(page) {
 
-            page.classList.remove("active");
+                page.classList.remove(
+                    "active"
+                );
 
-        });
+            }
+        );
 
 
     document
@@ -1233,9 +1637,18 @@ function showPage(pageId) {
         top: 0,
         behavior: "smooth"
     });
+
 }
+
+
+/* ========================================
+   START
+======================================== */
+
+checkExistingAccess();
 
 </script>
 
 </body>
 </html>
+```
