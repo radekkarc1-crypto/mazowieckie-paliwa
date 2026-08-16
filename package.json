@@ -3,6 +3,7 @@
     "start": "node bot.js"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
     "@supabase/supabase-js": "^2.57.0",
     "discord.js": "^14.22.1"
   }
