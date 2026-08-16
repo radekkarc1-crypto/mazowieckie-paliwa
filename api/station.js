@@ -5,52 +5,55 @@ const sql = neon(process.env.DATABASE_URL);
 export default async function handler(req, res) {
     try {
 
-        // POBIERANIE STATUSU
         if (req.method === "GET") {
 
             const result = await sql`
-                SELECT is_open, updated_at
-                FROM station_status
+                SELECT is_open
+                FROM station_settings
                 WHERE id = 1
+                LIMIT 1
             `;
 
-            if (result.length === 0) {
-                return res.status(404).json({
-                    error: "Nie znaleziono statusu stacji."
+            if (!result.length) {
+
+                await sql`
+                    INSERT INTO station_settings (id, is_open)
+                    VALUES (1, TRUE)
+                `;
+
+                return res.status(200).json({
+                    is_open: true
                 });
             }
 
             return res.status(200).json({
-                isOpen: result[0].is_open,
-                updatedAt: result[0].updated_at
+                is_open: result[0].is_open
             });
         }
 
 
-        // ZMIANA STATUSU
         if (req.method === "POST") {
 
-            const { isOpen } = req.body || {};
+            const { is_open } = req.body || {};
 
-            if (typeof isOpen !== "boolean") {
+            if (typeof is_open !== "boolean") {
+
                 return res.status(400).json({
-                    error: "Brak prawidłowego statusu."
+                    error: "is_open musi być wartością true albo false."
                 });
             }
 
-            const result = await sql`
-                UPDATE station_status
-                SET
-                    is_open = ${isOpen},
-                    updated_at = CURRENT_TIMESTAMP
+
+            await sql`
+                UPDATE station_settings
+                SET is_open = ${is_open}
                 WHERE id = 1
-                RETURNING is_open, updated_at
             `;
+
 
             return res.status(200).json({
                 success: true,
-                isOpen: result[0].is_open,
-                updatedAt: result[0].updated_at
+                is_open: is_open
             });
         }
 
@@ -58,6 +61,7 @@ export default async function handler(req, res) {
         return res.status(405).json({
             error: "Metoda niedozwolona."
         });
+
 
     } catch (error) {
 
