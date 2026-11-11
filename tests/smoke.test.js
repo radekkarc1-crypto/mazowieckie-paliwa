@@ -81,8 +81,10 @@ test('instruction schema matches the supported version and part formats', () => 
 });
 
 test('instruction validator accepts the sample and rejects unsafe or malformed packs', () => {
-  const source = html.match(/function validate\\([\\s\\S]*?\\n\\}/)?.[0];
-  assert.ok(source, 'missing instruction validator');
+  const start = html.indexOf('function validate(');
+  const end = html.indexOf('\\nasync function importFile', start);
+  assert.ok(start >= 0 && end > start, 'missing instruction validator');
+  const source = html.slice(start, end);
   const validate = new Function(source + '; return validate;')();
   const sample = JSON.parse(fs.readFileSync(path.join(root, 'public', 'przykladowa-instrukcja.json'), 'utf8'));
   assert.doesNotThrow(() => validate(sample));
