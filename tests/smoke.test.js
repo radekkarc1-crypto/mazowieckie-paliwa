@@ -139,4 +139,8 @@ test('local server serves the app, PWA assets, and public Supabase config', asyn
   assert.match(manifest.headers.get('content-type'), /manifest\+json/);
   const denied = await fetch('http://127.0.0.1:' + port + '/', { method: 'POST' });
   assert.equal(denied.status, 405);
+  const privateFile = await fetch('http://127.0.0.1:' + port + '/package.json');
+  assert.equal(privateFile.status, 404);
+  const traversal = await fetch('http://127.0.0.1:' + port + '/%2e%2e/package.json');
+  assert.equal(traversal.status, 404);
 });
