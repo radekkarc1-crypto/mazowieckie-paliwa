@@ -15,7 +15,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Set up Node
-        uses: actions/setup-node@1e60f620b9541d2f9f4e2a3e7d1c7d7e5c5f2a6b
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22
       - name: Run smoke tests
