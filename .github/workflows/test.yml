@@ -1,0 +1,22 @@
+name: Test Asystent Budowania
+on:
+  push:
+    branches: [asystent-budowania-rebuild]
+  pull_request:
+    branches: [asystent-budowania-rebuild]
+permissions:
+  contents: read
+jobs:
+  smoke-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@1e60f620b9541d2f9f4e2a3e7d1c7d7e5c5f2a6b
+        with:
+          node-version: 22
+      - name: Run smoke tests
+        run: npm test
