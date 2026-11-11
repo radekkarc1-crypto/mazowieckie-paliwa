@@ -22,8 +22,7 @@ select ok(
    where schemaname = 'public'
      and tablename = 'user_backups'
      and roles @> array['authenticated']::name[]
-     and coalesce(qual, '') like '%auth.uid%'
-     and coalesce(with_check, '') like '%auth.uid%'),
+     and (coalesce(qual, '') || ' ' || coalesce(with_check, '')) like '%auth.uid%'),
   'all four policies are restricted to the authenticated owner'
 );
 
