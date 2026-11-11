@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "title": "Mini samolot demonstracyjny",
+  "category": "Model",
+  "description": "Przykładowa instrukcja.",
+  "parts": [
+    "Korpus x1",
+    "Skrzydło x2",
+    "Statecznik x1"
+  ],
+  "steps": [
+    {
+      "title": "Przygotuj korpus",
+      "description": "Połóż korpus na płaskiej powierzchni i sprawdź, czy nie ma uszkodzeń.",
+      "parts": [
+        "Korpus x1"
+      ]
+    },
+    {
+      "title": "Zamocuj skrzydła",
+      "description": "Umieść oba skrzydła symetrycznie po bokach korpusu.",
+      "parts": [
+        "Skrzydło x2"
+      ]
+    },
+    {
+      "title": "Dodaj statecznik",
+      "description": "Zamocuj statecznik z tyłu modelu. Gotowe!",
+      "parts": [
+        "Statecznik x1"
+      ]
+    }
+  ]
+}
