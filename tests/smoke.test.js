@@ -65,3 +65,17 @@ test('Supabase backup migration enables row-level security and user ownership', 
   assert.ok(migration.includes('auth.uid() = user_id'));
   assert.ok(migration.includes('jsonb_typeof(projects) = \'array\''));
 });
+
+test('instruction import requires a preview confirmation before adding a project', () => {
+  assert.ok(html.includes('id="importPreview"'));
+  assert.ok(html.includes('id="confirmImport"'));
+  assert.ok(html.includes('id="cancelImport"'));
+  assert.ok(html.includes('pendingProject=validate'));
+});
+
+test('instruction schema matches the supported version and part formats', () => {
+  const schema = JSON.parse(fs.readFileSync(path.join(root, 'public', 'instruction.schema.json'), 'utf8'));
+  assert.equal(schema.properties.version.const, 1);
+  assert.ok(schema.properties.steps.items.anyOf.length >= 2);
+  assert.ok(schema.properties.steps.items.properties.parts.items.oneOf.length >= 2);
+});
