@@ -27,7 +27,9 @@ function resolveFile(urlPath) {
     return null;
   }
   if (pathname.includes('\\0')) return null;
-  const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\\/+/, '');
+  let relative = pathname;
+  while (relative.startsWith('/')) relative = relative.slice(1);
+  if (!relative) relative = 'index.html';
   const candidates = [path.resolve(root, relative), path.resolve(publicDir, relative)];
   return candidates.find(file => file.startsWith(root + path.sep) && fs.existsSync(file) && fs.statSync(file).isFile()) || null;
 }
