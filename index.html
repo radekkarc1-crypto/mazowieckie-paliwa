@@ -13,13 +13,20 @@ function read(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{ret
 function validate(d){
 if(!d||d.version!==1||typeof d.title!=='string'||!d.title.trim()||d.title.length>160||!Array.isArray(d.steps)||!d.steps.length)throw Error('Pakiet musi mieć version: 1, tytuł i co najmniej jeden krok.');
 if(d.steps.length>500)throw Error('Maksymalnie 500 kroków.');
-if(typeof d.description==='string'&&d.description.length>5000)throw Error('Opis projektu jest za długi.');
-if(typeof d.category==='string'&&d.category.length>80)throw Error('Kategoria jest za długa.');
-const cleanParts=(parts,label)=>{if(parts===undefined)return[];if(!Array.isArray(parts)||parts.length>500)throw Error(label+' musi być listą do 500 elementów.');if(parts.some(x=>typeof x!=='string'&&!(x&&typeof x==='object'&&typeof x.name==='string')))throw Error(label+' zawiera nieprawidłową część.');return parts};
+if(d.description!==undefined&&(typeof d.description!=='string'||d.description.length>5000))throw Error('Opis projektu musi być tekstem do 5000 znaków.');
+if(d.category!==undefined&&(typeof d.category!=='string'||d.category.length>80))throw Error('Kategoria musi być tekstem do 80 znaków.');
+const cleanParts=(parts,label)=>{if(parts===undefined)return[];if(!Array.isArray(parts)||parts.length>500)throw Error(label+' musi być listą do 500 elementów.');if(parts.some(x=>typeof x!=='string'&&!(x&&typeof x==='object'&&!Array.isArray(x)&&typeof x.name==='string'&&x.name.trim()&&x.name.length<=200)))throw Error(label+' zawiera nieprawidłową część.');return parts};
+const stepIds=new Set();
 let steps=d.steps.map((s,i)=>{
-if(!s||typeof s!=='object'||typeof s.title!=='string'||!s.title.trim()||s.title.length>200||typeof(s.description||s.instruction)!=='string'||(s.description||s.instruction).length>10000)throw Error('Krok '+(i+1)+' musi mieć tytuł i opis (maks. 10 000 znaków).');
-if(s.image!==undefined&&s.image!==null&&(!/^https:\/\//i.test(s.image)||s.image.length>2000))throw Error('Ilustracja w kroku '+(i+1)+' musi mieć adres HTTPS.');
-return{title:s.title,description:s.description||s.instruction,parts:cleanParts(s.parts,'Części kroku '+(i+1)),image:typeof s.image==='string'?s.image:null,warning:typeof s.warning==='string'?s.warning.slice(0,1000):'',duration:typeof s.duration==='string'?s.duration.slice(0,80):'',position:typeof s.position==='string'?s.position.slice(0,300):'',rotation:typeof s.rotation==='string'?s.rotation.slice(0,120):''}
+if(!s||typeof s!=='object'||Array.isArray(s)||typeof s.title!=='string'||!s.title.trim()||s.title.length>200)throw Error('Krok '+(i+1)+' musi mieć tytuł do 200 znaków.');
+if(s.description!==undefined&&typeof s.description!=='string')throw Error('Opis kroku '+(i+1)+' musi być tekstem.');
+if(s.instruction!==undefined&&typeof s.instruction!=='string')throw Error('Instrukcja kroku '+(i+1)+' musi być tekstem.');
+const description=s.description||s.instruction;
+if(typeof description!=='string'||!description.trim()||description.length>10000)throw Error('Krok '+(i+1)+' musi mieć opis do 10 000 znaków.');
+if(s.id!==undefined){if(typeof s.id!=='string'||!s.id.trim()||stepIds.has(s.id))throw Error('Identyfikator kroku '+(i+1)+' jest nieprawidłowy lub powtórzony.');stepIds.add(s.id)}
+const optionalText=(key,max)=>{if(s[key]!==undefined&&typeof s[key]!=='string')throw Error('Pole '+key+' w kroku '+(i+1)+' musi być tekstem.');return typeof s[key]==='string'?s[key].slice(0,max):''};
+let image=null;if(s.image!==undefined&&s.image!==null){if(typeof s.image!=='string'||s.image.length>2000)throw Error('Adres ilustracji w kroku '+(i+1)+' jest nieprawidłowy.');try{const url=new URL(s.image);if(url.protocol!=='https:'||!url.hostname)throw Error()}catch{throw Error('Ilustracja w kroku '+(i+1)+' musi mieć poprawny adres HTTPS.')};image=s.image}
+return{title:s.title,description,parts:cleanParts(s.parts,'Części kroku '+(i+1)),image,warning:optionalText('warning',1000),duration:optionalText('duration',80),position:optionalText('position',300),rotation:optionalText('rotation',120)}
 });
 return{id:Date.now().toString(36)+Math.random().toString(36).slice(2),title:d.title.trim(),description:d.description||'',category:d.category||'Projekt',parts:cleanParts(d.parts,'Lista części'),steps,done:[],current:0}
 }
