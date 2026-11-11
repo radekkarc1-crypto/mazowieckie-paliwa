@@ -102,3 +102,41 @@ test('instruction validator accepts the sample and rejects unsafe or malformed p
   assert.throws(() => validate({ version: 2, title: 'Bad', steps: [{ title: 'Step', description: 'Text' }] }));
   assert.throws(() => validate({ version: 1, title: 'Bad image', steps: [{ title: 'Step', description: 'Text', image: 'javascript:alert(1)' }] }));
 });
+
+test('local server serves the app, PWA assets, and public Supabase config', async t => {
+  const { spawn } = require('node:child_process');
+  const net = require('node:net');
+  const probe = net.createServer();
+  await new Promise(resolve => probe.listen(0, '127.0.0.1', resolve));
+  const port = probe.address().port;
+  await new Promise(resolve => probe.close(resolve));
+  const child = spawn(process.execPath, ['server.js'], {
+    cwd: root,
+    env: { ...process.env, PORT: String(port), SUPABASE_URL: 'https://example.supabase.co', SUPABASE_ANON_KEY: 'public-test-key' },
+    stdio: 'ignore'
+  });
+  t.after(() => child.kill());
+  let response;
+  for (let attempt = 0; attempt < 30; attempt++) {
+    try {
+      response = await fetch('http://127.0.0.1:' + port + '/');
+      break;
+    } catch {
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+  }
+  assert.ok(response, 'server did not start');
+  assert.equal(response.status, 200);
+  assert.match(await response.text(), /Asystent Budowania/);
+  const config = await fetch('http://127.0.0.1:' + port + '/api/config.js');
+  assert.equal(config.status, 200);
+  const configText = await config.text();
+  assert.ok(configText.includes('https://example.supabase.co'));
+  assert.ok(configText.includes('public-test-key'));
+  assert.ok(!configText.includes('service_role'));
+  const manifest = await fetch('http://127.0.0.1:' + port + '/manifest.webmanifest');
+  assert.equal(manifest.status, 200);
+  assert.match(manifest.headers.get('content-type'), /manifest\+json/);
+  const denied = await fetch('http://127.0.0.1:' + port + '/', { method: 'POST' });
+  assert.equal(denied.status, 405);
+});
