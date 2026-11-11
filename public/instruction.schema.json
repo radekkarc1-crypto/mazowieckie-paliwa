@@ -28,7 +28,24 @@
       "type": "array",
       "maxItems": 500,
       "items": {
-        "type": "string"
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
       }
     },
     "steps": {
@@ -57,7 +74,24 @@
           "parts": {
             "type": "array",
             "items": {
-              "type": "string"
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              ]
             }
           },
           "image": {
@@ -82,7 +116,19 @@
             "maxLength": 120
           }
         },
-        "additionalProperties": true
+        "additionalProperties": true,
+        "anyOf": [
+          {
+            "required": [
+              "description"
+            ]
+          },
+          {
+            "required": [
+              "instruction"
+            ]
+          }
+        ]
       }
     }
   },
