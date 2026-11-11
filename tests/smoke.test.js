@@ -68,6 +68,9 @@ test('Supabase backup migration enables row-level security and user ownership', 
   assert.ok(migration.includes('enable row level security'));
   assert.ok(migration.includes('(select auth.uid()) = user_id'));
   assert.ok(migration.includes('jsonb_typeof(projects) = \'array\''));
+  const dbTests = fs.readFileSync(path.join(root, 'supabase', 'tests', 'user_backups.test.sql'), 'utf8');
+  assert.ok(dbTests.includes('row-level security is enabled'));
+  assert.ok(dbTests.includes('anonymous role cannot read backups'));
 });
 
 test('instruction import requires a preview confirmation before adding a project', () => {
