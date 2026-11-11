@@ -35,4 +35,4 @@ Jeśli konfiguracja Supabase nie jest dostępna, aplikacja działa w trybie loka
 Zobacz `public/instruction.schema.json` oraz `public/przykladowa-instrukcja.json`. Pakiet wymaga `version: 1`, `title` i co najmniej jednego kroku. Kroki mogą zawierać `description` (lub `instruction`), `parts`, ilustrację HTTPS, `warning`, `duration`, `position` i `rotation`.
 
 ## Testy
-`npm test` uruchamia testy smoke na wbudowanym runnerze Node.js. GitHub Actions uruchamia je przy pushu i pull requeście do gałęzi `asystent-budowania-rebuild`.
+`npm test` uruchamia testy smoke na wbudowanym runnerze Node.js. Testy polityk bazy są w `supabase/tests/user_backups.test.sql` i można je uruchomić poleceniem `supabase test db` po aktywowaniu oraz skonfigurowaniu lokalnego/połączonego projektu. GitHub Actions uruchamia testy aplikacji przy pushu i pull requeście do gałęzi `asystent-budowania-rebuild`.
