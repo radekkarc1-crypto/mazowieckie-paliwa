@@ -35,3 +35,14 @@ test('the app does not include AI provider SDKs or API endpoints', () => {
   assert.deepEqual(deps, []);
   assert.ok(!/api\.(openai|anthropic)\.com|generativelanguage\.googleapis\.com/i.test(html));
 });
+
+test('local development server is valid and serves public assets safely', () => {
+  const vm = require('node:vm');
+  const server = fs.readFileSync(path.join(root, 'server.js'), 'utf8');
+  const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+  assert.doesNotThrow(() => new vm.Script(server));
+  assert.equal(pkg.scripts.start, 'node server.js');
+  assert.ok(server.includes("'X-Content-Type-Options': 'nosniff'"));
+  assert.ok(server.includes("path.resolve(publicDir, relative)"));
+  assert.ok(server.includes("req.method !== 'GET' && req.method !== 'HEAD'"));
+});
