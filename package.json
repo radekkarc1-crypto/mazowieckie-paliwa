@@ -4,6 +4,7 @@
   "private": true,
   "description": "Czytnik instrukcji budowy krok po kroku",
   "scripts": {
-    "start": "node -e \"require('http').createServer((req,res)=>{const fs=require('fs');const p=req.url==='/'?'index.html':'.'+req.url;fs.createReadStream(p).on('error',()=>{res.statusCode=404;res.end('Not found')}).pipe(res)}).listen(process.env.PORT||3000)\""
+    "start": "node -e \"require('http').createServer((req,res)=>{const fs=require('fs');const p=req.url==='/'?'index.html':'.'+req.url;fs.createReadStream(p).on('error',()=>{res.statusCode=404;res.end('Not found')}).pipe(res)}).listen(process.env.PORT||3000)\"",
+    "test": "node --test"
   }
 }
