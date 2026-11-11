@@ -13,13 +13,13 @@ Responsywna, instalowalna aplikacja PWA do importowania i czytania instrukcji bu
 - Lokalny serwer deweloperski bez dodatkowych zależności
 
 ## Uruchomienie lokalne
-Wymagany Node.js 18 lub nowszy.
+Wymagany Node.js 22.9 lub nowszy.
 
 ```bash
 npm start
 ```
 
-Otwórz `http://localhost:3000`. Dla lokalnej synchronizacji ustaw zmienne środowiskowe `SUPABASE_URL` i `SUPABASE_ANON_KEY` przed uruchomieniem serwera.
+Otwórz `http://localhost:3000`. Skopiuj `.env.example` do `.env` i uzupełnij `SUPABASE_URL` oraz `SUPABASE_ANON_KEY`, jeśli chcesz testować synchronizację lokalnie.
 
 ## Supabase
 1. Aktywuj projekt Supabase.
