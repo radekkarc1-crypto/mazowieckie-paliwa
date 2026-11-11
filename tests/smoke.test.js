@@ -46,3 +46,21 @@ test('local development server is valid and serves public assets safely', () => 
   assert.ok(server.includes("path.resolve(publicDir, relative)"));
   assert.ok(server.includes("req.method !== 'GET' && req.method !== 'HEAD'"));
 });
+
+test('application scripts compile and cloud configuration never exposes a service key', () => {
+  const vm = require('node:vm');
+  const inline = html.match(/<script>([\\s\\S]*?)<\\/script>/);
+  assert.ok(inline, 'missing application script');
+  assert.doesNotThrow(() => new vm.Script(inline[1]));
+  assert.ok(html.includes('window.supabase.createClient') || html.includes('window.supabase?.createClient'));
+  const config = fs.readFileSync(path.join(root, 'api', 'config.js'), 'utf8');
+  assert.ok(config.includes('SUPABASE_ANON_KEY'));
+  assert.ok(!config.includes('SUPABASE_SERVICE_ROLE'));
+});
+
+test('Supabase backup migration enables row-level security and user ownership', () => {
+  const migration = fs.readFileSync(path.join(root, 'supabase', 'migrations', '20261111000000_user_backups.sql'), 'utf8');
+  assert.ok(migration.includes('enable row level security'));
+  assert.ok(migration.includes('auth.uid() = user_id'));
+  assert.ok(migration.includes('jsonb_typeof(projects) = \'array\''));
+});
