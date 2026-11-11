@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "title": "F-16 Fighting Falcon • Plane Crazy",
+  "category": "Samoloty / Plane Crazy",
+  "description": "Wizualna instrukcja budowy modelu F-16 w Roblox Plane Crazy. Każdy krok ma osobny schemat z widokiem z góry i wyróżnieniem dokładanych bloków. Nos po lewej, ogon po prawej. Liczby części są orientacyjną listą elementów do odtworzenia na siatce gry; kształt można dopasować do dostępnych typów bloków.",
+  "parts": [
+    "Standardowy blok kadłuba x54",
+    "Blok nosa x13",
+    "Ciemny blok kokpitu x12",
+    "Blok skrzydła x90",
+    "Blok statecznika poziomego x8",
+    "Blok statecznika pionowego x9",
+    "Ciemny blok dyszy x9",
+    "Blok wlotu powietrza x12",
+    "Koło x3",
+    "Zawias podwozia x3",
+    "Blok pylonu dekoracyjnego x8",
+    "Blok końcówki skrzydła x4"
+  ],
+  "steps": [
+    {
+      "title": "Rdzeń kadłuba",
+      "description": "Ustaw oś budowy: nos samolotu będzie po lewej stronie schematu, ogon po prawej. Zbuduj prosty rdzeń kadłuba o długości 18 bloków i szerokości 3 bloków. Wszystkie bloki połóż w jednej warstwie.",
+      "parts": [
+        "Standardowe bloki x54"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-01.svg",
+      "position": "Centralna oś kadłuba",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba."
+    },
+    {
+      "title": "Zwężany nos",
+      "description": "Przed rdzeniem dobuduj nos. Zachowaj symetrię: od czubka do kadłuba poszerzaj go stopniowo. Czubek ma szerokość 1 bloku, następny przekrój 3 bloki, a połączenie z kadłubem 5 bloków. Wzmocnij połączenie od spodu.",
+      "parts": [
+        "Bloki nosa x13"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-02.svg",
+      "position": "Przód kadłuba",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba."
+    },
+    {
+      "title": "Kokpit",
+      "description": "Na grzbiecie kadłuba, za nosem, ułóż kokpit z ciemnych bloków. Zrób wydłużoną osłonę o długości 4 bloków i szerokości 3 bloków. Przód kokpitu powinien być bliżej nosa.",
+      "parts": [
+        "Ciemne bloki kokpitu x12"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-03.svg",
+      "position": "Grzbiet kadłuba, za nosem",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba."
+    },
+    {
+      "title": "Skrzydła delta",
+      "description": "Dołóż dwa duże, skośne skrzydła. Buduj je warstwą po warstwie na tej samej wysokości co kadłub. Skrzydła mają być lustrzanym odbiciem względem osi kadłuba. Zostaw wolną przestrzeń na końcówkach.",
+      "parts": [
+        "Bloki skrzydeł x90"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-04.svg",
+      "position": "Po obu stronach kadłuba",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba."
+    },
+    {
+      "title": "Stateczniki poziome",
+      "description": "Z tyłu kadłuba dodaj dwa małe stateczniki poziome. Jeden po lewej i jeden po prawej stronie. Ustaw je symetrycznie i połącz z kadłubem na szerokiej podstawie.",
+      "parts": [
+        "Bloki stateczników poziomych x8"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-05.svg",
+      "position": "Tylna część skrzydeł",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba."
+    },
+    {
+      "title": "Statecznik pionowy",
+      "description": "Na górze tylnej części kadłuba zbuduj pojedynczy statecznik pionowy. Ustaw go centralnie, w osi kadłuba. Zastosuj pochylony profil z bloków wedge, jeśli masz je odblokowane; w przeciwnym razie użyj zwykłych bloków.",
+      "parts": [
+        "Bloki statecznika pionowego x9"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-06.svg",
+      "position": "Górna powierzchnia ogona",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba."
+    },
+    {
+      "title": "Silnik i dysza",
+      "description": "Zamknij tylną część kadłuba i dodaj dyszę. Użyj ciemnych bloków na końcu, aby odróżnić wylot silnika od reszty konstrukcji. Zachowaj środek dyszy na osi kadłuba.",
+      "parts": [
+        "Ciemne bloki dyszy x9"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-07.svg",
+      "position": "Skrajny tył kadłuba",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba."
+    },
+    {
+      "title": "Wlot powietrza",
+      "description": "Pod środkową częścią kadłuba dodaj centralny wlot powietrza. Zbuduj go z kilku bloków pod spodem, za kokpitem. To detal wizualny, nie mechanizm napędowy.",
+      "parts": [
+        "Bloki wlotu powietrza x12"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-08.svg",
+      "position": "Spód kadłuba, za kokpitem",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba."
+    },
+    {
+      "title": "Podwozie",
+      "description": "Zamocuj trzy punkty podwozia: jedno pod przednią częścią kadłuba oraz dwa pod skrzydłami blisko kadłuba. Użyj kół i zawiasów dostępnych w Plane Crazy. Sprawdź, czy samolot stoi poziomo.",
+      "parts": [
+        "Koła x3",
+        "Zawiasy podwozia x3"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-09.svg",
+      "position": "Spód kadłuba i skrzydeł",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba."
+    },
+    {
+      "title": "Detale i podwieszenia",
+      "description": "Na spodzie skrzydeł dodaj symetryczne pylony i niewielkie, dekoracyjne zasobniki. Dodaj końcówki skrzydeł oraz oznaczenia. Wszystkie elementy podwieszane są dekoracyjne, bez funkcji bojowej.",
+      "parts": [
+        "Bloki pylonów x8",
+        "Bloki końcówek skrzydeł x4"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-10.svg",
+      "position": "Pod skrzydłami i na końcówkach",
+      "rotation": "Widok z góry: nos po lewej, ogon po prawej. Elementy montuj symetrycznie względem osi kadłuba.",
+      "warning": "Elementy podwieszane są wyłącznie dekoracyjne."
+    }
+  ]
+}
