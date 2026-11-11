@@ -24,7 +24,11 @@ test('PWA manifest and offline worker are present', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public', 'manifest.webmanifest'), 'utf8'));
   assert.equal(manifest.name, 'Asystent Budowania');
   assert.equal(manifest.display, 'standalone');
+  const sw = fs.readFileSync(path.join(root, 'public', 'sw.js'), 'utf8');
   assert.ok(fs.existsSync(path.join(root, 'public', 'sw.js')));
+  assert.doesNotThrow(() => new (require('node:vm').Script)(sw));
+  assert.ok(sw.includes('request.mode==="navigate"'));
+  assert.ok(sw.includes('url.pathname.startsWith("/api/")'));
   assert.ok(fs.existsSync(path.join(root, 'public', 'icon.svg')));
   assert.ok(html.includes('navigator.serviceWorker.register'));
 });
