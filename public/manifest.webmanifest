@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "Asystent Budowania",
+  "short_name": "Asystent",
+  "description": "Instrukcje budowy krok po kroku i zapis postępu.",
+  "lang": "pl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#101827",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
