@@ -66,7 +66,7 @@ test('application scripts compile and cloud configuration never exposes a servic
 test('Supabase backup migration enables row-level security and user ownership', () => {
   const migration = fs.readFileSync(path.join(root, 'supabase', 'migrations', '20261111000000_user_backups.sql'), 'utf8');
   assert.ok(migration.includes('enable row level security'));
-  assert.ok(migration.includes('auth.uid() = user_id'));
+  assert.ok(migration.includes('(select auth.uid()) = user_id'));
   assert.ok(migration.includes('jsonb_typeof(projects) = \'array\''));
 });
 
