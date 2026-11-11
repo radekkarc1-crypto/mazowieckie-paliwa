@@ -79,3 +79,13 @@ test('instruction schema matches the supported version and part formats', () => 
   assert.ok(schema.properties.steps.items.anyOf.length >= 2);
   assert.ok(schema.properties.steps.items.properties.parts.items.oneOf.length >= 2);
 });
+
+test('instruction validator accepts the sample and rejects unsafe or malformed packs', () => {
+  const source = html.match(/function validate\\([\\s\\S]*?\\n\\}/)?.[0];
+  assert.ok(source, 'missing instruction validator');
+  const validate = new Function(source + '; return validate;')();
+  const sample = JSON.parse(fs.readFileSync(path.join(root, 'public', 'przykladowa-instrukcja.json'), 'utf8'));
+  assert.doesNotThrow(() => validate(sample));
+  assert.throws(() => validate({ version: 2, title: 'Bad', steps: [{ title: 'Step', description: 'Text' }] }));
+  assert.throws(() => validate({ version: 1, title: 'Bad image', steps: [{ title: 'Step', description: 'Text', image: 'javascript:alert(1)' }] }));
+});
