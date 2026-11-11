@@ -39,6 +39,18 @@ const server = http.createServer((req, res) => {
     res.writeHead(405, { Allow: 'GET, HEAD' });
     return res.end('Method Not Allowed');
   }
+  if ((req.url || '').split('?')[0] === '/api/config.js') {
+    res.writeHead(200, {
+      'Content-Type': 'application/javascript; charset=utf-8',
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff'
+    });
+    if (req.method === 'HEAD') return res.end();
+    return res.end('window.__APP_CONFIG__ = ' + JSON.stringify({
+      supabaseUrl: process.env.SUPABASE_URL || '',
+      supabaseAnonKey: process.env.SUPABASE_ANON_KEY || ''
+    }) + ';');
+  }
   const file = resolveFile(req.url || '/');
   if (!file) {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
