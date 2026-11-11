@@ -7,7 +7,7 @@ create table if not exists public.user_backups (
 
 alter table public.user_backups enable row level security;
 
-revoke all on public.user_backups from anon, authenticated;
+revoke all on public.user_backups from public, anon, authenticated;
 grant usage on schema public to authenticated;
 grant select, insert, update, delete on public.user_backups to authenticated;
 
