@@ -2,20 +2,19 @@
   "version": 1,
   "title": "F-16 Fighting Falcon • Plane Crazy",
   "category": "Samoloty / Plane Crazy",
-  "description": "Wizualna instrukcja budowy modelu F-16 w Roblox Plane Crazy. Każdy krok ma osobny schemat z widokiem z góry i wyróżnieniem dokładanych bloków. Nos po lewej, ogon po prawej. Liczby części są orientacyjną listą elementów do odtworzenia na siatce gry; kształt można dopasować do dostępnych typów bloków.",
+  "description": "Wizualna instrukcja budowy modelu F-16 w Roblox Plane Crazy. Każdy krok ma osobny schemat z widokiem z góry i wyróżnieniem dokładanych bloków. Nos po lewej, ogon po prawej. Schematy pokazują układ bloków na siatce gry; podwozie i elementy dekoracyjne montuje się jako osobne części.",
   "parts": [
     "Standardowy blok kadłuba x54",
     "Blok nosa x13",
     "Ciemny blok kokpitu x12",
-    "Blok skrzydła x90",
-    "Blok statecznika poziomego x8",
+    "Blok skrzydła x98",
+    "Blok statecznika poziomego x16",
     "Blok statecznika pionowego x9",
     "Ciemny blok dyszy x9",
     "Blok wlotu powietrza x12",
+    "Blok mocowania podwozia x3",
     "Koło x3",
-    "Zawias podwozia x3",
-    "Blok pylonu dekoracyjnego x8",
-    "Blok końcówki skrzydła x4"
+    "Blok pylonu dekoracyjnego x6"
   ],
   "steps": [
     {
@@ -52,7 +51,7 @@
       "title": "Skrzydła delta",
       "description": "Dołóż dwa duże, skośne skrzydła. Buduj je warstwą po warstwie na tej samej wysokości co kadłub. Skrzydła mają być lustrzanym odbiciem względem osi kadłuba. Zostaw wolną przestrzeń na końcówkach.",
       "parts": [
-        "Bloki skrzydeł x90"
+        "Bloki skrzydeł x98"
       ],
       "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-04.svg",
       "position": "Po obu stronach kadłuba",
@@ -62,7 +61,7 @@
       "title": "Stateczniki poziome",
       "description": "Z tyłu kadłuba dodaj dwa małe stateczniki poziome. Jeden po lewej i jeden po prawej stronie. Ustaw je symetrycznie i połącz z kadłubem na szerokiej podstawie.",
       "parts": [
-        "Bloki stateczników poziomych x8"
+        "Bloki stateczników poziomych x16"
       ],
       "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-05.svg",
       "position": "Tylna część skrzydeł",
@@ -102,8 +101,8 @@
       "title": "Podwozie",
       "description": "Zamocuj trzy punkty podwozia: jedno pod przednią częścią kadłuba oraz dwa pod skrzydłami blisko kadłuba. Użyj kół i zawiasów dostępnych w Plane Crazy. Sprawdź, czy samolot stoi poziomo.",
       "parts": [
-        "Koła x3",
-        "Zawiasy podwozia x3"
+        "Bloki mocowania x3",
+        "Koła x3"
       ],
       "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-09.svg",
       "position": "Spód kadłuba i skrzydeł",
@@ -113,8 +112,7 @@
       "title": "Detale i podwieszenia",
       "description": "Na spodzie skrzydeł dodaj symetryczne pylony i niewielkie, dekoracyjne zasobniki. Dodaj końcówki skrzydeł oraz oznaczenia. Wszystkie elementy podwieszane są dekoracyjne, bez funkcji bojowej.",
       "parts": [
-        "Bloki pylonów x8",
-        "Bloki końcówek skrzydeł x4"
+        "Bloki pylonów dekoracyjnych x6"
       ],
       "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/instructions/f16-step-10.svg",
       "position": "Pod skrzydłami i na końcówkach",
