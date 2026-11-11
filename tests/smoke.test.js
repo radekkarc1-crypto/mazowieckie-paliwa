@@ -85,9 +85,13 @@ test('instruction validator accepts the sample and rejects unsafe or malformed p
   const end = html.indexOf('\nasync function importFile', start);
   assert.ok(start >= 0 && end > start, 'missing instruction validator');
   const source = html.slice(start, end);
-  const validate = new Function(source + '; return validate;')();
+  const { validate, normalizeSavedProject } = new Function(source + '; return { validate, normalizeSavedProject };')();
   const sample = JSON.parse(fs.readFileSync(path.join(root, 'public', 'przykladowa-instrukcja.json'), 'utf8'));
   assert.doesNotThrow(() => validate(sample));
+  const restored = normalizeSavedProject({ title: 'Old local project', steps: [{ title: 'Step', description: 'Text' }], done: [0, 0, 9], current: 8 });
+  assert.equal(restored.version, 1);
+  assert.deepEqual(restored.done, [0]);
+  assert.equal(restored.current, 0);
   assert.throws(() => validate({ version: 2, title: 'Bad', steps: [{ title: 'Step', description: 'Text' }] }));
   assert.throws(() => validate({ version: 1, title: 'Bad image', steps: [{ title: 'Step', description: 'Text', image: 'javascript:alert(1)' }] }));
 });
