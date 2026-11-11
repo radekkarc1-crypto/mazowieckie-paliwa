@@ -30,8 +30,11 @@ function resolveFile(urlPath) {
   let relative = pathname;
   while (relative.startsWith('/')) relative = relative.slice(1);
   if (!relative) relative = 'index.html';
-  const candidates = [path.resolve(root, relative), path.resolve(publicDir, relative)];
-  return candidates.find(file => file.startsWith(root + path.sep) && fs.existsSync(file) && fs.statSync(file).isFile()) || null;
+  const candidates = [];
+  if (relative === 'index.html') candidates.push(path.join(root, 'index.html'));
+  const publicFile = path.resolve(publicDir, relative);
+  if (publicFile.startsWith(publicDir + path.sep)) candidates.push(publicFile);
+  return candidates.find(file => fs.existsSync(file) && fs.statSync(file).isFile()) || null;
 }
 
 const server = http.createServer((req, res) => {
