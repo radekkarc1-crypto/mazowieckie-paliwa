@@ -49,9 +49,10 @@ test('local development server is valid and serves public assets safely', () => 
 
 test('application scripts compile and cloud configuration never exposes a service key', () => {
   const vm = require('node:vm');
-  const inline = html.match(/<script>([\\s\\S]*?)<\\/script>/);
-  assert.ok(inline, 'missing application script');
-  assert.doesNotThrow(() => new vm.Script(inline[1]));
+  const start = html.indexOf('<script>') + 8;
+  const end = html.indexOf('</script>', start);
+  assert.ok(start >= 8 && end > start, 'missing application script');
+  assert.doesNotThrow(() => new vm.Script(html.slice(start, end)));
   assert.ok(html.includes('window.supabase.createClient') || html.includes('window.supabase?.createClient'));
   const config = fs.readFileSync(path.join(root, 'api', 'config.js'), 'utf8');
   assert.ok(config.includes('SUPABASE_ANON_KEY'));
