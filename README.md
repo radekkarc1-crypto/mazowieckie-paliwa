@@ -4,8 +4,8 @@ Responsywna, instalowalna aplikacja PWA do importowania i czytania instrukcji bu
 
 ## Funkcje
 - Biblioteka projektów z wyszukiwaniem i filtrowaniem postępu
-- Import instrukcji JSON (do 5 MB, maks. 500 kroków) z walidacją
-- Czytnik krok po kroku, skoki do wybranego kroku i oznaczanie wykonania
+- Import instrukcji JSON (do 5 MB, maks. 500 kroków) z walidacją i podglądem przed potwierdzeniem
+- Czytnik krok po kroku, skoki do wybranego kroku, skróty klawiaturowe i oznaczanie wykonania
 - Ilustracje HTTPS, ostrzeżenia, czas, pozycja, obrót i części przypisane do kroku
 - Automatyczny zapis lokalny, eksport i przywracanie kopii
 - Opcjonalne konto e-mail i synchronizacja projektów przez Supabase
