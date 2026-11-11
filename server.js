@@ -26,7 +26,7 @@ function resolveFile(urlPath) {
   } catch {
     return null;
   }
-  if (pathname.includes('\\0')) return null;
+  if (pathname.includes(String.fromCharCode(0))) return null;
   let relative = pathname;
   while (relative.startsWith('/')) relative = relative.slice(1);
   if (!relative) relative = 'index.html';
