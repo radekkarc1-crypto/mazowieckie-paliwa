@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "title": "Avengers Quinjet • Plane Crazy",
+  "category": "Roblox / Plane Crazy",
+  "description": "Przykładowy, symetryczny Quinjet w stylu Avengers. Instrukcja zawiera 9 schematów widoku z góry. Nos jest u góry rysunków. To koncepcja do zbudowania i wyregulowania w Plane Crazy, nieprzetestowany blueprint gry. Po zbudowaniu sprawdź środek ciężkości, moc silników i sterowanie.",
+  "parts": [
+    "Bloki kadłuba ×26",
+    "Bloki skrzydeł ×32",
+    "Bloki klinowe ×4",
+    "Przezroczyste bloki kokpitu ×6",
+    "Bloki gondoli ×16",
+    "Silniki/propulsory ×2",
+    "Motor 2×",
+    "Bloki stateczników ×14",
+    "Ster kierunku ×2"
+  ],
+  "steps": [
+    {
+      "title": "Rdzeń kadłuba",
+      "description": "Zbuduj prosty, prostoliniowy rdzeń kadłuba. Oś samolotu biegnie pionowo na rysunku, nos jest u góry. Użyj 18 bloków kadłuba w osi, w dwóch równoległych rzędach po 9. Zachowaj symetrię.",
+      "instruction": "Zbuduj prosty, prostoliniowy rdzeń kadłuba. Oś samolotu biegnie pionowo na rysunku, nos jest u góry. Użyj 18 bloków kadłuba w osi, w dwóch równoległych rzędach po 9. Zachowaj symetrię.",
+      "parts": [
+        "Kadłub 1×18 bloków",
+        "Łączniki 2×"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/quinjet/01-kil.svg",
+      "position": "Widok z góry; nos samolotu u góry ilustracji. Buduj lustrzanie względem osi środkowej.",
+      "rotation": "Nie obracaj kadłuba; skrzydła i gondole montuj symetrycznie.",
+      "duration": "3–8 min"
+    },
+    {
+      "title": "Przednia sekcja i nos",
+      "description": "Przedłuż dziób o 4 bloki i zwęź go schodkowo: po 2 bloki w pierwszym rzędzie, po 1 w kolejnym. To przód samolotu. Nie dodawaj jeszcze kokpitu.",
+      "instruction": "Przedłuż dziób o 4 bloki i zwęź go schodkowo: po 2 bloki w pierwszym rzędzie, po 1 w kolejnym. To przód samolotu. Nie dodawaj jeszcze kokpitu.",
+      "parts": [
+        "Bloki kadłuba ×4",
+        "Bloki klinowe ×4"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/quinjet/02-przedni-kadlub.svg",
+      "position": "Widok z góry; nos samolotu u góry ilustracji. Buduj lustrzanie względem osi środkowej.",
+      "rotation": "Nie obracaj kadłuba; skrzydła i gondole montuj symetrycznie.",
+      "duration": "3–8 min"
+    },
+    {
+      "title": "Główne skrzydła",
+      "description": "Zbuduj skrzydła symetrycznie: po każdej stronie 8 bloków konstrukcyjnych od nasady, następnie po 5 bloków skośnie na zewnątrz i do tyłu. Zakończ końcówki krótkimi blokami. Skrzydła muszą być lustrzane.",
+      "instruction": "Zbuduj skrzydła symetrycznie: po każdej stronie 8 bloków konstrukcyjnych od nasady, następnie po 5 bloków skośnie na zewnątrz i do tyłu. Zakończ końcówki krótkimi blokami. Skrzydła muszą być lustrzane.",
+      "parts": [
+        "Bloki skrzydeł ×26",
+        "Bloki końcówek ×2"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/quinjet/03-skrzydla.svg",
+      "position": "Widok z góry; nos samolotu u góry ilustracji. Buduj lustrzanie względem osi środkowej.",
+      "rotation": "Nie obracaj kadłuba; skrzydła i gondole montuj symetrycznie.",
+      "duration": "3–8 min"
+    },
+    {
+      "title": "Tylne stateczniki poziome",
+      "description": "Z tyłu kadłuba dodaj dwa małe stateczniki poziome, po 3 bloki na stronę. Ustaw je symetrycznie i lekko skośnie.",
+      "instruction": "Z tyłu kadłuba dodaj dwa małe stateczniki poziome, po 3 bloki na stronę. Ustaw je symetrycznie i lekko skośnie.",
+      "parts": [
+        "Bloki skrzydeł ×6"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/quinjet/04-stateczniki-poziome.svg",
+      "position": "Widok z góry; nos samolotu u góry ilustracji. Buduj lustrzanie względem osi środkowej.",
+      "rotation": "Nie obracaj kadłuba; skrzydła i gondole montuj symetrycznie.",
+      "duration": "3–8 min"
+    },
+    {
+      "title": "Wzmocnienie i podstawa kokpitu",
+      "description": "Na górnej części kadłuba dodaj podstawę kokpitu z 4 bloków. Zostaw środkową oś wolną na przednią szybę.",
+      "instruction": "Na górnej części kadłuba dodaj podstawę kokpitu z 4 bloków. Zostaw środkową oś wolną na przednią szybę.",
+      "parts": [
+        "Bloki kadłuba ×4"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/quinjet/05-kokpit.svg",
+      "position": "Widok z góry; nos samolotu u góry ilustracji. Buduj lustrzanie względem osi środkowej.",
+      "rotation": "Nie obracaj kadłuba; skrzydła i gondole montuj symetrycznie.",
+      "duration": "3–8 min"
+    },
+    {
+      "title": "Osłona kabiny pilota",
+      "description": "Zamontuj szybę kokpitu nad podstawą, używając przezroczystych bloków. Kabina powinna być niska, opływowa i nie wystawać poza obrys kadłuba.",
+      "instruction": "Zamontuj szybę kokpitu nad podstawą, używając przezroczystych bloków. Kabina powinna być niska, opływowa i nie wystawać poza obrys kadłuba.",
+      "parts": [
+        "Przezroczyste bloki ×6"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/quinjet/06-oslona-kokpitu.svg",
+      "position": "Widok z góry; nos samolotu u góry ilustracji. Buduj lustrzanie względem osi środkowej.",
+      "rotation": "Nie obracaj kadłuba; skrzydła i gondole montuj symetrycznie.",
+      "duration": "3–8 min"
+    },
+    {
+      "title": "Dwie gondole silnikowe",
+      "description": "Pod skrzydłami, po obu stronach kadłuba, zamontuj dwie gondole. Każda ma 4 bloki długości i 2 szerokości. Umieść je w tej samej odległości od osi.",
+      "instruction": "Pod skrzydłami, po obu stronach kadłuba, zamontuj dwie gondole. Każda ma 4 bloki długości i 2 szerokości. Umieść je w tej samej odległości od osi.",
+      "parts": [
+        "Bloki gondoli ×16"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/quinjet/07-gondole-silnikow.svg",
+      "position": "Widok z góry; nos samolotu u góry ilustracji. Buduj lustrzanie względem osi środkowej.",
+      "rotation": "Nie obracaj kadłuba; skrzydła i gondole montuj symetrycznie.",
+      "duration": "3–8 min"
+    },
+    {
+      "title": "Silniki i wyloty ciągu",
+      "description": "Na końcu każdej gondoli zamontuj silnik/propulsor skierowany do tyłu. Dla VTOL dodaj zawias Motor 2x, aby obie gondole mogły obracać się razem: pionowo do startu, poziomo do lotu. Zsynchronizuj sterowanie.",
+      "instruction": "Na końcu każdej gondoli zamontuj silnik/propulsor skierowany do tyłu. Dla VTOL dodaj zawias Motor 2x, aby obie gondole mogły obracać się razem: pionowo do startu, poziomo do lotu. Zsynchronizuj sterowanie.",
+      "parts": [
+        "Silniki/propulsory ×2",
+        "Motor 2×",
+        "Przewody/łącza sterowania ×2"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/quinjet/08-wentylatory-i-dysze.svg",
+      "position": "Widok z góry; nos samolotu u góry ilustracji. Buduj lustrzanie względem osi środkowej.",
+      "rotation": "Nie obracaj kadłuba; skrzydła i gondole montuj symetrycznie.",
+      "warning": "Silniki i mechanizm VTOL wymagają testu w grze. Jeśli silniki obracają się w przeciwnych kierunkach, odwróć jeden Motor.",
+      "duration": "3–8 min"
+    },
+    {
+      "title": "Podwójne stateczniki pionowe",
+      "description": "Na końcu kadłuba zamontuj dwa pionowe stateczniki, po jednym nad każdą stroną tylnej sekcji. Sprawdź symetrię i dodaj sterowanie kierunkiem.",
+      "instruction": "Na końcu kadłuba zamontuj dwa pionowe stateczniki, po jednym nad każdą stroną tylnej sekcji. Sprawdź symetrię i dodaj sterowanie kierunkiem.",
+      "parts": [
+        "Bloki statecznika ×8",
+        "Ster kierunku ×2"
+      ],
+      "image": "https://raw.githubusercontent.com/radekkarc1-crypto/mazowieckie-paliwa/asystent-budowania-rebuild/public/quinjet/09-usterzenie-pionowe.svg",
+      "position": "Widok z góry; nos samolotu u góry ilustracji. Buduj lustrzanie względem osi środkowej.",
+      "rotation": "Nie obracaj kadłuba; skrzydła i gondole montuj symetrycznie.",
+      "warning": "Sprawdź, czy stateczniki nie kolidują z gondolami podczas ich obracania.",
+      "duration": "3–8 min"
+    }
+  ]
+}
