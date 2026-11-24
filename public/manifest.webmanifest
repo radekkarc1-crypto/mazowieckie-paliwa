@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "Asystent Budowania",
-  "short_name": "Asystent",
-  "description": "Instrukcje budowy krok po kroku i zapis postępu.",
+  "name": "Asystent Nauki",
+  "short_name": "Nauka",
+  "description": "Twój planer nauki, materiałów, sprawdzianów i postępów.",
   "lang": "pl",
   "start_url": "/",
   "scope": "/",
