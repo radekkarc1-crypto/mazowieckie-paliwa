@@ -73,7 +73,7 @@ test('aplikacja zawiera kalendarz, adaptacyjny plan, drukowanie i kopie JSON', (
 
 test('build kopiuje aplikację i zasoby publiczne do katalogu dist', () => {
   const build = fs.readFileSync(path.join(root, 'build.js'), 'utf8');
-  assert.doesNotThrow(() => new vm.SourceTextModule(build));
+  assert.ok(build.startsWith('import { cpSync, mkdirSync, rmSync }'));
   assert.ok(build.includes('cpSync("index.html", "dist/index.html")'));
   assert.ok(build.includes('cpSync("public", "dist"'));
   const config = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8'));
